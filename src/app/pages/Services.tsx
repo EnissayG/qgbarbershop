@@ -8,7 +8,9 @@ export function Services() {
   const fadeInUp = {
     initial: { opacity: 0, y: 60 },
     whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true, margin: "-100px" },
+    // On mobile, `margin` + viewport resize can cause double-trigger.
+    // `amount` is more stable.
+    viewport: { once: true, amount: 0.2 },
     transition: { duration: 0.6 }
   };
 

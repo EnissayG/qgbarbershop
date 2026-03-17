@@ -4,6 +4,7 @@ import { Scissors, Clock, MapPin, Star, ArrowRight, Quote } from "lucide-react";
 import { ImageWithFallback } from "../components/figma/ImageWithFallback";
 
 export function Home() {
+  const ASSET_BASE = import.meta.env.BASE_URL;
   const fadeInUp = {
     initial: { opacity: 0, y: 60 },
     whileInView: { opacity: 1, y: 0 },
@@ -176,7 +177,7 @@ export function Home() {
             <div className="relative w-full max-w-md lg:max-w-lg">
               <div className="aspect-[3/4] overflow-hidden">
                 <ImageWithFallback
-                  src="/assets/hero.png"
+                  src={`${ASSET_BASE}assets/hero.png`}
                   alt="QG Le Quartier Général – Intérieur du salon"
                   className="w-full h-full object-cover"
                 />

@@ -2,7 +2,7 @@ import { motion } from "motion/react";
 import { Award, Heart, Users, Instagram } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 
-const ASSETS = "/assets";
+const ASSETS = `${import.meta.env.BASE_URL}assets`;
 
 export function Team() {
   const fadeInUp = {
