@@ -2,9 +2,12 @@ import { motion } from "motion/react";
 import { Link } from "react-router";
 import { Scissors, Clock, MapPin, Star, ArrowRight, Quote } from "lucide-react";
 import { ImageWithFallback } from "../components/figma/ImageWithFallback";
+import { useState } from "react";
 
 export function Home() {
   const ASSET_BASE = import.meta.env.BASE_URL;
+  const [showAllReviews, setShowAllReviews] = useState(false);
+  const MOBILE_REVIEW_LIMIT = 4;
   const fadeInUp = {
     initial: { opacity: 0, y: 60 },
     whileInView: { opacity: 1, y: 0 },
@@ -203,14 +206,16 @@ export function Home() {
         </div>
       </section>
 
-      {/* Séparateur diagonal : séparation noire (blanc → noir) */}
-      <div className="relative h-24 w-full overflow-hidden bg-white">
+      {/* Séparateur diagonal : aucune “cassure” entre blanc → section noire */}
+      <div className="relative h-14 md:h-24 w-full overflow-hidden bg-black">
         <svg
           className="absolute inset-0 w-full h-full"
           preserveAspectRatio="none"
           viewBox="0 0 100 100"
+          aria-hidden
         >
-          <path d="M0,100 L0,55 L100,0 L100,100 Z" fill="black" />
+          {/* Partie blanche en haut, en diagonale. Le reste est noir (bg du conteneur). */}
+          <path d="M0,0 L100,0 L100,12 L0,28 Z" fill="white" />
         </svg>
       </div>
 
@@ -343,7 +348,7 @@ export function Home() {
                 transition={{ duration: 0.6, delay: index * 0.08 }}
                 className={`bg-gradient-to-br from-gray-50 to-white p-6 md:p-8 space-y-4 hover:from-black hover:to-black/90 group transition-all duration-500 ${
                   index === 0 ? "lg:col-span-2 lg:row-span-2" : ""
-                }`}
+                } ${index >= MOBILE_REVIEW_LIMIT && !showAllReviews ? "hidden md:block" : ""}`}
               >
                 <Quote className="w-8 h-8 text-black/10 group-hover:text-white/20 transition-colors duration-500" />
                 
@@ -370,6 +375,19 @@ export function Home() {
               </motion.div>
             ))}
           </div>
+
+          {/* Voir plus (mobile) */}
+          {reviews.length > MOBILE_REVIEW_LIMIT && (
+            <div className="mt-10 md:hidden flex justify-center">
+              <button
+                type="button"
+                onClick={() => setShowAllReviews((v) => !v)}
+                className="inline-flex items-center justify-center px-7 py-3 border-2 border-black text-black font-medium hover:bg-black hover:text-white transition-colors"
+              >
+                {showAllReviews ? "Voir moins" : `Voir plus (${reviews.length - MOBILE_REVIEW_LIMIT})`}
+              </button>
+            </div>
+          )}
 
           {/* Google Link */}
           <motion.div

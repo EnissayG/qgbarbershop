@@ -83,7 +83,7 @@ export function About() {
                 <div className="w-20 h-1 bg-white/30" />
                 <div className="space-y-4 text-white/80 leading-relaxed">
                   <p>
-                    Au Quartier Général, nous ne faisons pas que coiffer. Nous écoutons, conseillons et créons. Nous travaillons aussi sur les réseaux sociaux et la création de contenu pour augmenter notre visibilité et partager notre univers — pas seulement en salon, mais en ligne.
+                    Au Quartier Général, nous ne faisons pas que coiffer. Nous écoutons, conseillons et créons. Nous travaillons aussi sur les réseaux sociaux et la création de contenu pour augmenter notre visibilité et partager notre univers  pas seulement en salon, mais en ligne.
                   </p>
                   <p>
                     Notre engagement envers l'excellence se reflète dans chaque détail : des produits premium soigneusement sélectionnés, des techniques maîtrisées à la perfection, et une attention constante à votre confort.

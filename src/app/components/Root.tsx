@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { Outlet, useLocation } from "react-router";
 import { Navigation } from "./Navigation";
+import { Footer } from "./Footer";
 
 export function Root() {
   const location = useLocation();
@@ -14,6 +15,7 @@ export function Root() {
     <div className="min-h-screen bg-white">
       <Navigation />
       <Outlet />
+      <Footer />
     </div>
   );
 }

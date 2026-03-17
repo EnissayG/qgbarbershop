@@ -14,6 +14,21 @@ export function Services() {
     transition: { duration: 0.6 }
   };
 
+  const listVariants = {
+    hidden: {},
+    show: {
+      transition: {
+        staggerChildren: 0.08,
+        delayChildren: 0.05,
+      },
+    },
+  } as const;
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 24 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.55 } },
+  } as const;
+
   type ServiceItem = {
     name: string;
     price: string;
@@ -166,12 +181,17 @@ export function Services() {
               {category.category}
             </motion.h2>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {category.items.map((service, index) => (
+            <motion.div
+              variants={listVariants}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, amount: 0.2 }}
+              className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+            >
+              {category.items.map((service) => (
                 <motion.div
                   key={service.name}
-                  {...fadeInUp}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  variants={itemVariants}
                   className={`relative group ${
                     categoryIndex % 2 === 0
                       ? "bg-gradient-to-br from-gray-50 to-white hover:from-black hover:to-black/90"
@@ -261,7 +281,7 @@ export function Services() {
                   </div>
                 </motion.div>
               ))}
-            </div>
+            </motion.div>
           </div>
         </section>
       ))}
