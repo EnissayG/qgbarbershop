@@ -1,3 +1,4 @@
+import React from "react";
 import { motion } from "motion/react";
 import { Link } from "react-router";
 import { Scissors, Clock, MapPin, Star, ArrowRight, Quote } from "lucide-react";
@@ -9,10 +10,10 @@ export function Home() {
   const [showAllReviews, setShowAllReviews] = useState(false);
   const MOBILE_REVIEW_LIMIT = 4;
   const fadeInUp = {
-    initial: { opacity: 0, y: 60 },
+    initial: { opacity: 0, y: 24 },
     whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true, margin: "-100px" },
-    transition: { duration: 0.6 }
+    viewport: { once: true, amount: 0.2 },
+    transition: { duration: 0.45 }
   };
 
   const services = [
@@ -207,15 +208,15 @@ export function Home() {
       </section>
 
       {/* Séparateur diagonal : aucune “cassure” entre blanc → section noire */}
-      <div className="relative h-14 md:h-24 w-full overflow-hidden bg-black">
+      <div className="relative -mt-6 md:-mt-10 h-14 md:h-24 w-full overflow-hidden">
         <svg
           className="absolute inset-0 w-full h-full"
           preserveAspectRatio="none"
           viewBox="0 0 100 100"
           aria-hidden
         >
-          {/* Partie blanche en haut, en diagonale. Le reste est noir (bg du conteneur). */}
-          <path d="M0,0 L100,0 L100,12 L0,28 Z" fill="white" />
+          {/* Forme noire qui recouvre le bas du hero sans laisser de blanc. */}
+          <path d="M0,24 L100,0 L100,100 L0,100 Z" fill="black" />
         </svg>
       </div>
 

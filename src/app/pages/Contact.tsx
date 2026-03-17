@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { motion } from "motion/react";
 import { MapPin, Phone, Mail, Clock, Send, Check } from "lucide-react";
 
@@ -15,10 +15,10 @@ export function Contact() {
   const [submitted, setSubmitted] = useState(false);
 
   const fadeInUp = {
-    initial: { opacity: 0, y: 60 },
+    initial: { opacity: 0, y: 24 },
     whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true, margin: "-100px" },
-    transition: { duration: 0.6 }
+    viewport: { once: true, amount: 0.2 },
+    transition: { duration: 0.45 }
   };
 
   const handleSubmit = (e: React.FormEvent) => {

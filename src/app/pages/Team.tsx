@@ -1,3 +1,4 @@
+import React from "react";
 import { motion } from "motion/react";
 import { Award, Heart, Users, Instagram } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
@@ -6,10 +7,10 @@ const ASSETS = `${import.meta.env.BASE_URL}assets`;
 
 export function Team() {
   const fadeInUp = {
-    initial: { opacity: 0, y: 60 },
+    initial: { opacity: 0, y: 24 },
     whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true, margin: "-100px" },
-    transition: { duration: 0.6 }
+    viewport: { once: true, amount: 0.2 },
+    transition: { duration: 0.45 }
   };
 
   const teamMembers = [
@@ -163,11 +164,11 @@ export function Team() {
                   transition={{ duration: 0.6, delay: index * 0.08 }}
                   className="group block overflow-hidden bg-white border border-black/10 hover:border-black/30 transition-colors"
                 >
-                  <div className="relative overflow-hidden aspect-[16/10]">
+                  <div className="relative overflow-hidden aspect-[16/10] bg-gray-100">
                     <img
                       src={member.image}
                       alt={member.name}
-                      className="absolute inset-0 w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700"
+                      className="absolute inset-0 w-full h-full object-contain object-center group-hover:scale-[1.02] transition-transform duration-700"
                       loading="lazy"
                       decoding="async"
                     />

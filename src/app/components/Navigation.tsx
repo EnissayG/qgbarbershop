@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router";
 import { Menu, X, Scissors } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
+import { NAV_LINKS } from "../routes";
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
@@ -19,14 +20,6 @@ export function Navigation() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  const navLinks = [
-    { path: "/", label: "Accueil" },
-    { path: "/services", label: "Services" },
-    { path: "/equipe", label: "Équipe" },
-    { path: "/a-propos", label: "À Propos" },
-    { path: "/contact", label: "Contact" },
-  ];
 
   return (
     <nav
@@ -49,7 +42,7 @@ export function Navigation() {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
+            {NAV_LINKS.map((link) => (
               <Link
                 key={link.path}
                 to={link.path}
@@ -101,7 +94,7 @@ export function Navigation() {
             className="md:hidden bg-white border-t border-black/10 overflow-hidden"
           >
             <div className="px-4 py-6 space-y-4">
-              {navLinks.map((link) => (
+              {NAV_LINKS.map((link) => (
                 <Link
                   key={link.path}
                   to={link.path}

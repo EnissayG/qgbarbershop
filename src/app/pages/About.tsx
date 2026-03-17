@@ -1,13 +1,14 @@
+import React from "react";
 import { motion } from "motion/react";
 import { MapPin, Clock, Phone, Mail, Instagram, Facebook } from "lucide-react";
 import { ImageWithFallback } from "../components/figma/ImageWithFallback";
 
 export function About() {
   const fadeInUp = {
-    initial: { opacity: 0, y: 60 },
+    initial: { opacity: 0, y: 24 },
     whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true, margin: "-100px" },
-    transition: { duration: 0.6 }
+    viewport: { once: true, amount: 0.2 },
+    transition: { duration: 0.45 }
   };
 
   const schedule = [

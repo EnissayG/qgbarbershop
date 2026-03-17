@@ -6,12 +6,10 @@ import { BarberPole3D } from "../components/BarberPole3D";
 
 export function Services() {
   const fadeInUp = {
-    initial: { opacity: 0, y: 60 },
+    initial: { opacity: 0, y: 24 },
     whileInView: { opacity: 1, y: 0 },
-    // On mobile, `margin` + viewport resize can cause double-trigger.
-    // `amount` is more stable.
     viewport: { once: true, amount: 0.2 },
-    transition: { duration: 0.6 }
+    transition: { duration: 0.45 }
   };
 
   const listVariants = {
