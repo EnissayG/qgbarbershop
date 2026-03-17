@@ -1,6 +1,8 @@
+import React from "react";
 import { motion } from "motion/react";
 import { Check, Clock, Scissors, Sparkles } from "lucide-react";
 import { Link } from "react-router";
+import { BarberPole3D } from "../components/BarberPole3D";
 
 export function Services() {
   const fadeInUp = {
@@ -10,7 +12,21 @@ export function Services() {
     transition: { duration: 0.6 }
   };
 
-  const services = [
+  type ServiceItem = {
+    name: string;
+    price: string;
+    duration: string;
+    description: string;
+    features: string[];
+    popular?: boolean;
+  };
+
+  type ServiceCategory = {
+    category: string;
+    items: ServiceItem[];
+  };
+
+  const services: ServiceCategory[] = [
     {
       category: "Liste de prix – Quartier Général",
       items: [
@@ -92,7 +108,7 @@ export function Services() {
         />
         
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -113,6 +129,18 @@ export function Services() {
               <p className="text-xl text-black/60 leading-relaxed">
                 Des prestations sur mesure pour révéler votre style avec l'expertise de Khalid et Benz
               </p>
+            </motion.div>
+
+            {/* Animation à droite (comme sur ta capture) */}
+            <motion.div
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.15 }}
+              className="justify-self-end w-full max-w-xl"
+            >
+              <div className="w-full aspect-[4/3]">
+                <BarberPole3D className="w-full h-full" />
+              </div>
             </motion.div>
           </div>
         </div>
