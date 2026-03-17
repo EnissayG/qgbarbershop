@@ -9,6 +9,13 @@ export function Navigation() {
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
 
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" as ScrollBehavior });
+    requestAnimationFrame(() => {
+      window.scrollTo({ top: 0, left: 0, behavior: "instant" as ScrollBehavior });
+    });
+  };
+
   useEffect(() => {
     setIsOpen(false);
   }, [location]);
@@ -30,7 +37,14 @@ export function Navigation() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2 group">
+          <Link
+            to="/"
+            onClick={() => {
+              setIsOpen(false);
+              scrollToTop();
+            }}
+            className="flex items-center gap-2 group"
+          >
             <div className="relative">
               <Scissors className="w-8 h-8 text-black rotate-45 transition-transform group-hover:rotate-90 duration-300" />
             </div>
@@ -98,6 +112,10 @@ export function Navigation() {
                 <Link
                   key={link.path}
                   to={link.path}
+                  onClick={() => {
+                    setIsOpen(false);
+                    scrollToTop();
+                  }}
                   className={`block py-3 px-4 text-base font-medium transition-colors ${
                     location.pathname === link.path
                       ? "text-black bg-black/5"
@@ -109,6 +127,10 @@ export function Navigation() {
               ))}
               <Link
                 to="/contact"
+                onClick={() => {
+                  setIsOpen(false);
+                  scrollToTop();
+                }}
                 className="block w-full px-4 py-3 bg-black text-white text-center font-medium hover:bg-black/90 transition-colors"
               >
                 Réserver

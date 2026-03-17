@@ -154,14 +154,14 @@ export function Team() {
           {/* Propriétaires (KG + Benz) */} 
           {featured.length > 0 && (
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-10">
-              {featured.map((member, index) => (
+              {featured.map((member) => (
                 <motion.a
                   key={member.handle}
                   href={`https://instagram.com/${member.handle.replace("@", "")}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   {...fadeInUp}
-                  transition={{ duration: 0.6, delay: index * 0.08 }}
+                  transition={{ duration: 0.6 }}
                   className="group block overflow-hidden bg-white border border-black/10 hover:border-black/30 transition-colors"
                 >
                   <div className="relative overflow-hidden aspect-[16/10] bg-gray-100">
@@ -198,14 +198,14 @@ export function Team() {
 
           {/* Reste de l'équipe – cartes confortables (pas trop petites) */}
           <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 auto-rows-fr">
-            {others.map((member, index) => (
+              {others.map((member) => (
               <motion.a
                 key={member.handle}
                 href={`https://instagram.com/${member.handle.replace("@", "")}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 {...fadeInUp}
-                transition={{ duration: 0.6, delay: 0.15 + index * 0.06 }}
+                transition={{ duration: 0.6 }}
                 className="group block overflow-hidden bg-white border border-black/10 hover:border-black/30 transition-colors"
               >
                 <div className="relative overflow-hidden aspect-[3/4]">

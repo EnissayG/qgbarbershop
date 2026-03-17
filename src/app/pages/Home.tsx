@@ -284,7 +284,7 @@ export function Home() {
                     initial={{ opacity: 0, x: 20 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    transition={{ duration: 0.5 }}
                     className="group flex items-center justify-between p-6 border border-white/10 hover:border-white/30 hover:bg-white/5 transition-all duration-300"
                   >
                     <div>
@@ -346,7 +346,7 @@ export function Home() {
               <motion.div
                 key={review.name}
                 {...fadeInUp}
-                transition={{ duration: 0.6, delay: index * 0.08 }}
+                transition={{ duration: 0.6 }}
                 className={`bg-gradient-to-br from-gray-50 to-white p-6 md:p-8 space-y-4 hover:from-black hover:to-black/90 group transition-all duration-500 ${
                   index === 0 ? "lg:col-span-2 lg:row-span-2" : ""
                 } ${index >= MOBILE_REVIEW_LIMIT && !showAllReviews ? "hidden md:block" : ""}`}
@@ -442,7 +442,7 @@ export function Home() {
               <motion.div
                 key={item.title}
                 {...fadeInUp}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
+                transition={{ duration: 0.6 }}
                 className="group p-8 bg-gradient-to-br from-gray-50 to-white hover:from-black hover:to-black/90 transition-all duration-500"
               >
                 <div className="w-12 h-12 bg-black group-hover:bg-white flex items-center justify-center mb-6 transition-colors duration-500">
