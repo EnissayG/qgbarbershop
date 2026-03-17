@@ -90,7 +90,7 @@ export function Home() {
           initial={{ opacity: 0, scale: 0 }}
           animate={{ opacity: 0.06, scale: 1 }}
           transition={{ duration: 1.2, delay: 0.15 }}
-          className="absolute -left-16 -bottom-12 w-72 h-72 rounded-full bg-black"
+          className="absolute -left-24 -bottom-32 w-72 h-72 rounded-full bg-black"
           aria-hidden
         />
         <motion.div
@@ -203,14 +203,14 @@ export function Home() {
         </div>
       </section>
 
-      {/* Séparateur diagonal : aligné avec le cercle hero (blanc → noir) */}
-      <div className="relative h-20 w-full overflow-hidden bg-white">
+      {/* Séparateur diagonal : séparation noire (blanc → noir) */}
+      <div className="relative h-24 w-full overflow-hidden bg-white">
         <svg
           className="absolute inset-0 w-full h-full"
           preserveAspectRatio="none"
           viewBox="0 0 100 100"
         >
-          <path d="M0,100 L0,42 L100,0 L100,100 Z" fill="black" />
+          <path d="M0,100 L0,55 L100,0 L100,100 Z" fill="black" />
         </svg>
       </div>
 
