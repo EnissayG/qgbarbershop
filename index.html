@@ -1,30 +1,69 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="QG Barbier — Le Quartier Général : salon de coiffure et barbershop à Montréal. Coupes, barbe, tresses. Réservez votre rendez-vous."
+    />
 
-  <!DOCTYPE html>
-  <html lang="en">
-    <head>
-      <meta charset="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>Page vitrine barbier moderne</title>
-      <!-- GitHub Pages SPA redirect handler -->
-      <script type="text/javascript">
-        (function (l) {
-          if (l.search && l.search[1] === "/") {
-            var decoded = l.search
-              .slice(1)
-              .split("&")
-              .map(function (s) {
-                return s.replace(/~and~/g, "&");
-              })
-              .join("?");
-            window.history.replaceState(null, null, l.pathname + decoded + l.hash);
-          }
-        })(window.location);
-      </script>
-    </head>
+    <title>QG Quartier Général — Barbier Montréal</title>
 
-    <body>
-      <div id="root"></div>
-      <script type="module" src="/src/main.tsx"></script>
-    </body>
-  </html>
-  
+    <!-- Favicon (chemins relatifs = compatibles avec base GitHub Pages /repo/) -->
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <link rel="apple-touch-icon" href="./favicon.svg" />
+
+    <!-- Aperçu lien (Open Graph / Facebook / LinkedIn / iMessage, etc.) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="fr_CA" />
+    <meta property="og:site_name" content="QG Quartier Général" />
+    <meta property="og:title" content="QG Quartier Général — Barbier Montréal" />
+    <meta
+      property="og:description"
+      content="Salon de coiffure et barbershop à Montréal. Savoir-faire, ambiance moderne et équipe passionnée. Réservez en ligne."
+    />
+    <!-- URL publique du dépôt GitHub Pages (à ajuster si ton URL change) -->
+    <meta property="og:url" content="https://enissayg.github.io/qgbarbershop/" />
+    <meta
+      property="og:image"
+      content="https://enissayg.github.io/qgbarbershop/assets/hero.png"
+    />
+    <meta property="og:image:alt" content="QG Le Quartier Général — intérieur du salon" />
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="QG Quartier Général — Barbier Montréal" />
+    <meta
+      name="twitter:description"
+      content="Salon de coiffure et barbershop à Montréal. Savoir-faire, ambiance moderne et équipe passionnée."
+    />
+    <meta
+      name="twitter:image"
+      content="https://enissayg.github.io/qgbarbershop/assets/hero.png"
+    />
+
+    <meta name="theme-color" content="#000000" />
+
+    <!-- GitHub Pages SPA redirect handler -->
+    <script type="text/javascript">
+      (function (l) {
+        if (l.search && l.search[1] === "/") {
+          var decoded = l.search
+            .slice(1)
+            .split("&")
+            .map(function (s) {
+              return s.replace(/~and~/g, "&");
+            })
+            .join("?");
+          window.history.replaceState(null, null, l.pathname + decoded + l.hash);
+        }
+      })(window.location);
+    </script>
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
