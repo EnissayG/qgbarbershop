@@ -28,7 +28,7 @@ export function Home() {
           <div className="pointer-events-none absolute left-20 top-0 z-20 h-full w-16 -skew-x-12 bg-gradient-to-r from-white/5 to-transparent" />
         </div>
 
-        <div className="relative z-30 mx-auto w-full max-w-7xl px-5 pb-[max(5.5rem,env(safe-area-inset-bottom,0px))] pt-[max(6rem,calc(env(safe-area-inset-top,0px)+4.25rem))] sm:px-6 sm:pt-28 lg:px-12 lg:pb-24 lg:pt-36">
+        <div className="layout-gutter relative z-30 w-full pb-[max(6rem,calc(env(safe-area-inset-bottom,0px)+3.5rem))] pt-[max(6.75rem,calc(env(safe-area-inset-top,0px)+4.5rem))] sm:pt-28 lg:pb-24 lg:pt-36">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
@@ -111,11 +111,11 @@ export function Home() {
       </section>
 
       {/* About Section - Plus de détails */}
-      <section className="relative bg-white py-24 lg:py-32 overflow-x-hidden">
+      <section className="relative overflow-x-hidden bg-white pt-28 pb-24 lg:py-32">
         <SectionTopDiagonal tone="light" variant="slash" />
         <div className="absolute top-0 right-0 w-1/3 h-full bg-black transform skew-x-12 translate-x-32 opacity-5" />
         
-        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-12">
+        <div className="layout-gutter relative z-10">
           <div className="grid items-center gap-y-14 gap-x-12 lg:grid-cols-2 lg:gap-x-20 lg:gap-y-12">
             <motion.div
               initial={{ opacity: 0, x: -30 }}
@@ -132,7 +132,7 @@ export function Home() {
                 <br />
                 <span className="text-black/20">Barbershop</span>
               </h2>
-              <div className="space-y-4 text-lg text-black/70 leading-relaxed">
+              <div className="space-y-5 text-lg leading-relaxed text-black/70 sm:space-y-4">
                 <p>
                   Le Quartier Général, c&apos;est un barbershop moderne au look noir et blanc épuré :
                   précision, confort et service professionnel du début à la fin.
@@ -168,7 +168,7 @@ export function Home() {
                   className="w-full h-full object-cover"
                 />
               </div>
-              <div className="absolute -bottom-4 -right-3 flex h-28 w-28 items-center justify-center border-4 border-black bg-white sm:-bottom-6 sm:-right-5 sm:h-32 sm:w-32 lg:-bottom-8 lg:-right-8 lg:h-40 lg:w-40">
+              <div className="absolute -bottom-4 -right-2 flex h-28 w-28 items-center justify-center border-4 border-black bg-white sm:-bottom-6 sm:-right-5 sm:h-32 sm:w-32 lg:-bottom-8 lg:-right-8 lg:h-40 lg:w-40">
                 <div className="text-center">
                   <div className="text-4xl lg:text-5xl font-black tracking-tighter">5+</div>
                   <div className="text-xs uppercase tracking-widest font-bold">Ans</div>
@@ -180,9 +180,9 @@ export function Home() {
       </section>
 
       {/* Services Section */}
-      <section className="relative bg-black py-24 lg:py-32 text-white">
+      <section className="relative bg-black pt-24 pb-[max(6.5rem,calc(env(safe-area-inset-bottom,0px)+4rem))] text-white lg:py-32">
         <SectionTopDiagonal tone="dark" variant="slashAlt" />
-        <div className="max-w-7xl mx-auto px-6 lg:px-12">
+        <div className="layout-gutter">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -267,7 +267,7 @@ export function Home() {
       {/* Gallery Section - Instagram Style */}
       <section className="relative bg-white py-24 lg:py-32">
         <SectionTopDiagonal tone="light" variant="slice" />
-        <div className="max-w-7xl mx-auto px-6 lg:px-12">
+        <div className="layout-gutter">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -292,7 +292,7 @@ export function Home() {
             </a>
           </motion.div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 lg:gap-4">
+          <div className="grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-4 lg:gap-4">
             {shopPhotos.gallery.map((img, index) => (
               <motion.div
                 key={index}
@@ -314,13 +314,13 @@ export function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="relative overflow-x-hidden bg-black py-24 lg:py-32">
+      <section className="relative overflow-x-hidden bg-black pt-24 pb-[max(6.5rem,calc(env(safe-area-inset-bottom,0px)+4rem))] lg:py-32">
         <SectionTopDiagonal tone="dark" variant="slash" />
         <div className="absolute inset-0 flex items-center justify-center opacity-5 pointer-events-none">
           <span className="text-[20rem] lg:text-[30rem] font-black">QG</span>
         </div>
 
-        <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
+        <div className="layout-gutter relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}

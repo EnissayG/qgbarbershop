@@ -139,8 +139,8 @@ export function Team() {
       {/* Team Grid */}
       <section className="relative bg-white py-24 lg:py-32">
         <SectionTopDiagonal tone="light" variant="slashAlt" />
-        <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-10 lg:gap-12">
+        <div className="layout-gutter">
+          <div className="grid gap-12 sm:grid-cols-2 xl:grid-cols-3 lg:gap-14">
             {team.map((member, index) => (
               <motion.div
                 key={member.name}
@@ -217,9 +217,9 @@ export function Team() {
       </section>
 
       {/* Culture & Values */}
-      <section className="relative overflow-x-hidden bg-black py-32">
+      <section className="relative overflow-x-hidden bg-black pt-32 pb-[max(8rem,calc(env(safe-area-inset-bottom,0px)+4rem))] lg:py-32">
         <SectionTopDiagonal tone="dark" variant="slice" />
-        <div className="max-w-7xl mx-auto px-6 lg:px-12">
+        <div className="layout-gutter">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -291,7 +291,7 @@ export function Team() {
           ))}
         </div>
 
-        <div className="max-w-4xl mx-auto px-6 lg:px-12 relative z-10">
+        <div className="layout-gutter-narrow relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}

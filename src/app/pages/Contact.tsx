@@ -57,7 +57,7 @@ export function Contact() {
 
       <section className="relative overflow-x-hidden bg-white py-32">
         <SectionTopDiagonal tone="light" variant="slice" />
-        <div className="mx-auto max-w-7xl min-w-0 px-6 lg:px-12">
+        <div className="layout-gutter min-w-0">
           <div className="grid min-w-0 grid-cols-1 gap-16 lg:grid-cols-2 lg:gap-20">
             <motion.div
               initial={{ opacity: 0, x: -30 }}

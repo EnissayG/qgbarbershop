@@ -55,7 +55,7 @@ export function Header() {
     <header className="fixed left-0 right-0 top-0 z-[100] w-full max-w-full overflow-x-hidden">
       {/* z-[130] pour rester au-dessus du voile menu (z-90) et du panneau (z-95) : le X reste toujours cliquable */}
       <nav
-        className="relative z-[130] mx-auto flex max-w-7xl items-center justify-end gap-6 px-5 py-4 sm:px-6 lg:justify-between lg:px-12 lg:py-5"
+        className="nav-shell relative z-[130] mx-auto flex max-w-7xl items-center justify-end gap-6 lg:justify-between"
         aria-label="Navigation principale"
       >
         <Link
@@ -120,7 +120,7 @@ export function Header() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.24 }}
-            className="mobile-menu-overlay fixed inset-0 z-[90] flex min-h-0 flex-col items-center justify-center overscroll-contain bg-black px-5 pb-[max(1.25rem,env(safe-area-inset-bottom,0px))] pt-[max(4.5rem,env(safe-area-inset-top,0px)+2.5rem)] sm:px-6 lg:hidden"
+            className="mobile-menu-overlay fixed inset-0 z-[90] flex min-h-0 flex-col items-center justify-center overscroll-contain bg-black pl-[max(1.5rem,calc(env(safe-area-inset-left,0px)+0.75rem))] pr-[max(1.5rem,calc(env(safe-area-inset-right,0px)+0.75rem))] pb-[max(1.25rem,env(safe-area-inset-bottom,0px))] pt-[max(4.75rem,calc(env(safe-area-inset-top,0px)+2.75rem))] lg:hidden"
             onClick={() => setMobileMenuOpen(false)}
           >
             <nav

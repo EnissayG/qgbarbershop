@@ -24,6 +24,77 @@ body {
   background-color: #fff;
 }
 
+.layout-gutter {
+  box-sizing: border-box;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 80rem;
+  padding-left: max(1.5rem, calc(env(safe-area-inset-left, 0px) + 0.75rem));
+  padding-right: max(1.5rem, calc(env(safe-area-inset-right, 0px) + 0.75rem));
+}
+
+@media (min-width: 640px) {
+  .layout-gutter {
+    padding-left: max(1.5rem, calc(env(safe-area-inset-left, 0px) + 1rem));
+    padding-right: max(1.5rem, calc(env(safe-area-inset-right, 0px) + 1rem));
+  }
+}
+
+@media (min-width: 1024px) {
+  .layout-gutter {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+}
+
+.layout-gutter-narrow {
+  box-sizing: border-box;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 56rem;
+  padding-left: max(1.5rem, calc(env(safe-area-inset-left, 0px) + 0.75rem));
+  padding-right: max(1.5rem, calc(env(safe-area-inset-right, 0px) + 0.75rem));
+}
+
+@media (min-width: 640px) {
+  .layout-gutter-narrow {
+    padding-left: max(1.5rem, calc(env(safe-area-inset-left, 0px) + 1rem));
+    padding-right: max(1.5rem, calc(env(safe-area-inset-right, 0px) + 1rem));
+  }
+}
+
+@media (min-width: 1024px) {
+  .layout-gutter-narrow {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+}
+
+.nav-shell {
+  padding-left: max(1.25rem, calc(env(safe-area-inset-left, 0px) + 0.75rem));
+  padding-right: max(1.25rem, calc(env(safe-area-inset-right, 0px) + 0.75rem));
+  padding-top: max(1rem, calc(env(safe-area-inset-top, 0px) + 0.5rem));
+  padding-bottom: 1rem;
+}
+
+@media (min-width: 640px) {
+  .nav-shell {
+    padding-left: max(1.5rem, calc(env(safe-area-inset-left, 0px) + 0.75rem));
+    padding-right: max(1.5rem, calc(env(safe-area-inset-right, 0px) + 0.75rem));
+    padding-top: max(1rem, calc(env(safe-area-inset-top, 0px) + 0.35rem));
+    padding-bottom: 1.25rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .nav-shell {
+    padding-left: 3rem;
+    padding-right: 3rem;
+    padding-top: 1.25rem;
+    padding-bottom: 1.25rem;
+  }
+}
+
 /* Hero : carrousel plein cadre (sans Slick), cover + recadrage stable au resize */
 .hero-bg-carousel {
   height: 100%;
@@ -90,16 +161,16 @@ body {
   max-width: 80rem;
   margin-left: auto;
   margin-right: auto;
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
-  padding-bottom: max(5.5rem, env(safe-area-inset-bottom, 0px));
-  padding-top: max(6rem, calc(env(safe-area-inset-top, 0px) + 4.25rem));
+  padding-left: max(1.5rem, calc(env(safe-area-inset-left, 0px) + 0.75rem));
+  padding-right: max(1.5rem, calc(env(safe-area-inset-right, 0px) + 0.75rem));
+  padding-bottom: max(6rem, calc(env(safe-area-inset-bottom, 0px) + 3.5rem));
+  padding-top: max(6.75rem, calc(env(safe-area-inset-top, 0px) + 4.5rem));
 }
 
 @media (min-width: 640px) {
   .page-hero-inner {
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
+    padding-left: max(1.5rem, calc(env(safe-area-inset-left, 0px) + 1rem));
+    padding-right: max(1.5rem, calc(env(safe-area-inset-right, 0px) + 1rem));
     padding-top: 7rem;
   }
 }

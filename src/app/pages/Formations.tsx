@@ -42,7 +42,7 @@ export function Formations() {
       {/* Formation principale - Hybride 1000$ */}
       <section className="relative bg-white py-24 lg:py-32">
         <SectionTopDiagonal tone="light" variant="slashAlt" />
-        <div className="max-w-7xl mx-auto px-6 lg:px-12">
+        <div className="layout-gutter">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -176,9 +176,9 @@ export function Formations() {
       </section>
 
       {/* Formations à l'annonce */}
-      <section className="relative bg-black py-24 lg:py-32">
+      <section className="relative bg-black pt-24 pb-[max(6.5rem,calc(env(safe-area-inset-bottom,0px)+4rem))] lg:py-32">
         <SectionTopDiagonal tone="dark" variant="slash" />
-        <div className="max-w-7xl mx-auto px-6 lg:px-12">
+        <div className="layout-gutter">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -303,7 +303,7 @@ export function Formations() {
       {/* FAQ */}
       <section className="relative bg-white py-24 lg:py-32">
         <SectionTopDiagonal tone="light" variant="slice" />
-        <div className="max-w-4xl mx-auto px-6 lg:px-12">
+        <div className="layout-gutter-narrow">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -357,7 +357,7 @@ export function Formations() {
       </section>
 
       {/* CTA */}
-      <section className="relative overflow-x-hidden bg-black py-24 lg:py-32">
+      <section className="relative overflow-x-hidden bg-black pt-24 pb-[max(6.5rem,calc(env(safe-area-inset-bottom,0px)+4rem))] lg:py-32">
         <SectionTopDiagonal tone="dark" variant="slashAlt" />
         <div className="absolute inset-0 opacity-5">
           {[...Array(15)].map((_, i) => (
@@ -369,7 +369,7 @@ export function Formations() {
           ))}
         </div>
 
-        <div className="max-w-4xl mx-auto px-6 lg:px-12 relative z-10">
+        <div className="layout-gutter-narrow relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
