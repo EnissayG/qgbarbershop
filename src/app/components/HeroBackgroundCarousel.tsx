@@ -10,7 +10,7 @@ type Props = {
 
 /**
  * Carrousel plein cadre sans Slick : évite les bugs de hauteur au resize.
- * Images en object-fit: cover, centrées — remplissent toujours la zone (ratio préservé par recadrage).
+ * Images en object-fit: cover, centrées, remplissent toujours la zone (ratio préservé par recadrage).
  */
 export function HeroBackgroundCarousel({ images, alts }: Props) {
   const [index, setIndex] = useState(0);

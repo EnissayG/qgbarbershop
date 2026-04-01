@@ -54,7 +54,7 @@ export function Services() {
       icon: Sparkles,
       name: "Tresses",
       description:
-        "Tresses, nattes et styles protecteurs — avec notre barber spécialisée (Hauz of Tanz). Durée et tarif selon le style.",
+        "Tresses, nattes et styles protecteurs, avec notre barber spécialisée (Hauz of Tanz). Durée et tarif selon le style.",
       duration: "Variable",
       price: "Sur devis",
     },

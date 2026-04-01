@@ -1,5 +1,5 @@
 /**
- * Bordure diagonale entre sections — ancrée avec bottom-full (évite les traits blancs / sous-pixels).
+ * Bordure diagonale entre sections, ancrée avec bottom-full (évite les traits blancs / sous-pixels).
  * Un seul tracé par variante ; seule la couleur change selon le fond de la section.
  */
 type Tone = "light" | "dark";

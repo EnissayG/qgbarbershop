@@ -11,7 +11,7 @@ body {
   max-width: 100%;
 }
 
-/* Hero : carrousel plein cadre (sans Slick) — cover + recadrage stable au resize */
+/* Hero : carrousel plein cadre (sans Slick), cover + recadrage stable au resize */
 .hero-bg-carousel__img {
   position: absolute;
   inset: 0;

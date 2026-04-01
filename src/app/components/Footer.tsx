@@ -24,7 +24,7 @@ export function Footer() {
               className="h-16 w-auto mb-4"
             />
             <p className="text-white/60 text-sm">
-              Barbier moderne à Montréal — look épuré, service pro, résultats nets.
+              Barbier moderne à Montréal, look épuré, service pro, résultats nets.
             </p>
             <p className="text-white/80 font-black italic text-sm mt-4">
               "Viens juste faire ta tiass"
@@ -76,7 +76,7 @@ export function Footer() {
                 rel="noopener noreferrer"
                 className="hover:text-white underline underline-offset-2"
               >
-                Google — fiche & avis
+                Google, fiche & avis
               </a>
             </p>
             <div className="flex gap-3">

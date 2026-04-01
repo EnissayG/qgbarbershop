@@ -77,7 +77,7 @@ export function Formations() {
                 <div className="aspect-[4/5] overflow-hidden bg-black/10">
                   <ImageWithFallback
                     src={shopPhotos.formationFlyer}
-                    alt="Formation au QG — sur le terrain"
+                    alt="Formation au QG, sur le terrain"
                     className="w-full h-full object-cover"
                   />
                 </div>
@@ -94,7 +94,7 @@ export function Formations() {
                 <div>
                   <h3 className="text-3xl font-black uppercase mb-4">Programme Hybride</h3>
                   <p className="text-lg text-black/70 leading-relaxed mb-6">
-                    Des sessions animées par les barbers du QG — techniques réelles, en conditions de salon, avec
+                    Des sessions animées par les barbers du QG, techniques réelles, en conditions de salon, avec
                     la même exigence qu&apos;au comptoir.
                   </p>
 
@@ -120,7 +120,7 @@ export function Formations() {
                       <div>
                         <p className="font-bold mb-1">Sur le terrain, avec l&apos;équipe QG</p>
                         <p className="text-black/60 text-sm">
-                          Techniques et routines utilisées au salon chaque jour — apprentissage orienté résultat.
+                          Techniques et routines utilisées au salon chaque jour, apprentissage orienté résultat.
                         </p>
                       </div>
                     </div>
@@ -129,7 +129,7 @@ export function Formations() {
                       <MapPin size={24} className="flex-shrink-0 mt-1" />
                       <div>
                         <p className="font-bold mb-1">7072 rue Sherbrooke Est</p>
-                        <p className="text-black/60 text-sm">Montréal, QC H1N 1E6 — sessions pratiques au QG</p>
+                        <p className="text-black/60 text-sm">Montréal, QC H1N 1E6, sessions pratiques au QG</p>
                       </div>
                     </div>
                   </div>

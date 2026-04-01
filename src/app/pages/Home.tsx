@@ -15,7 +15,7 @@ import { shopInstagramUrl, shopPhotos } from "../config/shopPhotos";
 export function Home() {
   const carouselImages = shopPhotos.carousel;
   const carouselAlts = carouselImages.map(
-    (_, i) => `Quartier Général — salon ${i + 1}`
+    (_, i) => `Quartier Général, salon ${i + 1}`
   );
 
   return (
@@ -53,9 +53,9 @@ export function Home() {
             </motion.div>
 
             <h1 className="text-7xl lg:text-9xl font-black tracking-tighter text-white mb-6 leading-none uppercase">
-              Fresh
+              Quartier
               <br />
-              <span className="text-white/30">Cuts</span>
+              <span className="text-white/30">Général</span>
             </h1>
 
             <div className="mb-8">
@@ -63,7 +63,7 @@ export function Home() {
                 "Viens juste faire ta tiass"
               </p>
               <p className="text-xl lg:text-2xl text-white/70 font-light">
-                Barbier moderne, ambiance soignée — Montréal
+                Barbier moderne, ambiance soignée, Montréal
               </p>
             </div>
 
@@ -166,7 +166,7 @@ export function Home() {
               <div className="aspect-[4/5] overflow-hidden relative bg-black/10">
                 <ImageWithFallback
                   src={shopPhotos.homeAbout}
-                  alt="Le QG — ambiance du salon"
+                  alt="Le QG, ambiance du salon"
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -207,7 +207,7 @@ export function Home() {
               {
                 icon: Scissors,
                 title: "Coupes & fades",
-                desc: "Des fades nets, des contours précis, du classique au plus audacieux — toujours un résultat propre.",
+                desc: "Des fades nets, des contours précis, du classique au plus audacieux, toujours un résultat propre.",
               },
               {
                 icon: Users,

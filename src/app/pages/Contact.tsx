@@ -81,11 +81,11 @@ export function Contact() {
                   </div>
                   <div>
                     <p className="text-xs font-black uppercase tracking-[0.2em] text-white/70">
-                      Métro — ligne verte
+                      Métro, ligne verte
                     </p>
                     <p className="mt-1 text-2xl font-black uppercase tracking-tight">À côté de Radisson</p>
                     <p className="mt-2 text-sm text-white/80">
-                      Descends à Radisson — le salon est tout près à pied sur Sherbrooke Est.
+                      Descends à Radisson, le salon est tout près à pied sur Sherbrooke Est.
                     </p>
                   </div>
                 </div>
@@ -164,7 +164,7 @@ export function Contact() {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex h-14 w-14 items-center justify-center bg-black transition-all hover:bg-black/80"
-                    aria-label="Google — fiche du salon"
+                    aria-label="Google, fiche du salon"
                     title="Google"
                   >
                     <ExternalLink size={22} className="text-white" />

@@ -55,7 +55,7 @@ export function Team() {
     {
       name: "Hauz of Tanz",
       nickname: "Tanz",
-      role: "Barber — tresses & nattes",
+      role: "Barber, tresses & nattes",
       specialty: "Tresses, braids et styles protecteurs",
       experience: "Service tresses sur rendez-vous",
       image: shopPhotos.squad.hauzoftanz,
@@ -120,7 +120,7 @@ export function Team() {
               <span className="text-white/30">Squad</span>
             </h1>
             <p className="text-xl text-white/80 leading-relaxed max-w-2xl">
-              La vraie équipe du Quartier Général. KG & Benz au commande — suis chaque barber sur Insta.
+              La vraie équipe du Quartier Général. KG & Benz au commande, suis chaque barber sur Insta.
             </p>
             <a
               href={shopInstagramUrl}
