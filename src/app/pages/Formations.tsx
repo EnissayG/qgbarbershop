@@ -7,9 +7,8 @@ import { shopInstagramUrl, shopPhotos } from "../config/shopPhotos";
 
 export function Formations() {
   return (
-    <div className="pt-28 sm:pt-32">
-      {/* Hero */}
-      <section className="relative overflow-x-hidden bg-black py-24 lg:py-32">
+    <div className="overflow-x-hidden">
+      <section className="relative overflow-x-hidden bg-black pt-28 sm:pt-32 pb-24 lg:pb-32">
         <div className="absolute top-0 left-0 w-full h-full">
           <div className="absolute top-0 right-0 w-1/3 h-full bg-white/5 transform skew-x-12 translate-x-32" />
           <div className="absolute bottom-0 left-0 w-1/4 h-1/2 bg-white/5 transform -skew-x-12 -translate-x-16" />

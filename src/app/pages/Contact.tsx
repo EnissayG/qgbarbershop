@@ -17,8 +17,8 @@ const metroIconSrc = "/assets/metro-12.svg";
 
 export function Contact() {
   return (
-    <div className="overflow-x-hidden pt-28 sm:pt-32">
-      <section className="relative overflow-x-hidden bg-black py-24 lg:py-32">
+    <div className="overflow-x-hidden">
+      <section className="relative overflow-x-hidden bg-black pt-28 sm:pt-32 pb-24 lg:pb-32">
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute inset-0">
             <ImageWithFallback
