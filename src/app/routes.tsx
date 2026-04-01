@@ -1,30 +1,21 @@
-import { createBrowserRouter, Navigate } from "react-router";
-import { Root } from "./components/Root";
+import { createBrowserRouter } from "react-router";
 import { Home } from "./pages/Home";
 import { Services } from "./pages/Services";
 import { Team } from "./pages/Team";
-import { About } from "./pages/About";
+import { Formations } from "./pages/Formations";
 import { Contact } from "./pages/Contact";
-
-export const NAV_LINKS = [
-  { path: "/", label: "Accueil" },
-  { path: "/services", label: "Services" },
-  { path: "/equipe", label: "Équipe" },
-  { path: "/a-propos", label: "À Propos" },
-  { path: "/contact", label: "Contact" },
-] as const;
+import { Layout } from "./components/Layout";
 
 export const router = createBrowserRouter([
   {
     path: "/",
-    Component: Root,
+    Component: Layout,
     children: [
       { index: true, Component: Home },
       { path: "services", Component: Services },
       { path: "equipe", Component: Team },
-      { path: "a-propos", Component: About },
+      { path: "formations", Component: Formations },
       { path: "contact", Component: Contact },
-      { path: "*", element: <Navigate to="/" replace /> },
     ],
   },
-], { basename: import.meta.env.BASE_URL });
+]);

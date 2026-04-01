@@ -1,106 +1,101 @@
-import { Phone, MapPin, Clock, Instagram, ArrowRight } from "lucide-react";
+import { Instagram } from "lucide-react";
 import { Link } from "react-router";
-
-const GOOGLE_LINK = "https://share.google/IrYHUn7NjG4AH4sYh";
+import {
+  shopAddressLine1,
+  shopAddressLine2,
+  shopGoogleUrl,
+  shopPhoneAltDisplay,
+  shopPhoneAltTel,
+  shopPhoneDisplay,
+  shopPhoneTel,
+} from "../config/shopInfo";
+import { shopInstagramUrl, shopPhotos } from "../config/shopPhotos";
 
 export function Footer() {
   return (
-    <footer className="bg-white border-t border-black/10">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16">
-          {/* Marque & description */}
-          <div className="lg:col-span-2">
-            <Link to="/" className="inline-block mb-6">
-              <span className="text-2xl font-bold text-black tracking-tight">
-                QG <span className="italic text-black/80">Quartier Général</span>
-              </span>
-            </Link>
-            <p className="text-black/70 text-sm md:text-base leading-relaxed max-w-md mb-8">
-              Salon de coiffure et barbershop à Montréal. Savoir-faire traditionnel et techniques contemporaines pour des résultats exceptionnels.
+    <footer className="bg-black text-white py-16 border-t border-white/10">
+      <div className="max-w-7xl mx-auto px-6 lg:px-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+          {/* Brand */}
+          <div>
+            <img 
+              src={shopPhotos.logo} 
+              alt="QG Logo" 
+              className="h-16 w-auto mb-4"
+            />
+            <p className="text-white/60 text-sm">
+              Barbier moderne à Montréal — look épuré, service pro, résultats nets.
             </p>
-            <a
-              href={GOOGLE_LINK}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-black font-medium hover:text-black/80 transition-colors text-sm"
-            >
-              Avis & localisation Google
-              <ArrowRight className="w-4 h-4" />
-            </a>
+            <p className="text-white/80 font-black italic text-sm mt-4">
+              "Viens juste faire ta tiass"
+            </p>
           </div>
 
           {/* Navigation */}
           <div>
-            <h3 className="text-black font-semibold mb-6 text-sm uppercase tracking-wider">
-              Navigation
-            </h3>
-            <nav className="space-y-3">
-              {[
-                { to: "/", label: "Accueil" },
-                { to: "/services", label: "Services" },
-                { to: "/equipe", label: "Équipe" },
-                { to: "/a-propos", label: "À propos" },
-                { to: "/contact", label: "Contact" },
-              ].map((link) => (
-                <Link
-                  key={link.to}
-                  to={link.to}
-                  className="block text-black/70 hover:text-black transition-colors text-sm"
-                >
-                  {link.label}
-                </Link>
-              ))}
-            </nav>
+            <h3 className="uppercase tracking-wider text-sm font-bold mb-4">Navigation</h3>
+            <ul className="space-y-2">
+              <li><Link to="/" className="text-white/60 hover:text-white transition-colors text-sm">Accueil</Link></li>
+              <li><Link to="/services" className="text-white/60 hover:text-white transition-colors text-sm">Services</Link></li>
+              <li><Link to="/equipe" className="text-white/60 hover:text-white transition-colors text-sm">La Squad</Link></li>
+              <li><Link to="/formations" className="text-white/60 hover:text-white transition-colors text-sm">Academy</Link></li>
+            </ul>
           </div>
 
-          {/* Contact & lieu */}
+          {/* Contact */}
           <div>
-            <h3 className="text-black font-semibold mb-6 text-sm uppercase tracking-wider">
-              Nous trouver
-            </h3>
-            <div className="space-y-4">
+            <h3 className="uppercase tracking-wider text-sm font-bold mb-4">Contact</h3>
+            <ul className="space-y-2 text-sm text-white/60">
+              <li>{shopAddressLine1}</li>
+              <li>{shopAddressLine2}</li>
+              <li className="pt-2">
+                <a href={`tel:${shopPhoneTel}`} className="hover:text-white transition-colors">
+                  {shopPhoneDisplay}
+                </a>
+              </li>
+              <li>
+                <a href={`tel:${shopPhoneAltTel}`} className="hover:text-white transition-colors">
+                  {shopPhoneAltDisplay}
+                </a>
+              </li>
+              <li>
+                <a href="mailto:info@qgbarbershop.com" className="hover:text-white transition-colors">
+                  info@qgbarbershop.com
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          {/* Social */}
+          <div>
+            <h3 className="uppercase tracking-wider text-sm font-bold mb-4">Réseaux & avis</h3>
+            <p className="text-sm text-white/50 mb-3">
               <a
-                href="tel:4384541412"
-                className="flex items-start gap-3 text-black/70 hover:text-black transition-colors text-sm"
+                href={shopGoogleUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-white underline underline-offset-2"
               >
-                <Phone size={16} className="mt-0.5 shrink-0" />
-                438 454 1412
+                Google — fiche & avis
               </a>
-              <div className="flex items-start gap-3 text-black/70 text-sm">
-                <MapPin size={16} className="mt-0.5 shrink-0" />
-                <span>
-                  7072 R. Sherbrooke E<br />
-                  Montréal, QC H1N 1E6<br />
-                  <span className="text-black/50">Métro Radisson à proximité</span>
-                </span>
-              </div>
-              <div className="flex items-start gap-3 text-black/70 text-sm">
-                <Clock size={16} className="mt-0.5 shrink-0" />
-                <span>Lun-Sam 9h-20h · Dim fermé</span>
-              </div>
+            </p>
+            <div className="flex gap-3">
+              <a
+                href={shopInstagramUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 bg-white/10 hover:bg-white hover:text-black transition-all flex items-center justify-center"
+                aria-label="Instagram Quartier Général"
+              >
+                <Instagram size={18} />
+              </a>
             </div>
-            <a
-              href="https://www.instagram.com/quartiergeneral.qg/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-6 inline-flex items-center justify-center w-10 h-10 rounded-full bg-black/5 text-black hover:bg-black hover:text-white transition-colors"
-              aria-label="Instagram QG"
-            >
-              <Instagram size={18} />
-            </a>
           </div>
         </div>
 
-        {/* Bas de page */}
-        <div className="mt-16 pt-8 border-t border-black/10 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-black/50 text-xs md:text-sm">
-            © {new Date().getFullYear()} QG Barbier – Le Quartier Général
-          </p>
-          <div className="flex items-center gap-6 text-xs md:text-sm text-black/50">
-            <a href={GOOGLE_LINK} target="_blank" rel="noopener noreferrer" className="hover:text-black transition-colors">
-              Avis Google
-            </a>
-          </div>
+        {/* Bottom */}
+        <div className="border-t border-white/10 pt-6 text-center text-sm text-white/40">
+          <p>&copy; {new Date().getFullYear()} QG Barbershop. On reste fresh.</p>
         </div>
       </div>
     </footer>

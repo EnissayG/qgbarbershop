@@ -1,237 +1,258 @@
-import React from "react";
 import { motion } from "motion/react";
-import { MapPin, Phone, Mail, Clock, ExternalLink, Calendar } from "lucide-react";
-import { GETSQUIRE_BOOKING_URL } from "../config/booking";
-import { GOOGLE_MAPS_EMBED_SRC } from "../config/location";
+import { MapPin, Phone, Clock, Instagram, Zap, ExternalLink } from "lucide-react";
+import { ImageWithFallback } from "../components/figma/ImageWithFallback";
+import { SectionTopDiagonal } from "../components/SectionTopDiagonal";
+import {
+  shopAddressLine1,
+  shopAddressLine2,
+  shopBookingUrl,
+  shopGoogleUrl,
+  shopMapEmbedUrl,
+  shopPhoneDisplay,
+  shopPhoneTel,
+} from "../config/shopInfo";
+import { shopInstagramUrl, shopPhotos } from "../config/shopPhotos";
 
-const GOOGLE_LINK = "https://share.google/IrYHUn7NjG4AH4sYh";
+const metroIconSrc = "/assets/metro-12.svg";
 
 export function Contact() {
-  const fadeInUp = {
-    initial: { opacity: 0, y: 24 },
-    whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true, amount: 0.2 },
-    transition: { duration: 0.45 }
-  };
-
-  const columnTitle = "text-2xl sm:text-3xl font-bold text-black tracking-tight";
-  const columnSubtitle = "mt-2 text-sm sm:text-base text-black/55 leading-relaxed max-w-md";
-
   return (
-    <div className="bg-white pt-20">
-      {/* Hero */}
-      <section className="relative py-16 sm:py-20 lg:py-24 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-white via-gray-50 to-white" />
+    <div className="pt-16">
+      <section className="relative overflow-x-hidden bg-black py-24 lg:py-32">
+        <div className="absolute inset-0">
+          <ImageWithFallback
+            src={shopPhotos.contactHero}
+            alt="Ambiance du salon QG"
+            className="w-full h-full object-cover opacity-20"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-black via-black/90 to-black/70" />
+        </div>
 
-        <motion.div
-          initial={{ scale: 0, opacity: 0 }}
-          animate={{ scale: 1, opacity: 0.05 }}
-          transition={{ duration: 1 }}
-          className="absolute -top-40 -right-40 w-96 h-96 bg-black rounded-full"
-        />
+        <div className="absolute top-0 left-0 w-32 h-full bg-white/5 transform -skew-x-12 -translate-x-8" />
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
           <motion.div
-            initial={{ opacity: 0, y: 24 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.55 }}
-            className="max-w-2xl"
+            transition={{ duration: 0.8 }}
+            className="max-w-3xl"
           >
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-black leading-[1.1]">
-              Contact
-              <span className="text-black/40 font-normal"> · </span>
-              <span className="italic text-black/75">Rendez-vous</span>
+            <div className="inline-flex items-center gap-3 px-6 py-3 bg-white/10 text-white mb-8">
+              <Zap size={20} className="text-yellow-400" />
+              <span className="uppercase tracking-widest font-bold text-sm">Walk-ins ok</span>
+            </div>
+
+            <h1 className="text-7xl lg:text-9xl font-black tracking-tighter leading-none mb-8 text-white uppercase">
+              Passe
+              <br />
+              <span className="text-white/30">au QG</span>
             </h1>
-            <p className="mt-5 text-lg text-black/55 leading-relaxed">
-              Réservation en ligne, coordonnées du salon et itinéraire.
+            <p className="text-xl text-white/80 leading-relaxed max-w-2xl">
+              Réserve sur Squire ou écris en DM le barber de ton choix. Walk-ins selon place.
             </p>
           </motion.div>
         </div>
       </section>
 
-      {/* Deux colonnes alignées en haut, même rythme typographique */}
-      <section className="pb-16 lg:pb-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 lg:items-start">
-            {/* Colonne réservation */}
-            <motion.div {...fadeInUp} id="reservation-getsquire" className="min-w-0">
-              <h2 className={columnTitle}>Réservation en ligne</h2>
-              <p className={columnSubtitle}>
-                Choisissez votre prestation et un créneau qui vous convient. Vous serez redirigé vers
-                notre page de réservation sécurisée pour finaliser.
-              </p>
+      <section className="relative bg-white py-32">
+        <SectionTopDiagonal tone="light" variant="slice" />
+        <div className="max-w-7xl mx-auto px-6 lg:px-12">
+          <div className="grid lg:grid-cols-2 gap-16 lg:gap-20">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="space-y-12"
+            >
+              <div>
+                <h2 className="text-5xl font-black tracking-tighter mb-8 uppercase">Trouve-nous</h2>
 
-              <div className="mt-8 border border-black/12 bg-white p-6 sm:p-8 shadow-sm">
-                <div className="flex gap-4 sm:gap-5">
+                <div
+                  className="mb-10 flex flex-col gap-4 border-4 border-black bg-black p-6 text-white sm:flex-row sm:items-center"
+                  role="status"
+                >
                   <div
-                    className="flex h-12 w-12 shrink-0 items-center justify-center bg-black text-white"
+                    className="flex h-16 w-16 flex-shrink-0 items-center justify-center bg-[#007F4E]"
                     aria-hidden
                   >
-                    <Calendar className="h-6 w-6" />
+                    <img src={metroIconSrc} alt="" className="h-10 w-10 text-white brightness-0 invert" />
                   </div>
-                  <div className="min-w-0 space-y-3 pt-0.5">
-                    <p className="font-semibold text-black text-base sm:text-lg leading-snug">
-                      Prendre rendez-vous
+                  <div>
+                    <p className="text-xs font-black uppercase tracking-[0.2em] text-white/70">
+                      Métro — ligne verte
                     </p>
-                    <p className="text-sm text-black/60 leading-relaxed">
-                      Quelques minutes suffisent : services, disponibilités et confirmation en ligne.
+                    <p className="mt-1 text-2xl font-black uppercase tracking-tight">À côté de Radisson</p>
+                    <p className="mt-2 text-sm text-white/80">
+                      Descends à Radisson — le salon est tout près à pied sur Sherbrooke Est.
                     </p>
                   </div>
                 </div>
 
+                <div className="space-y-8">
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6 }}
+                    className="flex gap-4"
+                  >
+                    <div className="flex h-14 w-14 flex-shrink-0 items-center justify-center bg-black">
+                      <MapPin size={24} className="text-white" />
+                    </div>
+                    <div>
+                      <h3 className="mb-2 text-xs font-bold uppercase tracking-widest text-black/50">Adresse</h3>
+                      <p className="text-xl font-bold">{shopAddressLine1}</p>
+                      <p className="text-lg text-black/60">{shopAddressLine2}</p>
+                      <a
+                        href={shopGoogleUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mt-2 inline-block text-sm font-bold uppercase tracking-wider text-black hover:text-black/60"
+                      >
+                        Voir sur Google Maps →
+                      </a>
+                    </div>
+                  </motion.div>
+
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: 0.1 }}
+                    className="flex gap-4"
+                  >
+                    <div className="flex h-14 w-14 flex-shrink-0 items-center justify-center bg-black">
+                      <Phone size={24} className="text-white" />
+                    </div>
+                    <div>
+                      <h3 className="mb-2 text-xs font-bold uppercase tracking-widest text-black/50">Téléphone</h3>
+                      <a href={`tel:${shopPhoneTel}`} className="text-xl font-bold hover:underline">
+                        {shopPhoneDisplay}
+                      </a>
+                    </div>
+                  </motion.div>
+
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: 0.2 }}
+                    className="flex gap-4"
+                  >
+                    <div className="flex h-14 w-14 flex-shrink-0 items-center justify-center bg-black">
+                      <Clock size={24} className="text-white" />
+                    </div>
+                    <div>
+                      <h3 className="mb-2 text-xs font-bold uppercase tracking-widest text-black/50">Heures</h3>
+                      <div className="space-y-1 text-black/80">
+                        <p>Mer-Ven: 10h - 20h</p>
+                        <p>Sam: 9h - 18h</p>
+                        <p>Dim: 10h - 17h</p>
+                      </div>
+                    </div>
+                  </motion.div>
+                </div>
+              </div>
+
+              <div>
+                <h3 className="mb-6 text-xs font-bold uppercase tracking-widest text-black/50">Réseaux & avis</h3>
+                <div className="flex flex-wrap gap-4">
+                  <a
+                    href={shopGoogleUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex h-14 w-14 items-center justify-center bg-black transition-all hover:bg-black/80"
+                    aria-label="Google — fiche du salon"
+                    title="Google"
+                  >
+                    <ExternalLink size={22} className="text-white" />
+                  </a>
+                  <a
+                    href={shopInstagramUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex h-14 w-14 items-center justify-center bg-black transition-all hover:bg-black/80"
+                    aria-label="Instagram"
+                  >
+                    <Instagram size={24} className="text-white" />
+                  </a>
+                </div>
+              </div>
+
+              <div className="space-y-4 pt-8">
                 <a
-                  href={GETSQUIRE_BOOKING_URL}
+                  href={shopBookingUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-6 flex w-full items-center justify-center gap-2 bg-black px-6 py-3.5 text-sm sm:text-base font-semibold text-white transition-colors hover:bg-black/90 min-h-[48px]"
+                  className="flex w-full items-center justify-center gap-3 bg-black py-5 font-black uppercase tracking-wider text-white transition-all hover:bg-black/90"
                 >
-                  Réserver en ligne
-                  <ExternalLink className="h-4 w-4 sm:h-5 sm:w-5 shrink-0" aria-hidden />
+                  <span>Réserver sur Squire</span>
+                </a>
+                <a
+                  href={shopInstagramUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex w-full items-center justify-center gap-3 border-4 border-black py-5 font-black uppercase tracking-wider text-black transition-all hover:bg-black hover:text-white"
+                >
+                  <Instagram size={20} />
+                  <span>DM Instagram (barber au choix)</span>
+                </a>
+                <a
+                  href={`tel:${shopPhoneTel}`}
+                  className="flex w-full items-center justify-center gap-3 border-4 border-black py-5 font-black uppercase tracking-wider text-black transition-all hover:bg-black hover:text-white"
+                >
+                  <Phone size={20} />
+                  <span>Appeler le salon</span>
                 </a>
               </div>
             </motion.div>
 
-            {/* Colonne coordonnées & carte */}
-            <div className="min-w-0 space-y-8">
-              <motion.div {...fadeInUp} transition={{ delay: 0.05 }}>
-                <h2 className={columnTitle}>Coordonnées</h2>
-                <p className={columnSubtitle}>
-                  QG Le Quartier Général — Montréal. Métro Radisson à proximité.
-                </p>
-
-                <div className="mt-8 bg-black text-white p-6 sm:p-8 space-y-5">
-                  <div className="space-y-4">
-                    <div className="flex items-start gap-3 sm:gap-4">
-                      <MapPin className="w-5 h-5 sm:w-6 sm:h-6 shrink-0 mt-0.5 text-white/90" />
-                      <div>
-                        <p className="text-xs font-semibold uppercase tracking-wider text-white/50 mb-1">
-                          Adresse
-                        </p>
-                        <p className="text-white/85 text-sm leading-relaxed">
-                          7072 R. Sherbrooke E
-                          <br />
-                          Montréal, QC H1N 1E6
-                        </p>
-                      </div>
-                    </div>
-
-                    <div className="flex items-start gap-3 sm:gap-4">
-                      <Phone className="w-5 h-5 sm:w-6 sm:h-6 shrink-0 mt-0.5 text-white/90" />
-                      <div>
-                        <p className="text-xs font-semibold uppercase tracking-wider text-white/50 mb-1">
-                          Téléphone
-                        </p>
-                        <a
-                          href="tel:4384541412"
-                          className="text-white/85 text-sm hover:text-white transition-colors"
-                        >
-                          438 454 1412
-                        </a>
-                      </div>
-                    </div>
-
-                    <div className="flex items-start gap-3 sm:gap-4">
-                      <Mail className="w-5 h-5 sm:w-6 sm:h-6 shrink-0 mt-0.5 text-white/90" />
-                      <div>
-                        <p className="text-xs font-semibold uppercase tracking-wider text-white/50 mb-1">
-                          Courriel
-                        </p>
-                        <a
-                          href="mailto:contact@quartiergeneral.com"
-                          className="text-white/85 text-sm hover:text-white transition-colors break-all"
-                        >
-                          contact@quartiergeneral.com
-                        </a>
-                      </div>
-                    </div>
-
-                    <div className="flex items-start gap-3 sm:gap-4">
-                      <Clock className="w-5 h-5 sm:w-6 sm:h-6 shrink-0 mt-0.5 text-white/90" />
-                      <div>
-                        <p className="text-xs font-semibold uppercase tracking-wider text-white/50 mb-1">
-                          Horaires
-                        </p>
-                        <p className="text-white/85 text-sm leading-relaxed">
-                          Lun–Sam 9h–20h
-                          <br />
-                          Dimanche fermé
-                        </p>
-                      </div>
-                    </div>
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="flex flex-col gap-6"
+            >
+              <div>
+                <h3 className="mb-4 text-xs font-bold uppercase tracking-widest text-black/50">Carte</h3>
+                <div className="overflow-hidden border-4 border-black bg-black/5 shadow-[8px_8px_0_0_rgba(0,0,0,1)]">
+                  <div className="aspect-[4/3] w-full sm:aspect-video">
+                    <iframe
+                      title="Quartier Général Barbershop sur la carte"
+                      src={shopMapEmbedUrl}
+                      className="h-full w-full border-0"
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                      allowFullScreen
+                    />
                   </div>
                 </div>
-              </motion.div>
-
-              <motion.div
-                {...fadeInUp}
-                transition={{ delay: 0.1 }}
-                className="overflow-hidden border border-black/12 bg-white shadow-sm"
-              >
-                <div className="flex items-center justify-between gap-3 border-b border-black/10 px-4 py-3 sm:px-5">
-                  <span className="text-sm font-semibold text-black">Plan d&apos;accès</span>
-                  <a
-                    href={GOOGLE_LINK}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-xs sm:text-sm font-medium text-black/60 hover:text-black transition-colors shrink-0"
-                  >
-                    Ouvrir dans Google Maps
-                  </a>
-                </div>
-                <div className="relative aspect-[4/3] w-full min-h-[220px] bg-neutral-100">
-                  <iframe
-                    title="Carte — QG Quartier Général, Montréal"
-                    src={GOOGLE_MAPS_EMBED_SRC}
-                    className="absolute inset-0 h-full w-full border-0"
-                    loading="lazy"
-                    referrerPolicy="no-referrer-when-downgrade"
-                    allowFullScreen
-                  />
-                </div>
-              </motion.div>
-
-              <motion.div
-                {...fadeInUp}
-                transition={{ delay: 0.15 }}
-                className="border border-black/10 bg-neutral-50 px-5 py-5 sm:px-6 sm:py-6"
-              >
-                <p className="text-sm font-semibold text-black">Besoin d&apos;aide ?</p>
-                <p className="mt-2 text-sm text-black/60 leading-relaxed">
-                  Pour le jour même ou une question rapide, appelez-nous ou passez au salon aux
-                  heures d&apos;ouverture.
-                </p>
-              </motion.div>
-            </div>
+                <a
+                  href={shopGoogleUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-4 inline-flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-black underline underline-offset-4 hover:text-black/60"
+                >
+                  Ouvrir dans Google Maps
+                  <ExternalLink size={14} />
+                </a>
+              </div>
+            </motion.div>
           </div>
-        </div>
-      </section>
 
-      {/* CTA bas de page */}
-      <section className="bg-black text-white py-14 sm:py-16">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
-          <motion.div {...fadeInUp}>
-            <h3 className="text-xl sm:text-2xl font-bold">Rendez-vous urgent ?</h3>
-            <p className="mt-3 text-white/65 text-sm sm:text-base max-w-lg mx-auto leading-relaxed">
-              Appelez-nous ou réservez en ligne selon ce qui vous arrange.
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="mx-auto mt-24 max-w-4xl border-t-4 border-black pt-16 text-center"
+          >
+            <h3 className="text-4xl font-black uppercase tracking-tight lg:text-5xl">On se voit bientôt? 👊</h3>
+            <p className="mt-6 text-xl text-black/60">
+              Passe au QG et découvre pourquoi on est le meilleur spot de Montréal.
             </p>
-            <div className="mt-8 flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-stretch sm:items-center max-w-md sm:max-w-none mx-auto">
-              <a
-                href="tel:4384541412"
-                className="inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-white text-black text-sm font-semibold hover:bg-white/90 transition-colors min-h-[48px]"
-              >
-                <Phone className="w-5 h-5 shrink-0" />
-                438 454 1412
-              </a>
-              <a
-                href={GETSQUIRE_BOOKING_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 px-8 py-3.5 border-2 border-white text-white text-sm font-semibold hover:bg-white hover:text-black transition-colors min-h-[48px]"
-              >
-                Réserver en ligne
-                <ExternalLink className="w-5 h-5 shrink-0" aria-hidden />
-              </a>
-            </div>
           </motion.div>
         </div>
       </section>

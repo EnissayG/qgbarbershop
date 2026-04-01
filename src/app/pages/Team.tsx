@@ -1,290 +1,275 @@
-import React from "react";
 import { motion } from "motion/react";
-import { Award, Heart, Users, Instagram } from "lucide-react";
-import { useEffect, useMemo, useState } from "react";
+import { Instagram, Award, Scissors, Star } from "lucide-react";
+import { ImageWithFallback } from "../components/figma/ImageWithFallback";
+import { SectionTopDiagonal } from "../components/SectionTopDiagonal";
+import { shopInstagramUrl, shopPhotos } from "../config/shopPhotos";
 
-const ASSETS = `${import.meta.env.BASE_URL}assets`;
+type SquadMember = {
+  name: string;
+  nickname: string;
+  role: string;
+  specialty: string;
+  experience: string;
+  image: string;
+  /** Texte affiché (ex. @handle) */
+  instagramLabel: string;
+  instagramHref: string;
+  vibe: string;
+};
 
 export function Team() {
-  const fadeInUp = {
-    initial: { opacity: 0, y: 24 },
-    whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true, amount: 0.2 },
-    transition: { duration: 0.45 }
-  };
-
-  const teamMembers = [
+  const team: SquadMember[] = [
     {
-      name: "Shuya",
-      handle: "@shuyacutz",
-      image: `${ASSETS}/shuyacutz.png`,
-      specialty: "Expert Fades & Coupes Modernes",
-      description: "Spécialiste des dégradés précis et des styles urbains contemporains."
+      name: "KG",
+      nickname: "KG",
+      role: "Co-proprio & barber",
+      specialty: "Fades, techniques & vision QG",
+      experience: "Co-fondateur du Quartier Général",
+      image: shopPhotos.squad.kg,
+      instagramLabel: "@quartiergeneralbarbershop",
+      instagramHref: shopInstagramUrl,
+      vibe: "Co-proprio : vision et exigence au même niveau que la coupe",
     },
     {
       name: "Benz",
-      handle: "@bigbenzcuts",
-      image: `${ASSETS}/bigbenzcuts.png`,
-      specialty: "Maître Coiffeur & Styliste",
-      description: "Expert en transformations capillaires et techniques avancées de coiffure."
-    },
-    {
-      name: "Don Cruz",
-      handle: "@doncruzcuts",
-      image: `${ASSETS}/doncruzcuts.png`,
-      specialty: "Barbier Créatif",
-      description: "Passionné de coupes audacieuses et de designs capillaires uniques."
-    },
-    {
-      name: "Hauz",
-      handle: "@hauzoftanz",
-      image: `${ASSETS}/hauzoftanz.png`,
-      specialty: "Spécialiste Tresses & Box Braids",
-      description: "Experte en tressage, box braids et coiffures afro protectrices."
-    },
-    {
-      name: "KG",
-      handle: "@kgthebarber_",
-      image: `${ASSETS}/kgthebarber.png`,
-      specialty: "Barbier Polyvalent",
-      description: "Maîtrise parfaite des techniques traditionnelles et modernes."
+      nickname: "Benz",
+      role: "Co-proprio & barber",
+      specialty: "Coupe, style & identité du shop",
+      experience: "Co-fondateur du Quartier Général",
+      image: shopPhotos.squad.benz,
+      instagramLabel: "@quartiergeneralbarbershop",
+      instagramHref: shopInstagramUrl,
+      vibe: "Co-pilote du QG, même énergie, même exigence",
     },
     {
       name: "Lennox",
-      handle: "@lennoxcutzz",
-      image: `${ASSETS}/lennoxcutzz.png`,
-      specialty: "Expert Ligne & Détails",
-      description: "Précision chirurgicale dans les contours et finitions impeccables."
+      nickname: "Lennox",
+      role: "Barber",
+      specialty: "Coupe précise & finitions",
+      experience: "La squad QG",
+      image: shopPhotos.squad.lennox,
+      instagramLabel: "@lennoxcutzz",
+      instagramHref: "https://www.instagram.com/lennoxcutzz/",
+      vibe: "Calme sur les lignes, lourd sur le résultat",
     },
     {
-      name: "Kev",
-      handle: "@magickevcuts",
-      image: `${ASSETS}/magickevcuts.png`,
-      specialty: "Barbier Artistique",
-      description: "Créateur de styles personnalisés qui révèlent votre personnalité."
-    }
-  ];
-
-  const [availableMembers, setAvailableMembers] = useState<typeof teamMembers>([]);
-
-  useEffect(() => {
-    let cancelled = false;
-
-    const check = (src: string) =>
-      new Promise<boolean>((resolve) => {
-        const img = new Image();
-        img.onload = () => resolve(true);
-        img.onerror = () => resolve(false);
-        img.src = src;
-      });
-
-    (async () => {
-      const results = await Promise.all(teamMembers.map((m) => check(m.image)));
-      if (cancelled) return;
-      setAvailableMembers(teamMembers.filter((_, i) => results[i]));
-    })();
-
-    return () => {
-      cancelled = true;
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const { featured, others } = useMemo(() => {
-    const byHandle = new Map(availableMembers.map((m) => [m.handle, m]));
-    const featuredOrder = ["@kgthebarber_", "@bigbenzcuts"];
-    const featuredMembers = featuredOrder.map((h) => byHandle.get(h)).filter(Boolean) as typeof teamMembers;
-    const featuredSet = new Set(featuredMembers.map((m) => m.handle));
-    const otherMembers = availableMembers.filter((m) => !featuredSet.has(m.handle));
-    return { featured: featuredMembers, others: otherMembers };
-  }, [availableMembers]);
-
-  const values = [
-    {
-      icon: Award,
-      title: "Excellence",
-      description: "Nous visons la perfection dans chaque coupe, chaque détail compte."
+      name: "Hauz of Tanz",
+      nickname: "Tanz",
+      role: "Barber — tresses & nattes",
+      specialty: "Tresses, braids et styles protecteurs",
+      experience: "Service tresses sur rendez-vous",
+      image: shopPhotos.squad.hauzoftanz,
+      instagramLabel: "@hauzoftanz",
+      instagramHref: "https://www.instagram.com/hauzoftanz/",
+      vibe: "Spécialiste tresses : précision, tenue et finitions nettes",
     },
     {
-      icon: Heart,
-      title: "Passion",
-      description: "L'amour du métier guide chacun de nos gestes et conseils."
+      name: "Shuya",
+      nickname: "Shuya",
+      role: "Barber",
+      specialty: "Coupe & créativité",
+      experience: "La squad QG",
+      image: shopPhotos.squad.shuyacutz,
+      instagramLabel: "@shuyacutz",
+      instagramHref: "https://www.instagram.com/shuyacutz/",
+      vibe: "Style propre, attitude QG",
     },
     {
-      icon: Users,
-      title: "Communauté",
-      description: "Une relation authentique avec nos clients est notre priorité."
-    }
+      name: "Magic Kev",
+      nickname: "Kev",
+      role: "Barber",
+      specialty: "Fades & line-ups",
+      experience: "La squad QG",
+      image: shopPhotos.squad.magickevcuts,
+      instagramLabel: "@magickevcuts",
+      instagramHref: "https://www.instagram.com/magickevcuts/",
+      vibe: "La magie opère sur chaque session",
+    },
+    {
+      name: "Don Cruz",
+      nickname: "Don Cruz",
+      role: "Barber",
+      specialty: "Coupe moderne & texture",
+      experience: "La squad QG",
+      image: shopPhotos.squad.doncruzcuts,
+      instagramLabel: "@doncruzcuts",
+      instagramHref: "https://www.instagram.com/doncruzcuts/",
+      vibe: "Couleur, texture, personnalité",
+    },
   ];
 
   return (
-    <div className="bg-white pt-20">
-      {/* Hero Section */}
-      <section className="relative py-24 lg:py-32 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-white via-gray-50 to-white" />
-        
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="pt-16">
+      {/* Hero */}
+      <section className="relative overflow-x-hidden bg-black py-32">
+        <div className="absolute top-0 right-0 w-1/2 h-full bg-white/5 transform skew-x-12 translate-x-32" />
+
+        <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="max-w-3xl space-y-6"
+            transition={{ duration: 0.8 }}
+            className="max-w-3xl"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-black/5">
-              <Users className="w-4 h-4 text-black" />
-              <span className="text-sm font-medium text-black">Notre Équipe</span>
-            </div>
-            
-            <h1 className="text-5xl lg:text-6xl font-bold text-black leading-tight">
-              Les Artistes
+            <span className="text-sm uppercase tracking-widest text-white/60 mb-6 block font-bold">
+              Meet the squad
+            </span>
+            <h1 className="text-7xl lg:text-9xl font-black tracking-tighter leading-none mb-8 text-white uppercase">
+              La
               <br />
-              <span className="italic text-black/70">du Quartier Général</span>
+              <span className="text-white/30">Squad</span>
             </h1>
-            
-            <p className="text-xl text-black/60 leading-relaxed">
-              Une équipe talentueuse et passionnée, spécialisée dans tous les styles de coiffure
+            <p className="text-xl text-white/80 leading-relaxed max-w-2xl">
+              La vraie équipe du Quartier Général. KG & Benz au commande — suis chaque barber sur Insta.
             </p>
+            <a
+              href={shopInstagramUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 mt-8 text-white font-black uppercase tracking-wider text-sm border-b-2 border-white/40 hover:border-white transition-colors"
+            >
+              <Instagram size={18} />
+              @quartiergeneralbarbershop
+            </a>
           </motion.div>
         </div>
       </section>
 
-      {/* Team Grid – n'affiche que les membres dont l'image existe */}
-      <section className="py-16 lg:py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Propriétaires (KG + Benz) */} 
-          {featured.length > 0 && (
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-10">
-              {featured.map((member) => (
-                <motion.a
-                  key={member.handle}
-                  href={`https://instagram.com/${member.handle.replace("@", "")}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  {...fadeInUp}
-                  transition={{ duration: 0.6 }}
-                  className="group block overflow-hidden bg-white border border-black/10 hover:border-black/30 transition-colors"
-                >
-                  <div className="relative overflow-hidden aspect-[16/10] bg-gray-100">
-                    <img
+      {/* Team Grid */}
+      <section className="relative bg-white py-24 lg:py-32">
+        <SectionTopDiagonal tone="light" variant="slashAlt" />
+        <div className="max-w-7xl mx-auto px-6 lg:px-12">
+          <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-10 lg:gap-12">
+            {team.map((member, index) => (
+              <motion.div
+                key={member.name}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: index * 0.06 }}
+                className="group"
+              >
+                <div className="relative overflow-hidden mb-5">
+                  <div className="aspect-[4/5] relative overflow-hidden bg-neutral-900">
+                    <ImageWithFallback
                       src={member.image}
                       alt={member.name}
-                      className="absolute inset-0 w-full h-full object-contain object-center group-hover:scale-[1.02] transition-transform duration-700"
-                      loading="lazy"
-                      decoding="async"
+                      className="w-full h-full object-cover object-top"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                    <div className="absolute bottom-0 left-0 right-0 p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                      <p className="text-white/90 text-sm leading-relaxed mb-3">{member.description}</p>
-                      <span className="inline-flex items-center gap-2 text-white text-sm font-medium">
-                        <Instagram className="w-4 h-4" /> Suivre
-                      </span>
+
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      className="absolute bottom-0 left-0 right-0 p-5 translate-y-full group-hover:translate-y-0 transition-transform duration-300"
+                    >
+                      <a
+                        href={member.instagramHref}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 px-5 py-3 bg-white text-black font-black uppercase tracking-wider text-xs hover:bg-white/90 transition-colors w-full justify-center"
+                      >
+                        <Instagram size={16} />
+                        <span className="truncate">{member.instagramLabel}</span>
+                      </a>
+                    </motion.div>
+
+                    <div className="absolute top-5 left-5">
+                      <div className="px-3 py-1.5 bg-white text-black font-black uppercase text-xs tracking-wider">
+                        {member.nickname}
+                      </div>
                     </div>
                   </div>
+                </div>
 
-                  <div className="p-6 space-y-1">
-                    <div className="flex flex-wrap items-center justify-between gap-3">
-                      <h3 className="font-bold text-black text-2xl">{member.name}</h3>
-                      <span className="text-xs font-semibold tracking-wider uppercase bg-black text-white px-3 py-1">
-                        Propriétaire
-                      </span>
-                    </div>
-                    <p className="text-black/60 text-sm font-medium">{member.handle}</p>
-                    <p className="text-black/80 text-sm pt-2">{member.specialty}</p>
-                  </div>
-                </motion.a>
-              ))}
-            </div>
-          )}
+                <div className="space-y-3">
+                  <h3 className="text-3xl font-black uppercase tracking-tight">{member.name}</h3>
+                  <p className="text-xs uppercase tracking-widest text-black/50 font-bold">{member.role}</p>
+                  <a
+                    href={member.instagramHref}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-sm font-black text-black hover:text-black/60 transition-colors"
+                  >
+                    <Instagram size={16} />
+                    {member.instagramLabel}
+                  </a>
+                  <p className="text-base text-black/70 italic leading-snug">"{member.vibe}"</p>
 
-          {/* Reste de l'équipe – cartes confortables (pas trop petites) */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 auto-rows-fr">
-              {others.map((member) => (
-              <motion.a
-                key={member.handle}
-                href={`https://instagram.com/${member.handle.replace("@", "")}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                {...fadeInUp}
-                transition={{ duration: 0.6 }}
-                className="group block overflow-hidden bg-white border border-black/10 hover:border-black/30 transition-colors"
-              >
-                <div className="relative overflow-hidden aspect-[3/4]">
-                  <img
-                    src={member.image}
-                    alt={member.name}
-                    className="absolute inset-0 w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  <div className="absolute bottom-0 left-0 right-0 p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                    <p className="text-white/90 text-sm leading-relaxed mb-3">{member.description}</p>
-                    <span className="inline-flex items-center gap-2 text-white text-sm font-medium">
-                      <Instagram className="w-4 h-4" /> Suivre
+                  <div className="flex flex-wrap gap-3 pt-1 text-sm text-black/60">
+                    <span className="inline-flex items-center gap-1.5">
+                      <Scissors size={14} className="text-black/40 shrink-0" />
+                      {member.specialty}
+                    </span>
+                    <span className="inline-flex items-center gap-1.5">
+                      <Award size={14} className="text-black/40 shrink-0" />
+                      {member.experience}
                     </span>
                   </div>
                 </div>
-
-                <div className="p-6 space-y-1">
-                  <h3 className="font-bold text-black text-xl">{member.name}</h3>
-                  <p className="text-black/60 text-sm font-medium">{member.handle}</p>
-                  <p className="text-black/80 text-sm pt-2">{member.specialty}</p>
-                </div>
-              </motion.a>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Diagonal Separator */}
-      <div className="relative h-24 bg-white overflow-hidden">
-        <svg
-          className="absolute inset-0 w-full h-full"
-          preserveAspectRatio="none"
-          viewBox="0 0 100 100"
-        >
-          <polygon points="0,100 100,0 100,100" fill="black" />
-        </svg>
-      </div>
-
-      {/* Values Section */}
-      <section className="bg-black text-white py-24 lg:py-32">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Culture & Values */}
+      <section className="relative overflow-x-hidden bg-black py-32">
+        <SectionTopDiagonal tone="dark" variant="slice" />
+        <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <motion.div
-            {...fadeInUp}
-            className="text-center mb-16 space-y-4"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-20"
           >
-            <h2 className="text-4xl lg:text-5xl font-bold">
-              Nos Valeurs
+            <h2 className="text-6xl lg:text-7xl font-black tracking-tighter uppercase text-white mb-6">
+              Notre vibe
             </h2>
-            <p className="text-white/60 text-lg max-w-2xl mx-auto">
-              Ce qui fait du Quartier Général plus qu'un simple salon
-            </p>
+            <p className="text-xl text-white/60">Ce qui nous définit au QG</p>
           </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            {values.map((value, index) => {
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {[
+              {
+                icon: Star,
+                title: "Excellence",
+                desc: "Chaque coupe est un chef-d'œuvre. On se contente pas du 'correct'.",
+              },
+              {
+                icon: Scissors,
+                title: "Créativité",
+                desc: "On pousse les limites. Ton style, ta personnalité, notre art.",
+              },
+              {
+                icon: Instagram,
+                title: "Communauté",
+                desc: "Plus qu'un shop, c'est une famille. On grandit ensemble.",
+              },
+              {
+                icon: Award,
+                title: "Respect",
+                desc: "Du respect pour le métier, pour chaque client et pour le salon.",
+              },
+            ].map((value, index) => {
               const Icon = value.icon;
               return (
                 <motion.div
                   key={value.title}
-                  {...fadeInUp}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className="group relative p-10 bg-white/5 hover:bg-white transition-all duration-500"
+                  className="text-center space-y-4 group"
                 >
-                  <div className="space-y-6">
-                    <div className="w-16 h-16 bg-white group-hover:bg-black flex items-center justify-center transition-colors duration-500">
-                      <Icon className="w-8 h-8 text-black group-hover:text-white transition-colors duration-500" />
-                    </div>
-                    
-                    <h3 className="text-2xl font-bold group-hover:text-black transition-colors duration-500">
-                      {value.title}
-                    </h3>
-                    
-                    <p className="text-white/70 group-hover:text-black/80 leading-relaxed transition-colors duration-500">
-                      {value.description}
-                    </p>
+                  <div className="inline-flex w-20 h-20 bg-white/10 group-hover:bg-white group-hover:text-black transition-all items-center justify-center">
+                    <Icon size={32} className="text-white group-hover:text-black transition-colors" />
                   </div>
+                  <h3 className="text-2xl font-black uppercase text-white">{value.title}</h3>
+                  <p className="text-white/60 leading-relaxed">{value.desc}</p>
                 </motion.div>
               );
             })}
@@ -292,44 +277,58 @@ export function Team() {
         </div>
       </section>
 
-      {/* Story Section */}
-      <section className="bg-white py-24 lg:py-32">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div {...fadeInUp} className="space-y-8">
+      {/* Join Team CTA */}
+      <section className="relative overflow-x-hidden bg-white py-32">
+        <SectionTopDiagonal tone="light" variant="slash" />
+        <div className="absolute inset-0 opacity-5">
+          {[...Array(20)].map((_, i) => (
+            <div
+              key={i}
+              className="absolute h-full w-4 bg-black transform -skew-x-12"
+              style={{ left: `${i * 6}%` }}
+            />
+          ))}
+        </div>
+
+        <div className="max-w-4xl mx-auto px-6 lg:px-12 relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="text-center space-y-8"
+          >
             <div className="space-y-4">
-              <h2 className="text-4xl lg:text-5xl font-bold text-black">
-                Notre Histoire
+              <span className="inline-block px-6 py-2 bg-black text-white uppercase tracking-wider font-bold text-sm">
+                We're hiring
+              </span>
+              <h2 className="text-6xl font-black tracking-tighter uppercase">
+                Rejoins
+                <br />
+                la squad
               </h2>
-              <div className="w-20 h-1 bg-black" />
-            </div>
-            
-            <div className="space-y-6 text-lg text-black/70 leading-relaxed">
-              <p>
-                <strong className="text-black">Le Quartier Général</strong> est bien plus qu'un salon de coiffure. C'est un espace communautaire où se rencontrent passion, créativité et excellence technique.
-              </p>
-              
-              <p>
-                Situés au cœur de Montréal, nous nous démarquons par notre approche professionnelle, notre attention aux détails et notre ambiance moderne et chaleureuse. Notre équipe diversifiée et talentueuse maîtrise tous les styles : des coupes classiques aux fades modernes, des rasages traditionnels aux tresses sophistiquées.
-              </p>
-              
-              <p>
-                Que vous recherchiez une coupe précise, des box braids impeccables, des locks entretenus avec soin, ou que vous souhaitiez apprendre le métier à travers nos formations, Le Quartier Général est l'endroit idéal pour une expérience de qualité dans un espace inspirant.
-              </p>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-8 pt-8">
-              <div className="text-center space-y-2">
-                <div className="text-4xl font-bold text-black">469+</div>
-                <div className="text-black/60">Avis 5 étoiles</div>
-              </div>
-              <div className="text-center space-y-2">
-                <div className="text-4xl font-bold text-black">7</div>
-                <div className="text-black/60">Artistes experts</div>
-              </div>
-              <div className="text-center space-y-2">
-                <div className="text-4xl font-bold text-black">100%</div>
-                <div className="text-black/60">Satisfaction client</div>
-              </div>
+            <p className="text-xl text-black/70 leading-relaxed max-w-2xl mx-auto">
+              T'es un barber qui a la passion et le skill? Tu partages notre vision? Envoie-nous un message sur Instagram.
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8">
+              <a
+                href="mailto:careers@qgbarbershop.com"
+                className="px-12 py-6 bg-black text-white hover:bg-black/90 transition-all font-black uppercase tracking-wider"
+              >
+                Envoie ton portfolio
+              </a>
+              <a
+                href={shopInstagramUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-12 py-6 border-4 border-black text-black hover:bg-black hover:text-white transition-all font-black uppercase tracking-wider inline-flex items-center justify-center gap-2"
+              >
+                <Instagram size={20} />
+                <span>DM @quartiergeneralbarbershop</span>
+              </a>
             </div>
           </motion.div>
         </div>

@@ -1,287 +1,355 @@
-import React from "react";
 import { motion } from "motion/react";
-import { Check, Clock, Scissors, Sparkles } from "lucide-react";
+import { Scissors, Sparkles, Clock } from "lucide-react";
 import { Link } from "react-router";
-import { BarberPole3D } from "../components/BarberPole3D";
+import { SectionTopDiagonal } from "../components/SectionTopDiagonal";
+import {
+  shopBookingUrl,
+  shopPhoneDisplay,
+  shopPhoneTel,
+} from "../config/shopInfo";
+import { shopInstagramUrl } from "../config/shopPhotos";
 
 export function Services() {
-  const fadeInUp = {
-    initial: { opacity: 0, y: 24 },
-    whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true, amount: 0.2 },
-    transition: { duration: 0.45 }
-  };
-
-  type ServiceItem = {
-    name: string;
-    price: string;
-    duration: string;
-    description: string;
-    features: string[];
-    popular?: boolean;
-  };
-
-  type ServiceCategory = {
-    category: string;
-    items: ServiceItem[];
-  };
-
-  const services: ServiceCategory[] = [
+  const services = [
     {
-      category: "Liste de prix – Quartier Général",
-      items: [
-        {
-          name: "Coupe adulte",
-          price: "40$",
-          duration: "45min",
-          description: "Coupe personnalisée avec consultation de style",
-          features: ["Extra ciseaux : 5$", "Extra lavage : 25$"]
-        },
-        {
-          name: "Coupe enfant",
-          price: "30$",
-          duration: "30min",
-          description: "Coupe adaptée pour les 12 ans et moins",
-          features: ["Patience garantie", "Styling ludique"]
-        },
-        {
-          name: "Barbe",
-          price: "20$",
-          duration: "20min",
-          description: "Taille et sculpture professionnelle de la barbe",
-          features: ["Définition des contours", "Hydratation"]
-        },
-        {
-          name: "Line up",
-          price: "20$",
-          duration: "15min",
-          description: "Définition précise des contours",
-          features: ["Finitions impeccables"]
-        },
-        {
-          name: "Shampoing",
-          price: "30$",
-          duration: "20min",
-          description: "Shampooing professionnel avec massage du cuir chevelu",
-          features: ["Soins du cuir chevelu"]
-        }
-      ]
+      icon: Scissors,
+      name: "Coupe adulte",
+      description: "Le cut classique, toujours fresh. Fade, taper, tout ce que tu veux.",
+      duration: "45 min",
+      price: "40$",
+      extras: [
+        { name: "Extra ciseaux", price: "5$" },
+        { name: "Extra lavage", price: "25$" },
+      ],
     },
     {
-      category: "Tressage & autres coiffures",
-      items: [
-        {
-          name: "Tresses, box braids, locks…",
-          price: "À déterminer sur place",
-          duration: "Variable",
-          description: "Tresses, braids et autres coiffures. Tarif selon la prestation.",
-          features: ["Consultation sur place", "Devis personnalisé"]
-        }
-      ]
+      icon: Scissors,
+      name: "Line up",
+      description: "Rafraîchis tes contours, reste sharp entre deux coupes.",
+      duration: "20 min",
+      price: "20$",
     },
     {
-      category: "Formations",
-      items: [
-        {
-          name: "Formation Barbier / Coiffure",
-          price: "À déterminer sur place",
-          duration: "Variable",
-          description: "Apprenez le métier avec nos experts. Tarifs et modalités sur demande.",
-          features: ["Techniques avancées", "Pratique supervisée"]
-        }
-      ]
-    }
+      icon: Scissors,
+      name: "Barbe",
+      description: "Taille, contour, style. Ta barbe jamais été aussi clean.",
+      duration: "30 min",
+      price: "20$",
+    },
+    {
+      icon: Sparkles,
+      name: "Shampooing",
+      description: "Lavage premium avec produits de qualité.",
+      duration: "15 min",
+      price: "30$",
+    },
+    {
+      icon: Scissors,
+      name: "Coupe enfant",
+      description: "Pour les p'tits qui veulent être fresh comme papa.",
+      duration: "30 min",
+      price: "30$",
+    },
+    {
+      icon: Sparkles,
+      name: "Tresses",
+      description:
+        "Tresses, nattes et styles protecteurs — avec notre barber spécialisée (Hauz of Tanz). Durée et tarif selon le style.",
+      duration: "Variable",
+      price: "Sur devis",
+    },
   ];
 
   return (
-    <div className="bg-white pt-20">
-      {/* Hero Section */}
-      <section className="relative py-24 lg:py-32 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-white via-gray-50 to-white" />
-        
-        {/* Decorative circles */}
-        <motion.div
-          initial={{ scale: 0, opacity: 0 }}
-          animate={{ scale: 1, opacity: 0.05 }}
-          transition={{ duration: 1 }}
-          className="absolute top-0 right-0 w-96 h-96 bg-black rounded-full -translate-y-1/2 translate-x-1/2"
-        />
-        
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="space-y-6"
+    <div className="pt-16">
+      <section className="relative overflow-x-hidden bg-black py-24 lg:py-32">
+        <div className="pointer-events-none absolute inset-0">
+          <div className="absolute top-0 right-0 h-full w-1/3 translate-x-32 skew-x-12 bg-white/5" />
+          <div className="absolute bottom-0 left-0 h-1/2 w-1/4 -translate-x-16 -skew-x-12 bg-white/5" />
+        </div>
+
+        <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-12">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="max-w-3xl"
+          >
+            <span className="mb-6 block text-sm font-bold uppercase tracking-widest text-white/60">
+              Les tarifs
+            </span>
+            <h1 className="mb-8 text-6xl font-black uppercase leading-none tracking-tighter text-white lg:text-9xl">
+              Prix
+              <br />
+              <span className="text-white/30">Fixes</span>
+            </h1>
+            <p className="max-w-xl text-xl leading-relaxed text-white/80 lg:text-2xl">
+              Pas de surprises, que de la qualité. Check nos services et book ton spot
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Services Grid - Style diagonal cards */}
+      <section className="relative bg-white py-24 lg:py-32">
+        <SectionTopDiagonal tone="light" variant="slash" />
+        <div className="max-w-7xl mx-auto px-6 lg:px-12">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="mb-12"
+          >
+            <h2 className="text-4xl lg:text-6xl font-black tracking-tighter uppercase mb-4">
+              Nos services
+            </h2>
+            <p className="text-xl text-black/60">
+              Des cuts de qualité, des prix honnêtes
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {services.map((service, index) => {
+              const Icon = service.icon;
+              return (
+                <motion.div
+                  key={service.name}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: index * 0.05 }}
+                  className="group relative"
+                >
+                  <div className="bg-black p-8 lg:p-10 text-white hover:scale-105 transition-all duration-300 relative overflow-hidden h-full flex flex-col">
+                    <div className="absolute top-0 right-0 w-20 h-20 bg-white/5 transform rotate-45 translate-x-10 -translate-y-10" />
+                    
+                    <div className="relative z-10 flex-1 flex flex-col">
+                      <div className="mb-6">
+                        <div className="w-14 h-14 bg-white/10 group-hover:bg-white group-hover:text-black transition-all flex items-center justify-center">
+                          <Icon size={28} className="group-hover:text-black transition-colors" />
+                        </div>
+                      </div>
+                      
+                      <h3 className="text-2xl lg:text-3xl font-black mb-3 uppercase tracking-tight">
+                        {service.name}
+                      </h3>
+                      <p className="text-white/70 mb-6 leading-relaxed flex-1">
+                        {service.description}
+                      </p>
+                      
+                      {service.extras && (
+                        <div className="mb-4 space-y-1 text-sm pb-4 border-b border-white/20">
+                          {service.extras.map((extra) => (
+                            <div key={extra.name} className="flex justify-between text-white/50">
+                              <span>{extra.name}</span>
+                              <span className="font-bold">{extra.price}</span>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                      
+                      <div className="flex items-center justify-between pt-4 border-t border-white/20 mt-auto">
+                        <div className="flex items-center gap-2 text-sm text-white/60">
+                          <Clock size={16} />
+                          <span>{service.duration}</span>
+                        </div>
+                        <div className="text-3xl lg:text-4xl font-black tracking-tight">{service.price}</div>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="mt-16 text-center"
+          >
+            <p className="text-lg text-black/60 mb-6">
+              Tous nos services incluent une consultation personnalisée et des produits premium
+            </p>
+            <a
+              href={shopBookingUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center px-10 py-5 bg-black text-white hover:bg-black/90 transition-all font-black uppercase tracking-wider"
             >
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-black/5">
-                <Sparkles className="w-4 h-4 text-black" />
-                <span className="text-sm font-medium text-black">Services Premium</span>
-              </div>
-              
-              <h1 className="text-5xl lg:text-6xl font-bold text-black leading-tight">
-                Nos Services
+              Réserver sur Squire
+            </a>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Horaires - Style moderne */}
+      <section className="relative bg-black py-24 lg:py-32">
+        <SectionTopDiagonal tone="dark" variant="slashAlt" />
+        <div className="max-w-7xl mx-auto px-6 lg:px-12">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            {/* Horaires */}
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
+              <h2 className="text-5xl lg:text-6xl font-black tracking-tighter mb-12 text-white uppercase">
+                Quand on
                 <br />
-                <span className="italic text-black/70">& Tarifs</span>
-              </h1>
+                <span className="text-white/30">est là</span>
+              </h2>
               
-              <p className="text-xl text-black/60 leading-relaxed">
-                Des prestations sur mesure pour révéler votre style avec l'expertise de Khalid et Benz
-              </p>
+              <div className="space-y-6">
+                {[
+                  { day: "Lun - Mar", hours: "Fermé", closed: true },
+                  { day: "Mer - Ven", hours: "10h - 20h", closed: false },
+                  { day: "Samedi", hours: "9h - 18h", closed: false },
+                  { day: "Dimanche", hours: "10h - 17h", closed: false },
+                ].map((schedule, index) => (
+                  <motion.div
+                    key={schedule.day}
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    className={`flex justify-between items-center py-6 border-b border-white/10 ${
+                      schedule.closed ? "opacity-40" : ""
+                    }`}
+                  >
+                    <span className="text-xl lg:text-2xl font-bold text-white">{schedule.day}</span>
+                    <span className="text-xl lg:text-2xl font-black text-white/60">{schedule.hours}</span>
+                  </motion.div>
+                ))}
+              </div>
             </motion.div>
 
-            {/* Animation à droite (comme sur ta capture) */}
+            {/* CTA Box */}
             <motion.div
-              initial={{ opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.15 }}
-              className="justify-self-end w-full max-w-xl"
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="relative"
             >
-              <div className="w-full aspect-[4/3]">
-                <BarberPole3D className="w-full h-full" />
+              <div className="bg-white p-10 lg:p-16 relative overflow-hidden">
+                <div className="absolute inset-0 opacity-5">
+                  {[...Array(10)].map((_, i) => (
+                    <div
+                      key={i}
+                      className="absolute h-full w-8 bg-black transform -skew-x-12"
+                      style={{ left: `${i * 12}%` }}
+                    />
+                  ))}
+                </div>
+
+                <div className="relative z-10 space-y-6">
+                  <div className="inline-block px-4 py-2 bg-black text-white">
+                    <span className="uppercase tracking-wider font-bold text-xs">Walk-ins ok</span>
+                  </div>
+
+                  <h3 className="text-4xl lg:text-5xl font-black tracking-tighter uppercase">
+                    Book ton
+                    <br />
+                    spot
+                  </h3>
+                  
+                  <p className="text-black/60 text-lg leading-relaxed">
+                    Réservation en ligne sur Squire, ou message Instagram au barber de ton choix.
+                    Walk-ins selon disponibilité.
+                  </p>
+
+                  <div className="space-y-3 pt-4">
+                    <a
+                      href={shopBookingUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block w-full py-5 bg-black text-white hover:bg-black/90 transition-all text-center font-black uppercase tracking-wider"
+                    >
+                      Réserver sur Squire
+                    </a>
+                    <a
+                      href={shopInstagramUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block w-full py-5 border-4 border-black text-black hover:bg-black hover:text-white transition-all text-center font-black uppercase tracking-wider"
+                    >
+                      DM Instagram (barber au choix)
+                    </a>
+                    <a
+                      href={`tel:${shopPhoneTel}`}
+                      className="block w-full py-5 border-4 border-black text-black hover:bg-black hover:text-white transition-all text-center font-black uppercase tracking-wider"
+                    >
+                      Appeler : {shopPhoneDisplay}
+                    </a>
+                  </div>
+                </div>
               </div>
+
+              <div className="absolute -top-6 -right-6 w-24 h-24 lg:w-32 lg:h-32 bg-black transform rotate-12" />
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Services Grid */}
-      {services.map((category, categoryIndex) => (
-        <section
-          key={category.category}
-          className={`py-16 lg:py-24 ${
-            categoryIndex % 2 === 0 ? "bg-white" : "bg-black text-white"
-          }`}
-        >
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.h2
-              {...fadeInUp}
-              className={`text-3xl lg:text-4xl font-bold mb-12 ${
-                categoryIndex % 2 === 0 ? "text-black" : "text-white"
-              }`}
-            >
-              {category.category}
-            </motion.h2>
-
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {category.items.map((service) => (
-                <motion.div
-                  key={service.name}
-                  {...fadeInUp}
-                  transition={{ duration: 0.55 }}
-                  className={`relative group ${
-                    categoryIndex % 2 === 0
-                      ? "bg-gradient-to-br from-gray-50 to-white hover:from-black hover:to-black/90"
-                      : "bg-gradient-to-br from-white/5 to-white/10 hover:from-white hover:to-white/95"
-                  } p-8 transition-all duration-500 ${
-                    service.popular ? "ring-2 ring-black/20" : ""
-                  }`}
-                >
-                  {service.popular && (
-                    <div className="absolute -top-3 left-8 px-3 py-1 bg-black text-white text-xs font-bold">
-                      POPULAIRE
-                    </div>
-                  )}
-
-                  <div className="space-y-6">
-                    {/* Header */}
-                    <div className="space-y-3">
-                      <div className="flex items-start justify-between">
-                        <h3
-                          className={`text-2xl font-bold ${
-                            categoryIndex % 2 === 0
-                              ? "text-black group-hover:text-white"
-                              : "text-white group-hover:text-black"
-                          } transition-colors duration-500`}
-                        >
-                          {service.name}
-                        </h3>
-                        <Scissors
-                          className={`w-6 h-6 ${
-                            categoryIndex % 2 === 0
-                              ? "text-black/20 group-hover:text-white/50"
-                              : "text-white/20 group-hover:text-black/50"
-                          } transition-colors duration-500`}
-                        />
-                      </div>
-                      
-                      <div className="flex items-center gap-4">
-                        <span
-                          className={`text-3xl font-bold ${
-                            categoryIndex % 2 === 0
-                              ? "text-black group-hover:text-white"
-                              : "text-white group-hover:text-black"
-                          } transition-colors duration-500`}
-                        >
-                          {service.price}
-                        </span>
-                        <div
-                          className={`flex items-center gap-1 text-sm ${
-                            categoryIndex % 2 === 0
-                              ? "text-black/60 group-hover:text-white/70"
-                              : "text-white/60 group-hover:text-black/70"
-                          } transition-colors duration-500`}
-                        >
-                          <Clock className="w-4 h-4" />
-                          {service.duration}
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Description */}
-                    <p
-                      className={`${
-                        categoryIndex % 2 === 0
-                          ? "text-black/70 group-hover:text-white/80"
-                          : "text-white/70 group-hover:text-black/80"
-                      } transition-colors duration-500 leading-relaxed`}
-                    >
-                      {service.description}
-                    </p>
-
-                    {/* Features */}
-                    <ul className="space-y-2">
-                      {service.features.map((feature) => (
-                        <li
-                          key={feature}
-                          className={`flex items-center gap-2 text-sm ${
-                            categoryIndex % 2 === 0
-                              ? "text-black/60 group-hover:text-white/70"
-                              : "text-white/60 group-hover:text-black/70"
-                          } transition-colors duration-500`}
-                        >
-                          <Check className="w-4 h-4 flex-shrink-0" />
-                          {feature}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-      ))}
-
-      {/* CTA Section */}
-      <section className="bg-white py-24">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Info supplémentaire */}
+      <section className="relative bg-white py-24">
+        <SectionTopDiagonal tone="light" variant="slice" />
+        <div className="max-w-4xl mx-auto px-6 lg:px-12">
           <motion.div
-            {...fadeInUp}
-            className="text-center space-y-8 p-12 bg-gradient-to-br from-black to-black/90 text-white"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="space-y-8"
           >
-            <h2 className="text-4xl font-bold">
-              Besoin d'un conseil ?
+            <h3 className="text-3xl lg:text-4xl font-black uppercase text-center">Good to know</h3>
+            <div className="grid md:grid-cols-2 gap-6 text-center md:text-left">
+              <div className="p-6 bg-black/5">
+                <p className="font-bold mb-2">Une équipe qui vit le métier</p>
+                <p className="text-black/60 text-sm">Barbers expérimentés, sur le plancher tous les jours</p>
+              </div>
+              <div className="p-6 bg-black/5">
+                <p className="font-bold mb-2">On accepte cash et cartes</p>
+                <p className="text-black/60 text-sm">Paiement facile et sécurisé</p>
+              </div>
+              <div className="p-6 bg-black/5">
+                <p className="font-bold mb-2">Ambiance soignée</p>
+                <p className="text-black/60 text-sm">Espace moderne, noir & blanc, service pro</p>
+              </div>
+              <div className="p-6 bg-black/5">
+                <p className="font-bold mb-2">Tag-nous sur Instagram</p>
+                <p className="text-black/60 text-sm">@quartiergeneralbarbershop</p>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Slogan Section */}
+      <section className="relative bg-black py-24 lg:py-32">
+        <SectionTopDiagonal tone="dark" variant="slash" />
+        <div className="max-w-7xl mx-auto px-6 lg:px-12 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            <h2 className="text-5xl lg:text-7xl font-black tracking-tighter text-white mb-8 italic">
+              "Viens juste faire ta tiass"
             </h2>
-            <p className="text-white/80 text-lg max-w-2xl mx-auto">
-              Notre équipe est là pour vous conseiller et vous aider à choisir le service qui vous correspond le mieux.
+            <p className="text-xl text-white/60 mb-8">
+              Au QG, on te transforme
             </p>
             <Link
               to="/contact"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-white text-black font-medium hover:bg-white/90 transition-colors"
+              className="inline-flex items-center justify-center px-12 py-6 bg-white text-black hover:bg-white/90 transition-all font-black uppercase tracking-wider"
             >
-              Prendre rendez-vous
+              Réserve maintenant
             </Link>
           </motion.div>
         </div>

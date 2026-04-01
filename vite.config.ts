@@ -4,8 +4,6 @@ import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react'
 
 export default defineConfig({
-  // For GitHub Pages we pass `--base=/<repo-name>/` in CI.
-  // Locally, Vite uses `/` by default.
   plugins: [
     // The React and Tailwind plugins are both required for Make, even if
     // Tailwind is not being actively used – do not remove them
