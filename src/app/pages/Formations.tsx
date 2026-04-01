@@ -8,13 +8,13 @@ import { shopInstagramUrl, shopPhotos } from "../config/shopPhotos";
 export function Formations() {
   return (
     <div className="overflow-x-hidden">
-      <section className="relative overflow-x-hidden bg-black pt-28 sm:pt-32 pb-24 lg:pb-32">
-        <div className="absolute top-0 left-0 w-full h-full">
+      <section className="page-hero-section relative">
+        <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-0 right-0 w-1/3 h-full bg-white/5 transform skew-x-12 translate-x-32" />
           <div className="absolute bottom-0 left-0 w-1/4 h-1/2 bg-white/5 transform -skew-x-12 -translate-x-16" />
         </div>
-        
-        <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
+
+        <div className="page-hero-inner">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}

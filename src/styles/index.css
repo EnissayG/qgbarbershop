@@ -60,6 +60,60 @@ body {
 }
 
 /* Couche média : déborde dans les safe areas haut et bas (iPhone), tout noir derrière */
+.mobile-menu-overlay {
+  min-height: 100vh;
+  min-height: 100dvh;
+  min-height: max(100dvh, 100lvh);
+  min-height: -webkit-fill-available;
+}
+
+.page-hero-section {
+  background-color: #000;
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh;
+  min-height: max(100dvh, 100lvh);
+  overflow-x: hidden;
+}
+
+.page-hero-inner {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 80rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  padding-bottom: max(5.5rem, env(safe-area-inset-bottom, 0px));
+  padding-top: max(6rem, calc(env(safe-area-inset-top, 0px) + 4.25rem));
+}
+
+@media (min-width: 640px) {
+  .page-hero-inner {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    padding-top: 7rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .page-hero-inner {
+    padding-left: 3rem;
+    padding-right: 3rem;
+    padding-bottom: 6rem;
+    padding-top: 9rem;
+  }
+}
+
 .hero-fullscreen-media {
   position: absolute;
   top: calc(-1 * env(safe-area-inset-top, 0px));

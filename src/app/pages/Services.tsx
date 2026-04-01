@@ -62,13 +62,13 @@ export function Services() {
 
   return (
     <div className="overflow-x-hidden">
-      <section className="relative overflow-x-hidden bg-black pt-28 sm:pt-32 pb-24 lg:pb-32">
+      <section className="page-hero-section relative bg-black">
         <div className="pointer-events-none absolute inset-0 overflow-hidden">
           <div className="absolute top-0 right-0 h-full w-1/3 translate-x-16 skew-x-12 bg-white/5 sm:translate-x-24 lg:translate-x-32" />
           <div className="absolute bottom-0 left-0 h-1/2 w-1/4 -translate-x-8 -skew-x-12 bg-white/5 sm:-translate-x-12 lg:-translate-x-16" />
         </div>
 
-        <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-12">
+        <div className="page-hero-inner">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}

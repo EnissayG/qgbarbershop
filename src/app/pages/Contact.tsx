@@ -18,20 +18,20 @@ const metroIconSrc = "/assets/metro-12.svg";
 export function Contact() {
   return (
     <div className="overflow-x-hidden">
-      <section className="relative overflow-x-hidden bg-black pt-28 sm:pt-32 pb-24 lg:pb-32">
+      <section className="page-hero-section relative">
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute inset-0">
+          <div className="absolute inset-0 min-h-full">
             <ImageWithFallback
               src={shopPhotos.contactHero}
               alt="Ambiance du salon QG"
-              className="h-full w-full object-cover opacity-20"
+              className="h-full min-h-full w-full object-cover opacity-20"
             />
             <div className="absolute inset-0 bg-gradient-to-r from-black via-black/90 to-black/70" />
           </div>
           <div className="absolute left-0 top-0 h-full w-32 -translate-x-6 -skew-x-12 bg-white/5 sm:-translate-x-8" />
         </div>
 
-        <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-12">
+        <div className="page-hero-inner">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}

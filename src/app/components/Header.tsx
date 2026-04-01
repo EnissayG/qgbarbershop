@@ -1,12 +1,13 @@
 import { Link, useLocation } from "react-router";
 import { Menu, X } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { shopPhotos } from "../config/shopPhotos";
 
 export function Header() {
   const location = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const scrollLockYRef = useRef(0);
 
   const navItems = [
     { name: "Accueil", path: "/" },
@@ -23,9 +24,28 @@ export function Header() {
   }, [location.pathname]);
 
   useEffect(() => {
-    document.body.style.overflow = mobileMenuOpen ? "hidden" : "";
+    if (!mobileMenuOpen) return;
+
+    scrollLockYRef.current = window.scrollY;
+    const y = scrollLockYRef.current;
+    const html = document.documentElement;
+    const body = document.body;
+
+    html.style.overflow = "hidden";
+    body.style.position = "fixed";
+    body.style.top = `-${y}px`;
+    body.style.left = "0";
+    body.style.right = "0";
+    body.style.width = "100%";
+
     return () => {
-      document.body.style.overflow = "";
+      html.style.overflow = "";
+      body.style.position = "";
+      body.style.top = "";
+      body.style.left = "";
+      body.style.right = "";
+      body.style.width = "";
+      window.scrollTo(0, y);
     };
   }, [mobileMenuOpen]);
 
@@ -90,59 +110,52 @@ export function Header() {
 
       <AnimatePresence>
         {mobileMenuOpen && (
-          <>
-            <motion.div
-              key="menu-backdrop"
-              role="presentation"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.28 }}
-              className="fixed inset-0 z-[90] bg-black/80 backdrop-blur-2xl lg:hidden"
-              onClick={() => setMobileMenuOpen(false)}
-            />
-            <motion.div
-              id="mobile-menu"
-              key="menu-panel"
-              role="dialog"
-              aria-modal="true"
-              aria-label="Menu"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.22 }}
-              className="pointer-events-none fixed inset-0 z-[95] flex flex-col items-center justify-center px-6 pb-28 pt-24 lg:hidden"
+          <motion.div
+            id="mobile-menu"
+            key="mobile-menu"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Menu"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.24 }}
+            className="mobile-menu-overlay fixed inset-0 z-[90] flex min-h-0 flex-col items-center justify-center overscroll-contain bg-black px-5 pb-[max(1.25rem,env(safe-area-inset-bottom,0px))] pt-[max(4.5rem,env(safe-area-inset-top,0px)+2.5rem)] sm:px-6 lg:hidden"
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            <nav
+              className="flex w-full max-w-sm flex-col gap-1"
+              onClick={(e) => e.stopPropagation()}
+              aria-label="Navigation mobile"
             >
-              <nav className="pointer-events-auto flex w-full max-w-sm flex-col gap-1">
-                {navItems.map((item, i) => (
-                  <motion.div
-                    key={item.path}
-                    initial={{ opacity: 0, y: 28 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 16 }}
-                    transition={{
-                      type: "spring",
-                      stiffness: 380,
-                      damping: 32,
-                      delay: 0.06 + i * 0.055,
-                    }}
+              {navItems.map((item, i) => (
+                <motion.div
+                  key={item.path}
+                  initial={{ opacity: 0, y: 28 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 16 }}
+                  transition={{
+                    type: "spring",
+                    stiffness: 380,
+                    damping: 32,
+                    delay: 0.06 + i * 0.055,
+                  }}
+                >
+                  <Link
+                    to={item.path}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className={`block rounded-2xl border border-white/10 px-6 py-4 text-center text-xl font-black uppercase tracking-wide transition-colors ${
+                      isActive(item.path)
+                        ? "bg-white/20 text-white"
+                        : "bg-white/10 text-white/90 hover:bg-white/15 hover:text-white"
+                    }`}
                   >
-                    <Link
-                      to={item.path}
-                      onClick={() => setMobileMenuOpen(false)}
-                      className={`block rounded-2xl border border-white/10 px-6 py-4 text-center text-xl font-black uppercase tracking-wide backdrop-blur-md transition-colors ${
-                        isActive(item.path)
-                          ? "bg-white/20 text-white"
-                          : "bg-white/5 text-white/85 hover:bg-white/12 hover:text-white"
-                      }`}
-                    >
-                      {item.name}
-                    </Link>
-                  </motion.div>
-                ))}
-              </nav>
-            </motion.div>
-          </>
+                    {item.name}
+                  </Link>
+                </motion.div>
+              ))}
+            </nav>
+          </motion.div>
         )}
       </AnimatePresence>
     </header>
