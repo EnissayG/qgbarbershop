@@ -1,0 +1,2 @@
+# SPA : toutes les URLs servent index.html pour que React Router gère les 404
+/*    /index.html   200

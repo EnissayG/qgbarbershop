@@ -248,10 +248,6 @@ export function Team() {
       <section className="relative bg-white py-28 lg:py-32">
         <SectionTopDiagonal tone="light" variant="slashAlt" />
         <div className="layout-gutter">
-          <p className="mb-8 text-sm font-bold uppercase leading-relaxed tracking-wider text-black/45 lg:hidden">
-            Une personne à la fois — flèches ou vignettes. Swipe désactivé au profit du focus.
-          </p>
-
           <nav
             className="team-carousel-track sticky z-20 mb-8 flex gap-2.5 overflow-x-auto border-b border-black/10 bg-white/95 py-4 backdrop-blur-sm lg:hidden"
             style={{

@@ -4,6 +4,7 @@ import { Services } from "./pages/Services";
 import { Team } from "./pages/Team";
 import { Formations } from "./pages/Formations";
 import { Contact } from "./pages/Contact";
+import { NotFound } from "./pages/NotFound";
 import { Layout } from "./components/Layout";
 
 export const router = createBrowserRouter([
@@ -16,6 +17,7 @@ export const router = createBrowserRouter([
       { path: "equipe", Component: Team },
       { path: "formations", Component: Formations },
       { path: "contact", Component: Contact },
+      { path: "*", Component: NotFound },
     ],
   },
 ]);
