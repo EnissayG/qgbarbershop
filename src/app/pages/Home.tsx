@@ -21,45 +21,46 @@ export function Home() {
   return (
     <div className="pt-0">
       {/* Hero plein écran (safe areas + dvh/lvh, voir index.css) */}
-      <section className="hero-fullscreen-section relative isolate flex w-full items-center overflow-hidden">
+      <section className="hero-fullscreen-section relative isolate flex w-full items-center overflow-x-hidden">
         <div className="hero-fullscreen-media pointer-events-none z-0 overflow-hidden">
           <HeroBackgroundCarousel images={carouselImages} alts={carouselAlts} />
-          <div className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-r from-black/80 via-black/45 to-transparent" />
           <div className="pointer-events-none absolute left-0 top-0 z-20 h-full w-32 -translate-x-8 -skew-x-12 bg-gradient-to-r from-white/10 to-transparent" />
           <div className="pointer-events-none absolute left-20 top-0 z-20 h-full w-16 -skew-x-12 bg-gradient-to-r from-white/5 to-transparent" />
         </div>
 
-        <div className="relative z-30 mx-auto w-full max-w-7xl px-6 pb-[max(5rem,env(safe-area-inset-bottom,0px))] pt-[max(7rem,calc(env(safe-area-inset-top,0px)+5.5rem))] sm:pt-32 lg:px-12 lg:pb-24 lg:pt-36">
+        <div className="relative z-30 mx-auto w-full max-w-7xl px-5 pb-[max(5.5rem,env(safe-area-inset-bottom,0px))] pt-[max(6rem,calc(env(safe-area-inset-top,0px)+4.25rem))] sm:px-6 sm:pt-28 lg:px-12 lg:pb-24 lg:pt-36">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="max-w-3xl"
+            className="max-w-3xl space-y-8 sm:space-y-10"
           >
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="mb-8"
+              className="mb-0"
             >
-              <img 
-                src={shopPhotos.logo} 
-                alt="QG Logo" 
-                className="h-20 lg:h-28 w-auto"
+              <img
+                src={shopPhotos.logo}
+                alt="QG Logo"
+                className="h-20 w-auto drop-shadow-[0_4px_24px_rgba(0,0,0,0.85)] lg:h-28"
               />
             </motion.div>
 
-            <h1 className="text-7xl lg:text-9xl font-black tracking-tighter text-white mb-6 leading-none uppercase">
+            <h1 className="text-6xl font-black uppercase leading-[0.95] tracking-tighter text-white [text-shadow:0_2px_4px_rgba(0,0,0,0.9),0_8px_48px_rgba(0,0,0,0.75)] sm:text-7xl lg:mb-0 lg:text-9xl">
               Quartier
               <br />
-              <span className="text-white/30">Général</span>
+              <span className="text-white/40 [text-shadow:0_2px_4px_rgba(0,0,0,0.85),0_6px_40px_rgba(0,0,0,0.7)]">
+                Général
+              </span>
             </h1>
 
-            <div className="mb-8">
-              <p className="text-3xl lg:text-4xl text-white font-black mb-2 italic">
+            <div className="space-y-4">
+              <p className="text-2xl font-black italic text-white [text-shadow:0_2px_32px_rgba(0,0,0,0.9),0_1px_4px_rgba(0,0,0,0.95)] sm:text-3xl lg:text-4xl">
                 "Viens juste faire ta tiass"
               </p>
-              <p className="text-xl lg:text-2xl text-white/70 font-light">
+              <p className="text-lg font-light text-white/90 [text-shadow:0_2px_24px_rgba(0,0,0,0.88),0_1px_3px_rgba(0,0,0,0.9)] sm:text-xl lg:text-2xl">
                 Barbier moderne, ambiance soignée, Montréal
               </p>
             </div>
@@ -68,24 +69,24 @@ export function Home() {
               href={shopGoogleUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block mb-4 text-sm uppercase tracking-widest text-white/50 hover:text-white/80 font-bold border-b border-white/30"
+              className="inline-block border-b border-white/40 text-sm font-bold uppercase tracking-widest text-white/80 [text-shadow:0_2px_16px_rgba(0,0,0,0.9)] hover:text-white"
             >
               5,0 ★ sur Google · 470+ avis
             </a>
 
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-col gap-5 sm:flex-row sm:gap-4">
               <a
                 href={shopBookingUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group px-10 py-5 bg-white text-black hover:bg-white/90 transition-all inline-flex items-center justify-center gap-3 font-black uppercase tracking-wider text-center"
+                className="group inline-flex items-center justify-center gap-3 bg-white px-8 py-5 text-center font-black uppercase tracking-wider text-black transition-all hover:bg-white/90 sm:px-10"
               >
                 <span>Réserver sur Squire</span>
                 <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
               </a>
               <Link
                 to="/services"
-                className="px-10 py-5 border-2 border-white text-white hover:bg-white hover:text-black transition-all inline-flex items-center justify-center font-black uppercase tracking-wider text-center"
+                className="inline-flex items-center justify-center border-2 border-white px-8 py-5 text-center font-black uppercase tracking-wider text-white [text-shadow:0_2px_16px_rgba(0,0,0,0.85)] transition-all hover:bg-white hover:text-black hover:[text-shadow:none] sm:px-10"
               >
                 <span>Check les prix</span>
               </Link>
@@ -114,14 +115,14 @@ export function Home() {
         <SectionTopDiagonal tone="light" variant="slash" />
         <div className="absolute top-0 right-0 w-1/3 h-full bg-black transform skew-x-12 translate-x-32 opacity-5" />
         
-        <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-12">
+          <div className="grid items-center gap-y-14 gap-x-12 lg:grid-cols-2 lg:gap-x-20 lg:gap-y-12">
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              className="space-y-6"
+              className="space-y-7"
             >
               <span className="text-sm uppercase tracking-widest text-black/40 block font-bold">
                 Qui sommes-nous
@@ -146,7 +147,7 @@ export function Home() {
               </div>
               <Link
                 to="/equipe"
-                className="inline-flex items-center gap-2 text-black hover:gap-4 transition-all group pt-4 font-bold"
+                className="group inline-flex items-center gap-2 pt-2 font-bold text-black transition-all hover:gap-4 sm:pt-4"
               >
                 <span className="uppercase tracking-widest text-sm">Rencontre l&apos;équipe</span>
                 <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
@@ -167,7 +168,7 @@ export function Home() {
                   className="w-full h-full object-cover"
                 />
               </div>
-              <div className="absolute -bottom-6 -right-6 lg:-bottom-8 lg:-right-8 w-32 h-32 lg:w-40 lg:h-40 bg-white border-4 border-black flex items-center justify-center">
+              <div className="absolute -bottom-4 -right-3 flex h-28 w-28 items-center justify-center border-4 border-black bg-white sm:-bottom-6 sm:-right-5 sm:h-32 sm:w-32 lg:-bottom-8 lg:-right-8 lg:h-40 lg:w-40">
                 <div className="text-center">
                   <div className="text-4xl lg:text-5xl font-black tracking-tighter">5+</div>
                   <div className="text-xs uppercase tracking-widest font-bold">Ans</div>

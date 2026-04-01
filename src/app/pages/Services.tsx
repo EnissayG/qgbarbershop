@@ -79,9 +79,9 @@ export function Services() {
               Les tarifs
             </span>
             <h1 className="mb-8 text-6xl font-black uppercase leading-none tracking-tighter text-white lg:text-9xl">
-              Prix
+              Nos
               <br />
-              <span className="text-white/30">Fixes</span>
+              <span className="text-white/30">prix</span>
             </h1>
             <p className="max-w-xl text-xl leading-relaxed text-white/80 lg:text-2xl">
               Pas de surprises, que de la qualité. Check nos services et book ton spot

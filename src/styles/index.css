@@ -5,6 +5,8 @@
 html {
   overflow-x: hidden;
   height: 100%;
+  background-color: #000;
+  color-scheme: dark;
 }
 
 body {
@@ -13,12 +15,14 @@ body {
   max-width: 100%;
   min-height: 100%;
   min-height: -webkit-fill-available;
+  background-color: #000;
 }
 
 #root {
   min-height: 100%;
   min-height: 100dvh;
   min-height: -webkit-fill-available;
+  background-color: #000;
 }
 
 /* Hero : carrousel plein cadre (sans Slick), cover + recadrage stable au resize */
@@ -47,18 +51,26 @@ body {
   image-rendering: auto;
 }
 
-/* Section hero : au moins toute la hauteur utile (Safari / barre d’URL) */
+/* Section hero : fond noir si le moindre vide ; hauteur viewport iOS */
 .hero-fullscreen-section {
+  background-color: #000;
   min-height: 100vh;
   min-height: 100dvh;
   min-height: max(100dvh, 100lvh);
 }
 
-/* Couche média : suit la section (grandit si le contenu dépasse) + min. plein viewport */
+/* Couche média : déborde dans les safe areas haut et bas (iPhone), tout noir derrière */
 .hero-fullscreen-media {
   position: absolute;
-  inset: 0;
+  top: calc(-1 * env(safe-area-inset-top, 0px));
+  bottom: calc(-1 * env(safe-area-inset-bottom, 0px));
+  left: 0;
+  right: 0;
   width: 100%;
-  height: 100%;
-  min-height: max(100dvh, 100lvh);
+  height: auto;
+  min-height: calc(100dvh + env(safe-area-inset-top, 0px) + env(safe-area-inset-bottom, 0px));
+  min-height: calc(
+    max(100dvh, 100lvh) + env(safe-area-inset-top, 0px) + env(safe-area-inset-bottom, 0px)
+  );
+  background-color: #000;
 }
