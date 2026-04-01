@@ -29,8 +29,8 @@ body {
   margin-left: auto;
   margin-right: auto;
   max-width: 80rem;
-  padding-left: max(1.5rem, calc(env(safe-area-inset-left, 0px) + 0.75rem));
-  padding-right: max(1.5rem, calc(env(safe-area-inset-right, 0px) + 0.75rem));
+  padding-left: max(1.75rem, calc(env(safe-area-inset-left, 0px) + 1rem));
+  padding-right: max(1.75rem, calc(env(safe-area-inset-right, 0px) + 1rem));
 }
 
 @media (min-width: 640px) {
@@ -52,8 +52,8 @@ body {
   margin-left: auto;
   margin-right: auto;
   max-width: 56rem;
-  padding-left: max(1.5rem, calc(env(safe-area-inset-left, 0px) + 0.75rem));
-  padding-right: max(1.5rem, calc(env(safe-area-inset-right, 0px) + 0.75rem));
+  padding-left: max(1.75rem, calc(env(safe-area-inset-left, 0px) + 1rem));
+  padding-right: max(1.75rem, calc(env(safe-area-inset-right, 0px) + 1rem));
 }
 
 @media (min-width: 640px) {
@@ -71,8 +71,8 @@ body {
 }
 
 .nav-shell {
-  padding-left: max(1.25rem, calc(env(safe-area-inset-left, 0px) + 0.75rem));
-  padding-right: max(1.25rem, calc(env(safe-area-inset-right, 0px) + 0.75rem));
+  padding-left: max(1.35rem, calc(env(safe-area-inset-left, 0px) + 0.85rem));
+  padding-right: max(1.35rem, calc(env(safe-area-inset-right, 0px) + 0.85rem));
   padding-top: max(1rem, calc(env(safe-area-inset-top, 0px) + 0.5rem));
   padding-bottom: 1rem;
 }
@@ -130,11 +130,20 @@ body {
 }
 
 /* Couche média : déborde dans les safe areas haut et bas (iPhone), tout noir derrière */
+/* Voile menu : couvre aussi la zone status bar (évite bande grise iOS) */
 .mobile-menu-overlay {
-  min-height: 100vh;
-  min-height: 100dvh;
-  min-height: max(100dvh, 100lvh);
-  min-height: -webkit-fill-available;
+  position: fixed;
+  z-index: 90;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: calc(-1 * env(safe-area-inset-top, 0px));
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #000;
+  min-height: calc(100vh + env(safe-area-inset-top, 0px));
+  min-height: calc(100dvh + env(safe-area-inset-top, 0px));
+  min-height: calc(max(100dvh, 100lvh) + env(safe-area-inset-top, 0px));
 }
 
 .page-hero-section {
@@ -161,8 +170,8 @@ body {
   max-width: 80rem;
   margin-left: auto;
   margin-right: auto;
-  padding-left: max(1.5rem, calc(env(safe-area-inset-left, 0px) + 0.75rem));
-  padding-right: max(1.5rem, calc(env(safe-area-inset-right, 0px) + 0.75rem));
+  padding-left: max(1.75rem, calc(env(safe-area-inset-left, 0px) + 1rem));
+  padding-right: max(1.75rem, calc(env(safe-area-inset-right, 0px) + 1rem));
   padding-bottom: max(6rem, calc(env(safe-area-inset-bottom, 0px) + 3.5rem));
   padding-top: max(6.75rem, calc(env(safe-area-inset-top, 0px) + 4.5rem));
 }

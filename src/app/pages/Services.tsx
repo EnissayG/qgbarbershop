@@ -147,7 +147,7 @@ export function Services() {
                     onClick={() =>
                       setOpenSlug((s) => (s === service.slug ? null : service.slug))
                     }
-                    className="flex w-full items-center gap-3 p-4 text-left transition-colors active:bg-black/5"
+                    className="flex w-full items-center gap-3 p-5 text-left transition-colors active:bg-black/5"
                   >
                     <div className="flex h-11 w-11 shrink-0 items-center justify-center bg-black text-white">
                       <Icon size={22} />
@@ -169,7 +169,7 @@ export function Services() {
                     />
                   </button>
                   {open && (
-                    <div className="border-t-2 border-black bg-black px-4 py-5 text-white">
+                    <div className="border-t-2 border-black bg-black px-5 py-6 text-white">
                       <p className="leading-relaxed text-white/85">{service.description}</p>
                       {service.extras && (
                         <div className="mt-4 space-y-2 border-t border-white/20 pt-4 text-sm">

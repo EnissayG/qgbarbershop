@@ -19,18 +19,30 @@ export function Layout() {
 
     const html = document.documentElement;
     const body = document.body;
-    const prevHtmlOverflow = html.style.overflow;
-    const prevBodyOverflow = body.style.overflow;
-    const prevOverscroll = body.style.overscrollBehavior;
+    const root = document.getElementById("root");
+    const prev = {
+      htmlOverflow: html.style.overflow,
+      bodyOverflow: body.style.overflow,
+      overscroll: body.style.overscrollBehavior,
+      htmlBg: html.style.backgroundColor,
+      bodyBg: body.style.backgroundColor,
+      rootBg: root?.style.backgroundColor ?? "",
+    };
 
     html.style.overflow = "hidden";
     body.style.overflow = "hidden";
     body.style.overscrollBehavior = "none";
+    html.style.backgroundColor = "#000000";
+    body.style.backgroundColor = "#000000";
+    if (root) root.style.backgroundColor = "#000000";
 
     return () => {
-      html.style.overflow = prevHtmlOverflow;
-      body.style.overflow = prevBodyOverflow;
-      body.style.overscrollBehavior = prevOverscroll;
+      html.style.overflow = prev.htmlOverflow;
+      body.style.overflow = prev.bodyOverflow;
+      body.style.overscrollBehavior = prev.overscroll;
+      html.style.backgroundColor = prev.htmlBg;
+      body.style.backgroundColor = prev.bodyBg;
+      if (root) root.style.backgroundColor = prev.rootBg;
     };
   }, [mobileMenuOpen]);
 
@@ -50,7 +62,7 @@ export function Layout() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.24 }}
-            className="mobile-menu-overlay fixed inset-0 z-[90] flex min-h-0 flex-col items-center justify-center overscroll-none bg-black pl-[max(1.5rem,calc(env(safe-area-inset-left,0px)+0.75rem))] pr-[max(1.5rem,calc(env(safe-area-inset-right,0px)+0.75rem))] pb-[max(1.25rem,env(safe-area-inset-bottom,0px))] pt-[max(6.5rem,calc(env(safe-area-inset-top,0px)+4rem))] lg:hidden"
+            className="mobile-menu-overlay flex min-h-0 flex-col items-center justify-center overscroll-none pl-[max(1.5rem,calc(env(safe-area-inset-left,0px)+0.75rem))] pr-[max(1.5rem,calc(env(safe-area-inset-right,0px)+0.75rem))] pb-[max(1.25rem,env(safe-area-inset-bottom,0px))] pt-[max(6.5rem,calc(env(safe-area-inset-top,0px)+4rem))] lg:hidden"
             onClick={() => setMobileMenuOpen(false)}
           >
             <nav
