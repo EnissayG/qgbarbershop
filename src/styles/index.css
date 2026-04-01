@@ -200,3 +200,12 @@ body {
   );
   background-color: #000;
 }
+
+/* Carrousel équipe mobile : scroll horizontal propre */
+.team-carousel-track {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.team-carousel-track::-webkit-scrollbar {
+  display: none;
+}

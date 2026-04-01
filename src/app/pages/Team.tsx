@@ -1,3 +1,4 @@
+import { useCallback, useEffect, useRef, useState } from "react";
 import { motion } from "motion/react";
 import { Instagram, Award, Scissors, Star } from "lucide-react";
 import { ImageWithFallback } from "../components/figma/ImageWithFallback";
@@ -17,7 +18,83 @@ type SquadMember = {
   vibe: string;
 };
 
+function SquadCard({ member }: { member: SquadMember }) {
+  return (
+    <div className="group">
+      <div className="relative mb-5 overflow-hidden">
+        <div className="relative aspect-[4/5] overflow-hidden bg-neutral-900">
+          <ImageWithFallback
+            src={member.image}
+            alt={member.name}
+            className="h-full w-full object-cover object-top"
+          />
+
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="absolute bottom-0 left-0 right-0 translate-y-full p-5 transition-transform duration-300 group-hover:translate-y-0"
+          >
+            <a
+              href={member.instagramHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex w-full items-center justify-center gap-2 bg-white px-5 py-3 text-xs font-black uppercase tracking-wider text-black transition-colors hover:bg-white/90"
+            >
+              <Instagram size={16} />
+              <span className="truncate">{member.instagramLabel}</span>
+            </a>
+          </motion.div>
+
+          <div className="absolute left-5 top-5">
+            <div className="bg-white px-3 py-1.5 text-xs font-black uppercase tracking-wider text-black">
+              {member.nickname}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="space-y-3">
+        <h3 className="text-3xl font-black uppercase tracking-tight">{member.name}</h3>
+        <p className="text-xs font-bold uppercase tracking-widest text-black/50">{member.role}</p>
+        <a
+          href={member.instagramHref}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 text-sm font-black text-black transition-colors hover:text-black/60"
+        >
+          <Instagram size={16} />
+          {member.instagramLabel}
+        </a>
+        <p className="text-base italic leading-snug text-black/70">&quot;{member.vibe}&quot;</p>
+
+        <div className="flex flex-wrap gap-3 pt-1 text-sm text-black/60">
+          <span className="inline-flex items-center gap-1.5">
+            <Scissors size={14} className="shrink-0 text-black/40" />
+            {member.specialty}
+          </span>
+          <span className="inline-flex items-center gap-1.5">
+            <Award size={14} className="shrink-0 text-black/40" />
+            {member.experience}
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export function Team() {
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [activeIdx, setActiveIdx] = useState(0);
+
+  const scrollToMember = useCallback((index: number) => {
+    const root = scrollRef.current;
+    const el = root?.querySelector<HTMLElement>(`[data-team-slide="${index}"]`);
+    el?.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+  }, []);
+
   const team: SquadMember[] = [
     {
       name: "KG",
@@ -98,6 +175,25 @@ export function Team() {
     },
   ];
 
+  useEffect(() => {
+    const root = scrollRef.current;
+    if (!root) return;
+    const slides = root.querySelectorAll<HTMLElement>("[data-team-slide]");
+    const obs = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting && e.intersectionRatio >= 0.5) {
+            const idx = Number(e.target.getAttribute("data-team-slide"));
+            if (!Number.isNaN(idx)) setActiveIdx(idx);
+          }
+        }
+      },
+      { root, threshold: [0.5, 0.65] }
+    );
+    slides.forEach((el) => obs.observe(el));
+    return () => obs.disconnect();
+  }, [team.length]);
+
   return (
     <div className="overflow-x-hidden">
       <section className="page-hero-section relative">
@@ -136,11 +232,61 @@ export function Team() {
         </div>
       </section>
 
-      {/* Team Grid */}
+      {/* Squad : carrousel + rail (mobile / tablette) · grille large écran */}
       <section className="relative bg-white py-24 lg:py-32">
         <SectionTopDiagonal tone="light" variant="slashAlt" />
         <div className="layout-gutter">
-          <div className="grid gap-12 sm:grid-cols-2 xl:grid-cols-3 lg:gap-14">
+          <p className="mb-6 text-sm font-bold uppercase tracking-wider text-black/45 lg:hidden">
+            Glisse ou tape une tête — même infos, moins de scroll vertical
+          </p>
+
+          <nav
+            className="team-carousel-track sticky z-20 mb-5 flex gap-2 overflow-x-auto border-b border-black/10 bg-white/90 py-3 backdrop-blur-sm lg:hidden"
+            style={{
+              top: "max(5rem, calc(env(safe-area-inset-top, 0px) + 3.25rem))",
+            }}
+            aria-label="Raccourcis membres"
+          >
+            {team.map((m, i) => (
+              <button
+                key={m.name}
+                type="button"
+                onClick={() => scrollToMember(i)}
+                className={`flex shrink-0 flex-col items-center gap-1.5 rounded-xl border-2 px-2 py-2 transition-colors ${
+                  activeIdx === i
+                    ? "border-black bg-black text-white"
+                    : "border-black/15 bg-white text-black hover:border-black/40"
+                }`}
+              >
+                <ImageWithFallback
+                  src={m.image}
+                  alt=""
+                  className="pointer-events-none h-12 w-12 rounded-full object-cover object-top ring-2 ring-black/10"
+                />
+                <span className="max-w-[4.25rem] truncate text-center text-[10px] font-black uppercase leading-tight tracking-wide">
+                  {m.nickname}
+                </span>
+              </button>
+            ))}
+          </nav>
+
+          <div
+            ref={scrollRef}
+            className="team-carousel-track flex snap-x snap-mandatory gap-5 overflow-x-auto pb-8 pl-0.5 pr-4 lg:hidden"
+            aria-label="Carrousel de la squad"
+          >
+            {team.map((member, i) => (
+              <article
+                key={member.name}
+                data-team-slide={i}
+                className="w-[min(88vw,21rem)] shrink-0 snap-center sm:w-[23rem]"
+              >
+                <SquadCard member={member} />
+              </article>
+            ))}
+          </div>
+
+          <div className="hidden gap-12 lg:grid lg:grid-cols-3 lg:gap-14">
             {team.map((member, index) => (
               <motion.div
                 key={member.name}
@@ -148,68 +294,8 @@ export function Team() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.06 }}
-                className="group"
               >
-                <div className="relative overflow-hidden mb-5">
-                  <div className="aspect-[4/5] relative overflow-hidden bg-neutral-900">
-                    <ImageWithFallback
-                      src={member.image}
-                      alt={member.name}
-                      className="w-full h-full object-cover object-top"
-                    />
-
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
-                    <motion.div
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      className="absolute bottom-0 left-0 right-0 p-5 translate-y-full group-hover:translate-y-0 transition-transform duration-300"
-                    >
-                      <a
-                        href={member.instagramHref}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 px-5 py-3 bg-white text-black font-black uppercase tracking-wider text-xs hover:bg-white/90 transition-colors w-full justify-center"
-                      >
-                        <Instagram size={16} />
-                        <span className="truncate">{member.instagramLabel}</span>
-                      </a>
-                    </motion.div>
-
-                    <div className="absolute top-5 left-5">
-                      <div className="px-3 py-1.5 bg-white text-black font-black uppercase text-xs tracking-wider">
-                        {member.nickname}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="space-y-3">
-                  <h3 className="text-3xl font-black uppercase tracking-tight">{member.name}</h3>
-                  <p className="text-xs uppercase tracking-widest text-black/50 font-bold">{member.role}</p>
-                  <a
-                    href={member.instagramHref}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-sm font-black text-black hover:text-black/60 transition-colors"
-                  >
-                    <Instagram size={16} />
-                    {member.instagramLabel}
-                  </a>
-                  <p className="text-base text-black/70 italic leading-snug">"{member.vibe}"</p>
-
-                  <div className="flex flex-wrap gap-3 pt-1 text-sm text-black/60">
-                    <span className="inline-flex items-center gap-1.5">
-                      <Scissors size={14} className="text-black/40 shrink-0" />
-                      {member.specialty}
-                    </span>
-                    <span className="inline-flex items-center gap-1.5">
-                      <Award size={14} className="text-black/40 shrink-0" />
-                      {member.experience}
-                    </span>
-                  </div>
-                </div>
+                <SquadCard member={member} />
               </motion.div>
             ))}
           </div>

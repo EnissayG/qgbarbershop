@@ -1,5 +1,6 @@
+import { useState } from "react";
 import { motion } from "motion/react";
-import { Scissors, Sparkles, Clock } from "lucide-react";
+import { Scissors, Sparkles, Clock, ChevronDown } from "lucide-react";
 import { Link } from "react-router";
 import { SectionTopDiagonal } from "../components/SectionTopDiagonal";
 import {
@@ -9,9 +10,22 @@ import {
 } from "../config/shopInfo";
 import { shopInstagramUrl } from "../config/shopPhotos";
 
+type ServiceItem = {
+  slug: string;
+  icon: typeof Scissors;
+  name: string;
+  description: string;
+  duration: string;
+  price: string;
+  extras?: { name: string; price: string }[];
+};
+
 export function Services() {
-  const services = [
+  const [openSlug, setOpenSlug] = useState<string | null>(null);
+
+  const services: ServiceItem[] = [
     {
+      slug: "coupe-adulte",
       icon: Scissors,
       name: "Coupe adulte",
       description: "Le cut classique, toujours fresh. Fade, taper, tout ce que tu veux.",
@@ -23,6 +37,7 @@ export function Services() {
       ],
     },
     {
+      slug: "line-up",
       icon: Scissors,
       name: "Line up",
       description: "Rafraîchis tes contours, reste sharp entre deux coupes.",
@@ -30,6 +45,7 @@ export function Services() {
       price: "20$",
     },
     {
+      slug: "barbe",
       icon: Scissors,
       name: "Barbe",
       description: "Taille, contour, style. Ta barbe jamais été aussi clean.",
@@ -37,6 +53,7 @@ export function Services() {
       price: "20$",
     },
     {
+      slug: "shampooing",
       icon: Sparkles,
       name: "Shampooing",
       description: "Lavage premium avec produits de qualité.",
@@ -44,6 +61,7 @@ export function Services() {
       price: "30$",
     },
     {
+      slug: "coupe-enfant",
       icon: Scissors,
       name: "Coupe enfant",
       description: "Pour les p'tits qui veulent être fresh comme papa.",
@@ -51,6 +69,7 @@ export function Services() {
       price: "30$",
     },
     {
+      slug: "tresses",
       icon: Sparkles,
       name: "Tresses",
       description:
@@ -107,39 +126,105 @@ export function Services() {
             <p className="text-xl text-black/60">
               Des cuts de qualité, des prix honnêtes
             </p>
+            <p className="mt-3 text-sm font-bold uppercase tracking-wider text-black/40 md:hidden">
+              Liste compacte : tape pour ouvrir les détails
+            </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {/* Mobile : accordéon (moins de scroll) */}
+          <div className="space-y-2 md:hidden">
+            {services.map((service) => {
+              const Icon = service.icon;
+              const open = openSlug === service.slug;
+              return (
+                <div
+                  key={service.slug}
+                  id={`service-${service.slug}`}
+                  className="overflow-hidden border-2 border-black bg-white"
+                >
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setOpenSlug((s) => (s === service.slug ? null : service.slug))
+                    }
+                    className="flex w-full items-center gap-3 p-4 text-left transition-colors active:bg-black/5"
+                  >
+                    <div className="flex h-11 w-11 shrink-0 items-center justify-center bg-black text-white">
+                      <Icon size={22} />
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <span className="block font-black uppercase tracking-tight">
+                        {service.name}
+                      </span>
+                      <span className="text-xs font-bold uppercase tracking-wider text-black/45">
+                        {service.duration}
+                      </span>
+                    </div>
+                    <span className="shrink-0 text-xl font-black tabular-nums sm:text-2xl">
+                      {service.price}
+                    </span>
+                    <ChevronDown
+                      className={`h-5 w-5 shrink-0 transition-transform ${open ? "rotate-180" : ""}`}
+                      aria-hidden
+                    />
+                  </button>
+                  {open && (
+                    <div className="border-t-2 border-black bg-black px-4 py-5 text-white">
+                      <p className="leading-relaxed text-white/85">{service.description}</p>
+                      {service.extras && (
+                        <div className="mt-4 space-y-2 border-t border-white/20 pt-4 text-sm">
+                          {service.extras.map((extra) => (
+                            <div
+                              key={extra.name}
+                              className="flex justify-between gap-4 text-white/65"
+                            >
+                              <span>{extra.name}</span>
+                              <span className="shrink-0 font-black text-white">{extra.price}</span>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                      <div className="mt-4 flex items-center gap-2 border-t border-white/20 pt-4 text-sm text-white/55">
+                        <Clock size={16} />
+                        <span>{service.duration}</span>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Tablette & desktop : grille classique */}
+          <div className="hidden gap-6 md:grid md:grid-cols-2 lg:grid-cols-3">
             {services.map((service, index) => {
               const Icon = service.icon;
               return (
                 <motion.div
-                  key={service.name}
+                  key={service.slug}
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: index * 0.05 }}
                   className="group relative"
                 >
-                  <div className="bg-black p-8 lg:p-10 text-white hover:scale-105 transition-all duration-300 relative overflow-hidden h-full flex flex-col">
-                    <div className="absolute top-0 right-0 w-20 h-20 bg-white/5 transform rotate-45 translate-x-10 -translate-y-10" />
-                    
-                    <div className="relative z-10 flex-1 flex flex-col">
+                  <div className="relative flex h-full flex-col overflow-hidden bg-black p-8 text-white transition-all duration-300 hover:scale-105 lg:p-10">
+                    <div className="absolute right-0 top-0 h-20 w-20 translate-x-10 -translate-y-10 rotate-45 bg-white/5" />
+
+                    <div className="relative z-10 flex flex-1 flex-col">
                       <div className="mb-6">
-                        <div className="w-14 h-14 bg-white/10 group-hover:bg-white group-hover:text-black transition-all flex items-center justify-center">
-                          <Icon size={28} className="group-hover:text-black transition-colors" />
+                        <div className="flex h-14 w-14 items-center justify-center bg-white/10 transition-all group-hover:bg-white group-hover:text-black">
+                          <Icon size={28} className="transition-colors group-hover:text-black" />
                         </div>
                       </div>
-                      
-                      <h3 className="text-2xl lg:text-3xl font-black mb-3 uppercase tracking-tight">
+
+                      <h3 className="mb-3 text-2xl font-black uppercase tracking-tight lg:text-3xl">
                         {service.name}
                       </h3>
-                      <p className="text-white/70 mb-6 leading-relaxed flex-1">
-                        {service.description}
-                      </p>
-                      
+                      <p className="mb-6 flex-1 leading-relaxed text-white/70">{service.description}</p>
+
                       {service.extras && (
-                        <div className="mb-4 space-y-1 text-sm pb-4 border-b border-white/20">
+                        <div className="mb-4 space-y-1 border-b border-white/20 pb-4 text-sm">
                           {service.extras.map((extra) => (
                             <div key={extra.name} className="flex justify-between text-white/50">
                               <span>{extra.name}</span>
@@ -148,13 +233,15 @@ export function Services() {
                           ))}
                         </div>
                       )}
-                      
-                      <div className="flex items-center justify-between pt-4 border-t border-white/20 mt-auto">
+
+                      <div className="mt-auto flex items-center justify-between border-t border-white/20 pt-4">
                         <div className="flex items-center gap-2 text-sm text-white/60">
                           <Clock size={16} />
                           <span>{service.duration}</span>
                         </div>
-                        <div className="text-3xl lg:text-4xl font-black tracking-tight">{service.price}</div>
+                        <div className="text-3xl font-black tracking-tight lg:text-4xl">
+                          {service.price}
+                        </div>
                       </div>
                     </div>
                   </div>
