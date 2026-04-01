@@ -11,9 +11,9 @@ export function Layout() {
   }, [pathname]);
 
   return (
-    <div className="flex min-h-screen w-full max-w-full flex-col overflow-x-hidden bg-white">
+    <div className="flex min-h-screen w-full max-w-full flex-col bg-white">
       <Header />
-      <main className="min-w-0 flex-1 overflow-x-hidden bg-white">
+      <main className="min-w-0 flex-1 bg-white">
         <Outlet />
       </main>
       <Footer />

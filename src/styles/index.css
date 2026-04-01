@@ -2,15 +2,14 @@
 @import './tailwind.css';
 @import './theme.css';
 
+/* html sans overflow-x : overflow-x:hidden impose overflow-y:auto et découpe le hero (-safe-area). */
 html {
-  overflow-x: hidden;
   height: 100%;
-  background-color: #fff;
+  background-color: #000;
   color-scheme: light;
 }
 
 body {
-  overflow-x: hidden;
   width: 100%;
   max-width: 100%;
   min-height: 100%;
@@ -116,7 +115,9 @@ body {
 
 .hero-fullscreen-media {
   position: absolute;
+  top: calc(-1 * constant(safe-area-inset-top));
   top: calc(-1 * env(safe-area-inset-top, 0px));
+  bottom: calc(-1 * constant(safe-area-inset-bottom));
   bottom: calc(-1 * env(safe-area-inset-bottom, 0px));
   left: 0;
   right: 0;

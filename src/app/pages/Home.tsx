@@ -21,7 +21,7 @@ export function Home() {
   return (
     <div className="pt-0">
       {/* Hero plein écran (safe areas + dvh/lvh, voir index.css) */}
-      <section className="hero-fullscreen-section relative isolate flex w-full items-center overflow-x-hidden">
+      <section className="hero-fullscreen-section relative isolate flex w-full items-center">
         <div className="hero-fullscreen-media pointer-events-none z-0 overflow-hidden">
           <HeroBackgroundCarousel images={carouselImages} alts={carouselAlts} />
           <div className="pointer-events-none absolute left-0 top-0 z-20 h-full w-32 -translate-x-8 -skew-x-12 bg-gradient-to-r from-white/10 to-transparent" />
