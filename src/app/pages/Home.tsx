@@ -20,19 +20,16 @@ export function Home() {
 
   return (
     <div className="pt-0">
-      {/* Hero plein écran sous le header flottant */}
-      <section className="relative flex min-h-[100dvh] items-center overflow-hidden">
-        {/* Carousel Background */}
-        <div className="absolute inset-0 min-h-[100dvh] w-full">
+      {/* Hero plein écran (safe areas + dvh/lvh, voir index.css) */}
+      <section className="hero-fullscreen-section relative isolate flex w-full items-center overflow-hidden">
+        <div className="hero-fullscreen-media pointer-events-none z-0 overflow-hidden">
           <HeroBackgroundCarousel images={carouselImages} alts={carouselAlts} />
-          {/* Voile plus léger que l’original (via-black/80) pour laisser voir les photos */}
           <div className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-r from-black/80 via-black/45 to-transparent" />
+          <div className="pointer-events-none absolute left-0 top-0 z-20 h-full w-32 -translate-x-8 -skew-x-12 bg-gradient-to-r from-white/10 to-transparent" />
+          <div className="pointer-events-none absolute left-20 top-0 z-20 h-full w-16 -skew-x-12 bg-gradient-to-r from-white/5 to-transparent" />
         </div>
 
-        <div className="pointer-events-none absolute top-0 left-0 z-20 h-full w-32 -translate-x-8 -skew-x-12 bg-gradient-to-r from-white/10 to-transparent" />
-        <div className="pointer-events-none absolute top-0 left-20 z-20 h-full w-16 -skew-x-12 bg-gradient-to-r from-white/5 to-transparent" />
-
-        <div className="relative z-30 mx-auto w-full max-w-7xl px-6 pb-20 pt-28 sm:pt-32 lg:px-12 lg:pb-24 lg:pt-36">
+        <div className="relative z-30 mx-auto w-full max-w-7xl px-6 pb-[max(5rem,env(safe-area-inset-bottom,0px))] pt-[max(7rem,calc(env(safe-area-inset-top,0px)+5.5rem))] sm:pt-32 lg:px-12 lg:pb-24 lg:pt-36">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}

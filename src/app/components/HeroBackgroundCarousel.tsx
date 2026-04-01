@@ -37,13 +37,13 @@ export function HeroBackgroundCarousel({ images, alts }: Props) {
 
   return (
     <div
-      className="hero-bg-carousel pointer-events-none absolute inset-0 min-h-[100dvh] w-full overflow-hidden"
+      className="hero-bg-carousel pointer-events-none absolute inset-0 h-full min-h-full w-full overflow-hidden"
       aria-hidden
     >
       {images.map((src, i) => (
         <div
           key={`${src}-${i}`}
-          className="hero-bg-carousel__slide absolute inset-0 h-full min-h-[100dvh] w-full"
+          className="hero-bg-carousel__slide absolute inset-0 h-full min-h-full w-full"
           style={{
             opacity: i === index ? 1 : 0,
             zIndex: i === index ? 2 : 1,
