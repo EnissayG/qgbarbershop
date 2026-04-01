@@ -2,6 +2,7 @@ import { Link } from "react-router";
 import { Scissors, Users, GraduationCap, ArrowRight, Instagram } from "lucide-react";
 import { motion } from "motion/react";
 import { ImageWithFallback } from "../components/figma/ImageWithFallback";
+import { HeroBackgroundCarousel } from "../components/HeroBackgroundCarousel";
 import { SectionTopDiagonal } from "../components/SectionTopDiagonal";
 import {
   shopBookingUrl,
@@ -10,48 +11,20 @@ import {
   shopPhoneTel,
 } from "../config/shopInfo";
 import { shopInstagramUrl, shopPhotos } from "../config/shopPhotos";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 
 export function Home() {
   const carouselImages = shopPhotos.carousel;
-
-  const sliderSettings = {
-    dots: false,
-    infinite: true,
-    speed: 900,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 4000,
-    fade: true,
-    arrows: false,
-    pauseOnHover: false,
-  };
+  const carouselAlts = carouselImages.map(
+    (_, i) => `Quartier Général — salon ${i + 1}`
+  );
 
   return (
-    <div className="pt-16">
-      {/* Hero Section with Carousel */}
-      <section className="min-h-screen relative overflow-hidden flex items-center">
+    <div className="pt-0">
+      {/* Hero plein écran sous le header flottant */}
+      <section className="relative flex min-h-[100dvh] items-center overflow-hidden">
         {/* Carousel Background */}
-        <div className="absolute inset-0">
-          <Slider {...sliderSettings} className="home-hero-slider h-full">
-            {carouselImages.map((img, index) => (
-              <div key={index} className="h-screen">
-                <div className="relative h-full w-full">
-                  <ImageWithFallback
-                    src={img}
-                    alt={`Quartier Général — salon ${index + 1}`}
-                    className="hero-carousel-img h-full w-full object-cover object-center"
-                    loading={index === 0 ? "eager" : "lazy"}
-                    fetchPriority={index === 0 ? "high" : "low"}
-                    decoding="async"
-                  />
-                </div>
-              </div>
-            ))}
-          </Slider>
+        <div className="absolute inset-0 min-h-[100dvh] w-full">
+          <HeroBackgroundCarousel images={carouselImages} alts={carouselAlts} />
           {/* Voile plus léger que l’original (via-black/80) pour laisser voir les photos */}
           <div className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-r from-black/80 via-black/45 to-transparent" />
         </div>
@@ -59,7 +32,7 @@ export function Home() {
         <div className="pointer-events-none absolute top-0 left-0 z-20 h-full w-32 -translate-x-8 -skew-x-12 bg-gradient-to-r from-white/10 to-transparent" />
         <div className="pointer-events-none absolute top-0 left-20 z-20 h-full w-16 -skew-x-12 bg-gradient-to-r from-white/5 to-transparent" />
 
-        <div className="max-w-7xl mx-auto px-6 lg:px-12 py-20 w-full relative z-30">
+        <div className="relative z-30 mx-auto w-full max-w-7xl px-6 pb-20 pt-28 sm:pt-32 lg:px-12 lg:pb-24 lg:pt-36">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}

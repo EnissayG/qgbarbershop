@@ -61,11 +61,11 @@ export function Services() {
   ];
 
   return (
-    <div className="pt-16">
+    <div className="overflow-x-hidden pt-28 sm:pt-32">
       <section className="relative overflow-x-hidden bg-black py-24 lg:py-32">
-        <div className="pointer-events-none absolute inset-0">
-          <div className="absolute top-0 right-0 h-full w-1/3 translate-x-32 skew-x-12 bg-white/5" />
-          <div className="absolute bottom-0 left-0 h-1/2 w-1/4 -translate-x-16 -skew-x-12 bg-white/5" />
+        <div className="pointer-events-none absolute inset-0 overflow-hidden">
+          <div className="absolute top-0 right-0 h-full w-1/3 translate-x-16 skew-x-12 bg-white/5 sm:translate-x-24 lg:translate-x-32" />
+          <div className="absolute bottom-0 left-0 h-1/2 w-1/4 -translate-x-8 -skew-x-12 bg-white/5 sm:-translate-x-12 lg:-translate-x-16" />
         </div>
 
         <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-12">
@@ -91,9 +91,9 @@ export function Services() {
       </section>
 
       {/* Services Grid - Style diagonal cards */}
-      <section className="relative bg-white py-24 lg:py-32">
+      <section className="relative overflow-x-hidden bg-white py-24 lg:py-32">
         <SectionTopDiagonal tone="light" variant="slash" />
-        <div className="max-w-7xl mx-auto px-6 lg:px-12">
+        <div className="mx-auto max-w-7xl min-w-0 px-6 lg:px-12">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -186,16 +186,17 @@ export function Services() {
       </section>
 
       {/* Horaires - Style moderne */}
-      <section className="relative bg-black py-24 lg:py-32">
+      <section className="relative overflow-x-hidden bg-black py-24 lg:py-32">
         <SectionTopDiagonal tone="dark" variant="slashAlt" />
-        <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div className="mx-auto max-w-7xl min-w-0 px-6 lg:px-12">
+          <div className="grid min-w-0 grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16 items-center">
             {/* Horaires */}
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
+              className="min-w-0"
             >
               <h2 className="text-5xl lg:text-6xl font-black tracking-tighter mb-12 text-white uppercase">
                 Quand on
@@ -233,9 +234,9 @@ export function Services() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              className="relative"
+              className="relative min-w-0 overflow-x-clip"
             >
-              <div className="bg-white p-10 lg:p-16 relative overflow-hidden">
+              <div className="relative overflow-hidden bg-white p-10 lg:p-16">
                 <div className="absolute inset-0 opacity-5">
                   {[...Array(10)].map((_, i) => (
                     <div
@@ -289,16 +290,19 @@ export function Services() {
                 </div>
               </div>
 
-              <div className="absolute -top-6 -right-6 w-24 h-24 lg:w-32 lg:h-32 bg-black transform rotate-12" />
+              <div
+                className="absolute -top-4 -right-4 hidden h-20 w-20 rotate-12 bg-black sm:block sm:h-24 sm:w-24 lg:-top-6 lg:-right-6 lg:h-32 lg:w-32"
+                aria-hidden
+              />
             </motion.div>
           </div>
         </div>
       </section>
 
       {/* Info supplémentaire */}
-      <section className="relative bg-white py-24">
+      <section className="relative overflow-x-hidden bg-white py-24">
         <SectionTopDiagonal tone="light" variant="slice" />
-        <div className="max-w-4xl mx-auto px-6 lg:px-12">
+        <div className="mx-auto max-w-4xl min-w-0 px-6 lg:px-12">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -330,9 +334,9 @@ export function Services() {
       </section>
 
       {/* Slogan Section */}
-      <section className="relative bg-black py-24 lg:py-32">
+      <section className="relative overflow-x-hidden bg-black py-24 lg:py-32">
         <SectionTopDiagonal tone="dark" variant="slash" />
-        <div className="max-w-7xl mx-auto px-6 lg:px-12 text-center">
+        <div className="mx-auto max-w-7xl min-w-0 px-6 text-center lg:px-12">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}

@@ -2,21 +2,23 @@
 @import './tailwind.css';
 @import './theme.css';
 
-/* Carrousel accueil — hauteur plein viewport, pas de troncature */
-.home-hero-slider.slick-slider {
-  height: 100%;
+html {
+  overflow-x: hidden;
 }
-.home-hero-slider .slick-list,
-.home-hero-slider .slick-track {
-  height: 100% !important;
-}
-.home-hero-slider .slick-slide > div {
-  height: 100%;
-  min-height: 100vh;
+body {
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100%;
 }
 
-/* Réduit l’effet « flou » (sous-pixels / calques) sur grosses images cover */
-.home-hero-slider .hero-carousel-img {
+/* Hero : carrousel plein cadre (sans Slick) — cover + recadrage stable au resize */
+.hero-bg-carousel__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   transform: translateZ(0);

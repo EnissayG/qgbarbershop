@@ -17,20 +17,21 @@ const metroIconSrc = "/assets/metro-12.svg";
 
 export function Contact() {
   return (
-    <div className="pt-16">
+    <div className="overflow-x-hidden pt-28 sm:pt-32">
       <section className="relative overflow-x-hidden bg-black py-24 lg:py-32">
-        <div className="absolute inset-0">
-          <ImageWithFallback
-            src={shopPhotos.contactHero}
-            alt="Ambiance du salon QG"
-            className="w-full h-full object-cover opacity-20"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-black via-black/90 to-black/70" />
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute inset-0">
+            <ImageWithFallback
+              src={shopPhotos.contactHero}
+              alt="Ambiance du salon QG"
+              className="h-full w-full object-cover opacity-20"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-black via-black/90 to-black/70" />
+          </div>
+          <div className="absolute left-0 top-0 h-full w-32 -translate-x-6 -skew-x-12 bg-white/5 sm:-translate-x-8" />
         </div>
 
-        <div className="absolute top-0 left-0 w-32 h-full bg-white/5 transform -skew-x-12 -translate-x-8" />
-
-        <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
+        <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-12">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -54,16 +55,16 @@ export function Contact() {
         </div>
       </section>
 
-      <section className="relative bg-white py-32">
+      <section className="relative overflow-x-hidden bg-white py-32">
         <SectionTopDiagonal tone="light" variant="slice" />
-        <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          <div className="grid lg:grid-cols-2 gap-16 lg:gap-20">
+        <div className="mx-auto max-w-7xl min-w-0 px-6 lg:px-12">
+          <div className="grid min-w-0 grid-cols-1 gap-16 lg:grid-cols-2 lg:gap-20">
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              className="space-y-12"
+              className="min-w-0 space-y-12"
             >
               <div>
                 <h2 className="text-5xl font-black tracking-tighter mb-8 uppercase">Trouve-nous</h2>
@@ -213,16 +214,16 @@ export function Contact() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              className="flex flex-col gap-6"
+              className="flex min-w-0 flex-col gap-6"
             >
-              <div>
+              <div className="min-w-0 max-w-full">
                 <h3 className="mb-4 text-xs font-bold uppercase tracking-widest text-black/50">Carte</h3>
-                <div className="overflow-hidden border-4 border-black bg-black/5 shadow-[8px_8px_0_0_rgba(0,0,0,1)]">
-                  <div className="aspect-[4/3] w-full sm:aspect-video">
+                <div className="max-w-full overflow-hidden border-4 border-black bg-black/5 shadow-[8px_8px_0_0_rgba(0,0,0,1)]">
+                  <div className="aspect-[4/3] w-full max-w-full sm:aspect-video">
                     <iframe
                       title="Quartier Général Barbershop sur la carte"
                       src={shopMapEmbedUrl}
-                      className="h-full w-full border-0"
+                      className="h-full w-full max-w-full border-0"
                       loading="lazy"
                       referrerPolicy="no-referrer-when-downgrade"
                       allowFullScreen

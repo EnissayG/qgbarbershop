@@ -99,7 +99,7 @@ export function Team() {
   ];
 
   return (
-    <div className="pt-16">
+    <div className="pt-28 sm:pt-32">
       {/* Hero */}
       <section className="relative overflow-x-hidden bg-black py-32">
         <div className="absolute top-0 right-0 w-1/2 h-full bg-white/5 transform skew-x-12 translate-x-32" />
