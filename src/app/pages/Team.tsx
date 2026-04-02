@@ -245,8 +245,8 @@ export function Team() {
       </section>
 
       {/* Squad : carrousel + rail (mobile / tablette) · grille large écran */}
-      <section className="relative bg-white py-28 lg:py-32">
-        <SectionTopDiagonal tone="light" variant="slashAlt" />
+      <section className="section-diagonal-top relative bg-white pb-28 lg:pb-32">
+        <SectionTopDiagonal tone="light" variant="slash" />
         <div className="layout-gutter">
           <nav
             className="team-carousel-track sticky z-20 mb-8 flex gap-2.5 overflow-x-auto border-b border-black/10 bg-white/95 py-4 backdrop-blur-sm lg:hidden"
@@ -348,8 +348,8 @@ export function Team() {
       </section>
 
       {/* Culture & Values */}
-      <section className="relative overflow-x-hidden bg-black pt-32 pb-[max(8rem,calc(env(safe-area-inset-bottom,0px)+4rem))] lg:py-32">
-        <SectionTopDiagonal tone="dark" variant="slice" />
+      <section className="section-diagonal-top relative overflow-x-hidden bg-black pb-[max(8rem,calc(env(safe-area-inset-bottom,0px)+4rem))] lg:pb-32">
+        <SectionTopDiagonal tone="dark" variant="slashAlt" />
         <div className="layout-gutter">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -410,7 +410,7 @@ export function Team() {
       </section>
 
       {/* Join Team CTA */}
-      <section className="relative overflow-x-hidden bg-white py-32">
+      <section className="section-diagonal-top relative overflow-x-hidden bg-white pb-28 lg:pb-32">
         <SectionTopDiagonal tone="light" variant="slash" />
         <div className="absolute inset-0 opacity-5">
           {[...Array(20)].map((_, i) => (

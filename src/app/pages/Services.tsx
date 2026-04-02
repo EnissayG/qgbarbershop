@@ -110,7 +110,7 @@ export function Services() {
       </section>
 
       {/* Services Grid - Style diagonal cards */}
-      <section className="relative overflow-x-hidden bg-white py-24 lg:py-32">
+      <section className="section-diagonal-top relative overflow-x-hidden bg-white pb-24 lg:pb-32">
         <SectionTopDiagonal tone="light" variant="slash" />
         <div className="layout-gutter min-w-0">
           <motion.div
@@ -273,7 +273,7 @@ export function Services() {
       </section>
 
       {/* Horaires - Style moderne */}
-      <section className="relative overflow-x-hidden bg-black pt-24 pb-[max(6.5rem,calc(env(safe-area-inset-bottom,0px)+4rem))] lg:py-32">
+      <section className="section-diagonal-top relative overflow-x-hidden bg-black pb-[max(6.5rem,calc(env(safe-area-inset-bottom,0px)+4rem))] lg:pb-32">
         <SectionTopDiagonal tone="dark" variant="slashAlt" />
         <div className="layout-gutter min-w-0">
           <div className="grid min-w-0 grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16 items-center">
@@ -387,8 +387,8 @@ export function Services() {
       </section>
 
       {/* Info supplémentaire */}
-      <section className="relative overflow-x-hidden bg-white py-24">
-        <SectionTopDiagonal tone="light" variant="slice" />
+      <section className="section-diagonal-top relative overflow-x-hidden bg-white pb-24 lg:pb-32">
+        <SectionTopDiagonal tone="light" variant="slash" />
         <div className="layout-gutter-narrow min-w-0">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -421,8 +421,8 @@ export function Services() {
       </section>
 
       {/* Slogan Section */}
-      <section className="relative overflow-x-hidden bg-black pt-24 pb-[max(6.5rem,calc(env(safe-area-inset-bottom,0px)+4rem))] lg:py-32">
-        <SectionTopDiagonal tone="dark" variant="slash" />
+      <section className="section-diagonal-top relative overflow-x-hidden bg-black pb-[max(6.5rem,calc(env(safe-area-inset-bottom,0px)+4rem))] lg:pb-32">
+        <SectionTopDiagonal tone="dark" variant="slashAlt" />
         <div className="layout-gutter min-w-0 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}

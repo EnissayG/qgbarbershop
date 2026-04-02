@@ -2,6 +2,23 @@
 @import './tailwind.css';
 @import './theme.css';
 
+/* Sections avec SectionTopDiagonal : marge haute pour que le texte ne colle pas au pli */
+.section-diagonal-top {
+  padding-top: max(6.75rem, 5.75rem);
+}
+
+@media (min-width: 640px) {
+  .section-diagonal-top {
+    padding-top: max(7.5rem, 6.5rem);
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-diagonal-top {
+    padding-top: max(10rem, 8.25rem);
+  }
+}
+
 /* html sans overflow-x : overflow-x:hidden impose overflow-y:auto et découpe le hero (-safe-area). */
 html {
   height: 100%;
@@ -193,6 +210,26 @@ body {
   }
 }
 
+/* Heros : moins de vide vertical sur mobile / tablette */
+@media (max-width: 1023px) {
+  .page-hero-section {
+    min-height: 0;
+    min-height: auto;
+  }
+
+  .page-hero-inner {
+    flex: 0 1 auto;
+    justify-content: flex-start;
+    padding-top: max(5.25rem, calc(env(safe-area-inset-top, 0px) + 3.15rem));
+    padding-bottom: max(2.75rem, calc(env(safe-area-inset-bottom, 0px) + 1.5rem));
+  }
+
+  .hero-fullscreen-section {
+    min-height: min(72dvh, 100dvh);
+    min-height: min(72lvh, 100lvh);
+  }
+}
+
 .hero-fullscreen-media {
   position: absolute;
   top: calc(-1 * constant(safe-area-inset-top));
@@ -208,6 +245,15 @@ body {
     max(100dvh, 100lvh) + env(safe-area-inset-top, 0px) + env(safe-area-inset-bottom, 0px)
   );
   background-color: #000;
+}
+
+@media (max-width: 1023px) {
+  .hero-fullscreen-media {
+    min-height: calc(72dvh + env(safe-area-inset-top, 0px) + env(safe-area-inset-bottom, 0px));
+    min-height: calc(
+      min(72lvh, 100lvh) + env(safe-area-inset-top, 0px) + env(safe-area-inset-bottom, 0px)
+    );
+  }
 }
 
 /* Carrousel équipe mobile : scroll horizontal propre */

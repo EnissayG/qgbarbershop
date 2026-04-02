@@ -21,14 +21,14 @@ export function Home() {
   return (
     <div className="pt-0">
       {/* Hero plein écran (safe areas + dvh/lvh, voir index.css) */}
-      <section className="hero-fullscreen-section relative isolate flex w-full items-center">
+      <section className="hero-fullscreen-section relative isolate flex w-full items-center max-lg:items-start">
         <div className="hero-fullscreen-media pointer-events-none z-0 overflow-hidden">
           <HeroBackgroundCarousel images={carouselImages} alts={carouselAlts} />
           <div className="pointer-events-none absolute left-0 top-0 z-20 h-full w-32 -translate-x-8 -skew-x-12 bg-gradient-to-r from-white/10 to-transparent" />
           <div className="pointer-events-none absolute left-20 top-0 z-20 h-full w-16 -skew-x-12 bg-gradient-to-r from-white/5 to-transparent" />
         </div>
 
-        <div className="layout-gutter relative z-30 w-full pb-[max(6rem,calc(env(safe-area-inset-bottom,0px)+3.5rem))] pt-[max(6.75rem,calc(env(safe-area-inset-top,0px)+4.5rem))] sm:pt-28 lg:pb-24 lg:pt-36">
+        <div className="layout-gutter relative z-30 w-full pb-[max(4rem,calc(env(safe-area-inset-bottom,0px)+2.5rem))] pt-[max(5.5rem,calc(env(safe-area-inset-top,0px)+3.35rem))] sm:pb-[max(5rem,calc(env(safe-area-inset-bottom,0px)+3rem))] sm:pt-24 lg:pb-24 lg:pt-36">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
@@ -111,7 +111,7 @@ export function Home() {
       </section>
 
       {/* About Section - Plus de détails */}
-      <section className="relative overflow-x-hidden bg-white pt-28 pb-24 lg:py-32">
+      <section className="section-diagonal-top relative overflow-x-hidden bg-white pb-24 lg:pb-32">
         <SectionTopDiagonal tone="light" variant="slash" />
         <div className="absolute top-0 right-0 w-1/3 h-full bg-black transform skew-x-12 translate-x-32 opacity-5" />
         
@@ -180,7 +180,7 @@ export function Home() {
       </section>
 
       {/* Services Section */}
-      <section className="relative bg-black pt-24 pb-[max(6.5rem,calc(env(safe-area-inset-bottom,0px)+4rem))] text-white lg:py-32">
+      <section className="section-diagonal-top relative bg-black pb-[max(6.5rem,calc(env(safe-area-inset-bottom,0px)+4rem))] text-white lg:pb-32">
         <SectionTopDiagonal tone="dark" variant="slashAlt" />
         <div className="layout-gutter">
           <motion.div
@@ -265,8 +265,8 @@ export function Home() {
       </section>
 
       {/* Gallery Section - Instagram Style */}
-      <section className="relative bg-white py-24 lg:py-32">
-        <SectionTopDiagonal tone="light" variant="slice" />
+      <section className="section-diagonal-top relative bg-white pb-24 lg:pb-32">
+        <SectionTopDiagonal tone="light" variant="slash" />
         <div className="layout-gutter">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -314,8 +314,8 @@ export function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="relative overflow-x-hidden bg-black pt-24 pb-[max(6.5rem,calc(env(safe-area-inset-bottom,0px)+4rem))] lg:py-32">
-        <SectionTopDiagonal tone="dark" variant="slash" />
+      <section className="section-diagonal-top relative overflow-x-hidden bg-black pb-[max(6.5rem,calc(env(safe-area-inset-bottom,0px)+4rem))] lg:pb-32">
+        <SectionTopDiagonal tone="dark" variant="slashAlt" />
         <div className="absolute inset-0 flex items-center justify-center opacity-5 pointer-events-none">
           <span className="text-[20rem] lg:text-[30rem] font-black">QG</span>
         </div>

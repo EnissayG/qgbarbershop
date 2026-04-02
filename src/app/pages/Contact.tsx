@@ -55,8 +55,8 @@ export function Contact() {
         </div>
       </section>
 
-      <section className="relative overflow-x-hidden bg-white py-32">
-        <SectionTopDiagonal tone="light" variant="slice" />
+      <section className="section-diagonal-top relative overflow-x-hidden bg-white pb-28 lg:pb-32">
+        <SectionTopDiagonal tone="light" variant="slash" />
         <div className="layout-gutter min-w-0">
           <div className="grid min-w-0 grid-cols-1 gap-16 lg:grid-cols-2 lg:gap-20">
             <motion.div

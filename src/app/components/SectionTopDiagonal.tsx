@@ -1,14 +1,15 @@
 /**
- * Bordure diagonale entre sections, ancrée avec bottom-full (évite les traits blancs / sous-pixels).
- * Un seul tracé par variante ; seule la couleur change selon le fond de la section.
+ * Bordure diagonale entre sections (cohérence site).
+ * — Après un fond noir : tone "light" + variant "slash" (triangle blanc).
+ * — Après un fond blanc : tone "dark" + variant "slashAlt" (triangle noir).
+ * Utiliser avec la classe CSS .section-diagonal-top sur la section pour l’espace sous le pli.
  */
 type Tone = "light" | "dark";
-type Variant = "slash" | "slashAlt" | "slice";
+type Variant = "slash" | "slashAlt";
 
 const PATHS: Record<Variant, string> = {
   slash: "M0,100 L100,0 L100,100 Z",
   slashAlt: "M0,0 L100,100 L0,100 Z",
-  slice: "M0,100 L100,24 L100,100 Z",
 };
 
 type Props = {

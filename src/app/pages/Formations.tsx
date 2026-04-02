@@ -40,8 +40,8 @@ export function Formations() {
       </section>
 
       {/* Formation principale - Hybride 1000$ */}
-      <section className="relative bg-white py-24 lg:py-32">
-        <SectionTopDiagonal tone="light" variant="slashAlt" />
+      <section className="section-diagonal-top relative bg-white pb-24 lg:pb-32">
+        <SectionTopDiagonal tone="light" variant="slash" />
         <div className="layout-gutter">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -176,8 +176,8 @@ export function Formations() {
       </section>
 
       {/* Formations à l'annonce */}
-      <section className="relative bg-black pt-24 pb-[max(6.5rem,calc(env(safe-area-inset-bottom,0px)+4rem))] lg:py-32">
-        <SectionTopDiagonal tone="dark" variant="slash" />
+      <section className="section-diagonal-top relative bg-black pb-[max(6.5rem,calc(env(safe-area-inset-bottom,0px)+4rem))] lg:pb-32">
+        <SectionTopDiagonal tone="dark" variant="slashAlt" />
         <div className="layout-gutter">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -301,8 +301,8 @@ export function Formations() {
       </section>
 
       {/* FAQ */}
-      <section className="relative bg-white py-24 lg:py-32">
-        <SectionTopDiagonal tone="light" variant="slice" />
+      <section className="section-diagonal-top relative bg-white pb-24 lg:pb-32">
+        <SectionTopDiagonal tone="light" variant="slash" />
         <div className="layout-gutter-narrow">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -357,7 +357,7 @@ export function Formations() {
       </section>
 
       {/* CTA */}
-      <section className="relative overflow-x-hidden bg-black pt-24 pb-[max(6.5rem,calc(env(safe-area-inset-bottom,0px)+4rem))] lg:py-32">
+      <section className="section-diagonal-top relative overflow-x-hidden bg-black pb-[max(6.5rem,calc(env(safe-area-inset-bottom,0px)+4rem))] lg:pb-32">
         <SectionTopDiagonal tone="dark" variant="slashAlt" />
         <div className="absolute inset-0 opacity-5">
           {[...Array(15)].map((_, i) => (
