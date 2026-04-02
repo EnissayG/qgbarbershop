@@ -126,8 +126,8 @@ export function Team() {
       specialty: "Fades, techniques & vision QG",
       experience: "Co-fondateur du Quartier Général",
       image: shopPhotos.squad.kg,
-      instagramLabel: "@quartiergeneralbarbershop",
-      instagramHref: shopInstagramUrl,
+      instagramLabel: "@kgthebarber_",
+      instagramHref: "https://www.instagram.com/kgthebarber_/",
       vibe: "Co-proprio : vision et exigence au même niveau que la coupe",
     },
     {
@@ -137,8 +137,8 @@ export function Team() {
       specialty: "Coupe, style & identité du shop",
       experience: "Co-fondateur du Quartier Général",
       image: shopPhotos.squad.benz,
-      instagramLabel: "@quartiergeneralbarbershop",
-      instagramHref: shopInstagramUrl,
+      instagramLabel: "@bigbenzcuts",
+      instagramHref: "https://www.instagram.com/bigbenzcuts/",
       vibe: "Co-pilote du QG, même énergie, même exigence",
     },
     {
