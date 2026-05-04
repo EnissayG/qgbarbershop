@@ -28,7 +28,7 @@ export function Services() {
       slug: "coupe-adulte",
       icon: Scissors,
       name: "Coupe adulte",
-      description: "Le cut classique, toujours fresh. Fade, taper, tout ce que tu veux.",
+      description: "La coupe classique, toujours propre. Dégradé, coupe courte, tout ce que tu veux.",
       duration: "45 min",
       price: "40$",
       extras: [
@@ -39,8 +39,8 @@ export function Services() {
     {
       slug: "line-up",
       icon: Scissors,
-      name: "Line up",
-      description: "Rafraîchis tes contours, reste sharp entre deux coupes.",
+      name: "Contours",
+      description: "Rafraîchis tes contours, reste net entre deux coupes.",
       duration: "20 min",
       price: "20$",
     },
@@ -64,7 +64,7 @@ export function Services() {
       slug: "coupe-enfant",
       icon: Scissors,
       name: "Coupe enfant",
-      description: "Pour les p'tits qui veulent être fresh comme papa.",
+      description: "Pour les jeunes qui veulent être soignés comme les grands.",
       duration: "30 min",
       price: "30$",
     },
@@ -73,7 +73,7 @@ export function Services() {
       icon: Sparkles,
       name: "Tresses",
       description:
-        "Tresses, nattes et styles protecteurs, avec notre barber spécialisée (Hauz of Tanz). Durée et tarif selon le style.",
+        "Tresses, nattes et styles protecteurs avec notre spécialiste. Durée et tarif selon le style.",
       duration: "Variable",
       price: "Sur devis",
     },
@@ -103,7 +103,7 @@ export function Services() {
               <span className="text-white/30">prix</span>
             </h1>
             <p className="max-w-xl text-xl leading-relaxed text-white/80 lg:text-2xl">
-              Pas de surprises, que de la qualité. Check nos services et book ton spot
+              Pas de surprises, que de la qualité. Consulte nos services et réserve ta place.
             </p>
           </motion.div>
         </div>
@@ -293,10 +293,13 @@ export function Services() {
               
               <div className="space-y-6">
                 {[
-                  { day: "Lun - Mar", hours: "Fermé", closed: true },
-                  { day: "Mer - Ven", hours: "10h - 20h", closed: false },
-                  { day: "Samedi", hours: "9h - 18h", closed: false },
-                  { day: "Dimanche", hours: "10h - 17h", closed: false },
+                  { day: "Lundi", hours: "11h00 - 19h00", closed: false },
+                  { day: "Mardi", hours: "11h00 - 19h00", closed: false },
+                  { day: "Mercredi", hours: "11h00 - 19h00", closed: false },
+                  { day: "Jeudi", hours: "10h00 - 20h00", closed: false },
+                  { day: "Vendredi", hours: "9h00 - 21h00", closed: false },
+                  { day: "Samedi", hours: "10h00 - 21h00", closed: false },
+                  { day: "Dimanche", hours: "12h00 - 18h00", closed: false },
                 ].map((schedule, index) => (
                   <motion.div
                     key={schedule.day}
@@ -336,18 +339,18 @@ export function Services() {
 
                 <div className="relative z-10 space-y-6">
                   <div className="inline-block px-4 py-2 bg-black text-white">
-                    <span className="uppercase tracking-wider font-bold text-xs">Walk-ins ok</span>
+                    <span className="uppercase tracking-wider font-bold text-xs">Sans rendez-vous possible</span>
                   </div>
 
                   <h3 className="text-4xl lg:text-5xl font-black tracking-tighter uppercase">
-                    Book ton
+                    Réserve ton
                     <br />
-                    spot
+                    rendez-vous
                   </h3>
                   
                   <p className="text-black/60 text-lg leading-relaxed">
-                    Réservation en ligne sur Squire, ou message Instagram au barber de ton choix.
-                    Walk-ins selon disponibilité.
+                    Réservation en ligne sur Squire, ou message Instagram au barbier de ton choix.
+                    Sans rendez-vous selon disponibilité.
                   </p>
 
                   <div className="space-y-3 pt-4">
@@ -365,7 +368,7 @@ export function Services() {
                       rel="noopener noreferrer"
                       className="block w-full py-5 border-4 border-black text-black hover:bg-black hover:text-white transition-all text-center font-black uppercase tracking-wider"
                     >
-                      DM Instagram (barber au choix)
+                      Message Instagram (barbier au choix)
                     </a>
                     <a
                       href={`tel:${shopPhoneTel}`}
@@ -397,11 +400,11 @@ export function Services() {
             transition={{ duration: 0.6 }}
             className="space-y-8"
           >
-            <h3 className="text-3xl lg:text-4xl font-black uppercase text-center">Good to know</h3>
+            <h3 className="text-3xl lg:text-4xl font-black uppercase text-center">À savoir</h3>
             <div className="grid md:grid-cols-2 gap-6 text-center md:text-left">
               <div className="p-6 bg-black/5">
                 <p className="font-bold mb-2">Une équipe qui vit le métier</p>
-                <p className="text-black/60 text-sm">Barbers expérimentés, sur le plancher tous les jours</p>
+                <p className="text-black/60 text-sm">Barbiers expérimentés, sur le plancher tous les jours</p>
               </div>
               <div className="p-6 bg-black/5">
                 <p className="font-bold mb-2">On accepte cash et cartes</p>

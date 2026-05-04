@@ -2,7 +2,6 @@ import { Link } from "react-router";
 import { Scissors, Users, GraduationCap, ArrowRight, Instagram } from "lucide-react";
 import { motion } from "motion/react";
 import { ImageWithFallback } from "../components/figma/ImageWithFallback";
-import { HeroBackgroundCarousel } from "../components/HeroBackgroundCarousel";
 import { SectionTopDiagonal } from "../components/SectionTopDiagonal";
 import {
   shopBookingUrl,
@@ -13,101 +12,124 @@ import {
 import { shopInstagramUrl, shopPhotos } from "../config/shopPhotos";
 
 export function Home() {
-  const carouselImages = shopPhotos.carousel;
-  const carouselAlts = carouselImages.map(
-    (_, i) => `Quartier Général, salon ${i + 1}`
-  );
-
   return (
     <div className="pt-0">
-      {/* Hero plein écran (safe areas + dvh/lvh, voir index.css) */}
-      <section className="hero-fullscreen-section relative isolate flex w-full items-center max-lg:items-start">
-        <div className="hero-fullscreen-media pointer-events-none z-0 overflow-hidden">
-          <HeroBackgroundCarousel images={carouselImages} alts={carouselAlts} />
-          <div className="pointer-events-none absolute left-0 top-0 z-20 h-full w-32 -translate-x-8 -skew-x-12 bg-gradient-to-r from-white/10 to-transparent" />
-          <div className="pointer-events-none absolute left-20 top-0 z-20 h-full w-16 -skew-x-12 bg-gradient-to-r from-white/5 to-transparent" />
+      {/* Hero — Orienté conversion, photo de fond, responsive */}
+      <section className="hero-fullscreen-section relative isolate flex w-full items-center overflow-hidden bg-black">
+        {/* Photo de fond + voiles */}
+        <div className="absolute inset-0 z-0 overflow-hidden">
+          <ImageWithFallback
+            src={shopPhotos.heroBanner}
+            alt=""
+            className="h-full w-full object-cover object-center"
+          />
+          <div className="absolute inset-0 bg-black/70" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/10 to-black/55" />
         </div>
+        <div className="pointer-events-none absolute inset-x-0 top-0 z-10 h-px bg-white/25" />
 
-        <div className="layout-gutter relative z-30 w-full pb-[max(4rem,calc(env(safe-area-inset-bottom,0px)+2.5rem))] pt-[max(5.5rem,calc(env(safe-area-inset-top,0px)+3.35rem))] sm:pb-[max(5rem,calc(env(safe-area-inset-bottom,0px)+3rem))] sm:pt-24 lg:pb-24 lg:pt-36">
+        <div className="layout-gutter relative z-20 w-full pb-[max(4rem,calc(env(safe-area-inset-bottom,0px)+2.5rem))] pt-[max(5.75rem,calc(env(safe-area-inset-top,0px)+3.75rem))] sm:pb-[max(5rem,calc(env(safe-area-inset-bottom,0px)+3rem))] sm:pt-24 lg:pb-24 lg:pt-32">
           <motion.div
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="max-w-3xl space-y-8 sm:space-y-10"
+            className="grid items-center gap-10 lg:grid-cols-[1fr_380px] xl:grid-cols-[1fr_420px]"
           >
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="mb-0"
-            >
-              <img
+            {/* Colonne gauche : identité + CTA mobile */}
+            <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
+              <motion.img
+                initial={{ opacity: 0, scale: 0.88 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.6, delay: 0.15 }}
                 src={shopPhotos.logo}
-                alt="QG Logo"
-                className="h-20 w-auto drop-shadow-[0_4px_24px_rgba(0,0,0,0.85)] lg:h-28"
+                alt="Quartier Général Barbershop"
+                className="mb-6 h-16 w-auto sm:h-20 lg:h-24"
               />
-            </motion.div>
 
-            <h1 className="text-6xl font-black uppercase leading-[0.95] tracking-tighter text-white [text-shadow:0_2px_4px_rgba(0,0,0,0.9),0_8px_48px_rgba(0,0,0,0.75)] sm:text-7xl lg:mb-0 lg:text-9xl">
-              Quartier
-              <br />
-              <span className="text-white/40 [text-shadow:0_2px_4px_rgba(0,0,0,0.85),0_6px_40px_rgba(0,0,0,0.7)]">
-                Général
+              <span className="mb-5 inline-block bg-white px-3 py-1 text-xs font-black uppercase tracking-[0.2em] text-black">
+                Montréal — Sherbrooke Est
               </span>
-            </h1>
 
-            <div className="space-y-4">
-              <p className="text-2xl font-black italic text-white [text-shadow:0_2px_32px_rgba(0,0,0,0.9),0_1px_4px_rgba(0,0,0,0.95)] sm:text-3xl lg:text-4xl">
-                "Viens juste faire ta tiass"
+              <h1 className="mb-6 font-black uppercase leading-[0.88] tracking-tight text-white text-[clamp(2.75rem,9vw,5.75rem)]">
+                Quartier Général
+                <br />
+                <span className="text-white/40">Barbershop</span>
+              </h1>
+
+              <p className="mb-8 max-w-md text-base leading-relaxed text-white/75 sm:text-lg">
+                Coupes précises, service soigné, ambiance professionnelle. Réserve en ligne et
+                choisis ton barbier.
               </p>
-              <p className="text-lg font-light text-white/90 [text-shadow:0_2px_24px_rgba(0,0,0,0.88),0_1px_3px_rgba(0,0,0,0.9)] sm:text-xl lg:text-2xl">
-                Barbier moderne, ambiance soignée, Montréal
-              </p>
+
+              {/* CTA mobile — caché sur desktop */}
+              <div className="w-full space-y-3 lg:hidden">
+                <a
+                  href={shopBookingUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group inline-flex w-full items-center justify-center gap-3 bg-white px-8 py-5 font-black uppercase tracking-wider text-black transition-all hover:bg-white/95 active:scale-[0.99] sm:text-lg"
+                >
+                  <span>Réserver maintenant</span>
+                  <ArrowRight size={20} className="transition-transform group-hover:translate-x-1" />
+                </a>
+                <a
+                  href={`tel:${shopPhoneTel}`}
+                  className="inline-flex w-full items-center justify-center border-2 border-white/35 px-8 py-4 font-bold uppercase tracking-wider text-white/80 transition-all hover:border-white hover:text-white"
+                >
+                  {shopPhoneDisplay}
+                </a>
+              </div>
+
+              {/* Preuve sociale */}
+              <div className="mt-8 flex flex-wrap items-center justify-center gap-3 lg:mt-0 lg:justify-start">
+                <a
+                  href={shopGoogleUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 border border-white/20 bg-white/10 px-4 py-2.5 backdrop-blur-sm transition-colors hover:bg-white/20"
+                >
+                  <span className="tracking-wide text-yellow-400">★★★★★</span>
+                  <span className="text-sm font-black text-white">470+ avis Google</span>
+                </a>
+              </div>
             </div>
 
-            <a
-              href={shopGoogleUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block border-b border-white/40 text-sm font-bold uppercase tracking-widest text-white/80 [text-shadow:0_2px_16px_rgba(0,0,0,0.9)] hover:text-white"
-            >
-              5,0 ★ sur Google · 470+ avis
-            </a>
+            {/* Colonne droite : carte réservation — desktop uniquement */}
+            <div className="hidden lg:flex lg:flex-col border-4 border-white bg-black/85 p-8 shadow-[12px_12px_0_0_rgba(255,255,255,0.12)] xl:p-10">
+              <p className="mb-2 text-xs font-black uppercase tracking-[0.2em] text-white/50">
+                Réservation prioritaire
+              </p>
+              <h2 className="mb-3 text-3xl font-black uppercase tracking-tight text-white xl:text-4xl">
+                Réserver maintenant
+              </h2>
+              <p className="mb-7 text-sm leading-relaxed text-white/60">
+                Disponibilités en temps réel. Choisis ton barbier, ton service, ton créneau.
+              </p>
 
-            <div className="flex flex-col gap-5 sm:flex-row sm:gap-4">
-              <a
-                href={shopBookingUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group inline-flex items-center justify-center gap-3 bg-white px-8 py-5 text-center font-black uppercase tracking-wider text-black transition-all hover:bg-white/90 sm:px-10"
-              >
-                <span>Réserver sur Squire</span>
-                <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
-              </a>
-              <Link
-                to="/services"
-                className="inline-flex items-center justify-center border-2 border-white px-8 py-5 text-center font-black uppercase tracking-wider text-white [text-shadow:0_2px_16px_rgba(0,0,0,0.85)] transition-all hover:bg-white hover:text-black hover:[text-shadow:none] sm:px-10"
-              >
-                <span>Check les prix</span>
-              </Link>
+              <div className="space-y-3">
+                <a
+                  href={shopBookingUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group inline-flex w-full items-center justify-center gap-3 bg-white px-6 py-5 font-black uppercase tracking-wider text-black transition-all hover:bg-white/93"
+                >
+                  <span>Réserver maintenant</span>
+                  <ArrowRight size={20} className="transition-transform group-hover:translate-x-1" />
+                </a>
+                <a
+                  href={`tel:${shopPhoneTel}`}
+                  className="inline-flex w-full items-center justify-center border-2 border-white px-6 py-4 text-sm font-bold uppercase tracking-wider text-white transition-all hover:bg-white hover:text-black"
+                >
+                  Appeler : {shopPhoneDisplay}
+                </a>
+              </div>
+
+              <p className="mt-5 text-xs font-bold uppercase tracking-wider text-white/40">
+                Squire · Réservation sécurisée · Sans frais
+              </p>
             </div>
           </motion.div>
         </div>
-
-        {/* Scroll indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1, duration: 1 }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/40 text-sm uppercase tracking-widest z-30 hidden md:block"
-        >
-          <motion.div
-            animate={{ y: [0, 10, 0] }}
-            transition={{ repeat: Infinity, duration: 2 }}
-          >
-            Scroll
-          </motion.div>
-        </motion.div>
       </section>
 
       {/* About Section - Plus de détails */}
@@ -128,28 +150,34 @@ export function Home() {
                 Qui sommes-nous
               </span>
               <h2 className="text-5xl lg:text-7xl font-black tracking-tighter uppercase leading-tight">
-                Plus qu'un
+                Un vrai
                 <br />
-                <span className="text-black/20">Barbershop</span>
+                <span className="text-black/20">barbershop</span>
               </h2>
               <div className="space-y-5 text-lg leading-relaxed text-black/70 sm:space-y-4">
                 <p>
-                  Le Quartier Général, c&apos;est un barbershop moderne au look noir et blanc épuré :
-                  précision, confort et service professionnel du début à la fin.
+                  Le Quartier Général Barbershop est un salon où la priorité reste la même depuis le
+                  jour un : offrir des coupes de qualité, propres, précises et adaptées à chaque client.
+                  Le résultat final est au centre de tout ce qu&apos;on fait. Chaque détail compte, et rien
+                  n&apos;est laissé au hasard.
                 </p>
                 <p>
-                  Coupes, barbe, line-ups, et tresses sur rendez-vous avec des barbers qui maîtrisent
-                  leur craft. On propose aussi des formations encadrées par notre équipe de pros.
+                  Mais ce qui fait vraiment la différence, c&apos;est l&apos;expérience humaine. On a construit
+                  un environnement où tu peux te sentir à l&apos;aise dès que tu rentres : prendre ton temps,
+                  discuter, relaxer, et connecter avec ton barbier.
                 </p>
                 <p>
-                  Chaque coupe est unique, chaque client devient famille. Bienvenue dans notre quartier général.
+                  Beaucoup de nos clients ne viennent pas seulement pour une coupe, mais pour le moment
+                  qu&apos;ils passent ici : les conversations, l&apos;ambiance, le respect, et l&apos;accueil.
+                  Notre équipe prend son métier au sérieux, dans la qualité du travail comme dans
+                  l&apos;approche humaine.
                 </p>
               </div>
               <Link
                 to="/equipe"
                 className="group inline-flex items-center gap-2 pt-2 font-bold text-black transition-all hover:gap-4 sm:pt-4"
               >
-                <span className="uppercase tracking-widest text-sm">Rencontre l&apos;équipe</span>
+                <span className="uppercase tracking-widest text-sm">Notre équipe</span>
                 <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
               </Link>
             </motion.div>
@@ -210,7 +238,7 @@ export function Home() {
               {
                 icon: Users,
                 title: "Équipe d'élite",
-                desc: "Des barbers passionnés, chacun avec son style. Tresses et spécialités selon le membre de l\u2019équipe.",
+                desc: "Des barbiers passionnés, chacun avec son style. Tresses et spécialités selon le membre de l\u2019équipe.",
               },
               {
                 icon: GraduationCap,
@@ -331,7 +359,7 @@ export function Home() {
             <h2 className="text-5xl lg:text-8xl font-black tracking-tighter uppercase leading-tight text-white">
               Prêt pour ton
               <br />
-              glow-up?
+              changement de style?
             </h2>
             
             <p className="text-xl lg:text-2xl text-white/60 max-w-2xl mx-auto">

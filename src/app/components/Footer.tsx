@@ -3,9 +3,8 @@ import { Link } from "react-router";
 import {
   shopAddressLine1,
   shopAddressLine2,
+  shopEmail,
   shopGoogleUrl,
-  shopPhoneAltDisplay,
-  shopPhoneAltTel,
   shopPhoneDisplay,
   shopPhoneTel,
 } from "../config/shopInfo";
@@ -24,7 +23,7 @@ export function Footer() {
               className="mb-2 h-11 w-auto sm:mb-3 sm:h-14 lg:mb-4 lg:h-16"
             />
             <p className="text-xs leading-snug text-white/60 sm:text-sm lg:leading-normal">
-              Barbier moderne à Montréal, look épuré, service pro, résultats nets.
+              Barbier moderne à Montréal, style épuré, service professionnel, résultats nets.
             </p>
             <p className="mt-2 text-xs font-black italic text-white/80 sm:mt-3 sm:text-sm lg:mt-4">
               &quot;Viens juste faire ta tiass&quot;
@@ -58,7 +57,7 @@ export function Footer() {
                   to="/equipe"
                   className="text-xs text-white/60 transition-colors hover:text-white sm:text-sm"
                 >
-                  La Squad
+                  Équipe
                 </Link>
               </li>
               <li>
@@ -66,7 +65,7 @@ export function Footer() {
                   to="/formations"
                   className="text-xs text-white/60 transition-colors hover:text-white sm:text-sm"
                 >
-                  Academy
+                  Formations
                 </Link>
               </li>
             </ul>
@@ -85,14 +84,9 @@ export function Footer() {
                   {shopPhoneDisplay}
                 </a>
               </li>
-              <li>
-                <a href={`tel:${shopPhoneAltTel}`} className="hover:text-white transition-colors">
-                  {shopPhoneAltDisplay}
-                </a>
-              </li>
               <li className="break-all">
-                <a href="mailto:info@qgbarbershop.com" className="hover:text-white transition-colors">
-                  info@qgbarbershop.com
+                <a href={`mailto:${shopEmail}`} className="hover:text-white transition-colors">
+                  {shopEmail}
                 </a>
               </li>
             </ul>
@@ -130,7 +124,7 @@ export function Footer() {
         </div>
 
         <div className="border-t border-white/10 pt-4 text-center text-xs text-white/40 sm:pt-6 sm:text-sm">
-          <p>&copy; {new Date().getFullYear()} QG Barbershop. On reste fresh.</p>
+          <p>&copy; {new Date().getFullYear()} QG Barbershop. On reste soignés.</p>
         </div>
       </div>
     </footer>

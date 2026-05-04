@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { Instagram, Award, Scissors, Star, ChevronLeft, ChevronRight } from "lucide-react";
 import { ImageWithFallback } from "../components/figma/ImageWithFallback";
 import { SectionTopDiagonal } from "../components/SectionTopDiagonal";
+import { shopEmail } from "../config/shopInfo";
 import { shopInstagramUrl, shopPhotos } from "../config/shopPhotos";
 
 type SquadMember = {
@@ -122,79 +123,101 @@ export function Team() {
     {
       name: "KG",
       nickname: "KG",
-      role: "Co-proprio & barber",
-      specialty: "Fades, techniques & vision QG",
-      experience: "Co-fondateur du Quartier Général",
+      role: "Copropriétaire, formateur et barbier",
+      specialty: "Dégradés, design et barbe",
+      experience: "Barbier expérimenté",
       image: shopPhotos.squad.kg,
       instagramLabel: "@kgthebarber_",
       instagramHref: "https://www.instagram.com/kgthebarber_/",
-      vibe: "Co-proprio : vision et exigence au même niveau que la coupe",
+      vibe: "Précision, rigueur et vision du métier",
     },
     {
       name: "Benz",
       nickname: "Benz",
-      role: "Co-proprio & barber",
-      specialty: "Coupe, style & identité du shop",
-      experience: "Co-fondateur du Quartier Général",
+      role: "Copropriétaire, formateur et barbier",
+      specialty: "Cheveux afro et contours",
+      experience: "Barbier expérimenté",
       image: shopPhotos.squad.benz,
       instagramLabel: "@bigbenzcuts",
       instagramHref: "https://www.instagram.com/bigbenzcuts/",
-      vibe: "Co-pilote du QG, même énergie, même exigence",
+      vibe: "Coupe nette et finition maîtrisée",
+    },
+    {
+      name: "Mendy",
+      nickname: "Mendy",
+      role: "Barbier",
+      specialty: "Barbier complet, tous types de cheveux",
+      experience: "Professionnel et décontracté",
+      image: "/assets/shop/style-portrait-profile.png",
+      instagramLabel: "@mendy.the.barber",
+      instagramHref: "https://www.instagram.com/mendy.the.barber/",
+      vibe: "Calme, propre et constant sur chaque service",
+    },
+    {
+      name: "Anis",
+      nickname: "Anis",
+      role: "Barbier",
+      specialty: "Spécialiste des dégradés",
+      experience: "Approche précise et soignée",
+      image: "/assets/shop/style-curly-taper.png",
+      instagramLabel: "@nisocuts",
+      instagramHref: "https://www.instagram.com/nisocuts/",
+      vibe: "Détail et constance au rendez-vous",
     },
     {
       name: "Lennox",
       nickname: "Lennox",
-      role: "Barber",
-      specialty: "Coupe précise & finitions",
-      experience: "La squad QG",
+      role: "Barbier",
+      specialty: "Spécialiste du dégradé progressif, résultats nets",
+      experience: "Toujours net, toujours régulier",
       image: shopPhotos.squad.lennox,
       instagramLabel: "@lennoxcutzz",
       instagramHref: "https://www.instagram.com/lennoxcutzz/",
-      vibe: "Calme sur les lignes, lourd sur le résultat",
+      vibe: "Toujours là pour un bon moment et un résultat solide",
     },
     {
-      name: "Hauz of Tanz",
-      nickname: "Tanz",
-      role: "Barber, tresses & nattes",
-      specialty: "Tresses, braids et styles protecteurs",
-      experience: "Service tresses sur rendez-vous",
+      name: "Tanya",
+      nickname: "Tanya",
+      role: "Tresseuse et locticienne",
+      specialty: "Tresses, locs et styles protecteurs",
+      experience: "Locticienne expérimentée",
       image: shopPhotos.squad.hauzoftanz,
       instagramLabel: "@hauzoftanz",
       instagramHref: "https://www.instagram.com/hauzoftanz/",
-      vibe: "Spécialiste tresses : précision, tenue et finitions nettes",
+      vibe: "Finitions propres, tenue durable, style maîtrisé",
     },
     {
-      name: "Shuya",
-      nickname: "Shuya",
-      role: "Barber",
-      specialty: "Coupe & créativité",
-      experience: "La squad QG",
-      image: shopPhotos.squad.shuyacutz,
-      instagramLabel: "@shuyacutz",
-      instagramHref: "https://www.instagram.com/shuyacutz/",
-      vibe: "Style propre, attitude QG",
+      name: "Capie",
+      nickname: "Capie",
+      role: "Tresseuse et locticienne",
+      specialty: "Tresses professionnelles",
+      experience: "Approche minutieuse",
+      image: "/assets/shop/style-cornrows-profile.png",
+      instagramLabel: "@capie_place",
+      instagramHref: "https://www.instagram.com/capie_place/",
+      vibe: "Créative, appliquée et constante",
     },
     {
       name: "Magic Kev",
       nickname: "Kev",
-      role: "Barber",
-      specialty: "Fades & line-ups",
-      experience: "La squad QG",
+      role: "Barbier",
+      specialty: "Spécialiste en dégradé",
+      experience: "Barbier expérimenté et professionnel",
       image: shopPhotos.squad.magickevcuts,
       instagramLabel: "@magickevcuts",
       instagramHref: "https://www.instagram.com/magickevcuts/",
-      vibe: "La magie opère sur chaque session",
+      vibe: "Constance et précision à chaque coupe",
     },
     {
-      name: "Don Cruz",
-      nickname: "Don Cruz",
-      role: "Barber",
-      specialty: "Coupe moderne & texture",
-      experience: "La squad QG",
+      name: "Don Cruzi",
+      nickname: "Don Cruzi",
+      role: "Barbier",
+      specialty: "Coupe moderne, texture et ciseaux",
+      experience: "Style actuel et finitions propres",
       image: shopPhotos.squad.doncruzcuts,
       instagramLabel: "@doncruzcuts",
       instagramHref: "https://www.instagram.com/doncruzcuts/",
-      vibe: "Couleur, texture, personnalité",
+      vibe: "Coupe moderne avec personnalité",
     },
   ];
 
@@ -221,15 +244,16 @@ export function Team() {
             className="max-w-3xl"
           >
             <span className="text-sm uppercase tracking-widest text-white/60 mb-6 block font-bold">
-              Meet the squad
+              Notre équipe
             </span>
             <h1 className="text-7xl lg:text-9xl font-black tracking-tighter leading-none mb-8 text-white uppercase">
-              La
+              Notre
               <br />
-              <span className="text-white/30">Squad</span>
+              <span className="text-white/30">alignement</span>
             </h1>
             <p className="text-xl text-white/80 leading-relaxed max-w-2xl">
-              La vraie équipe du Quartier Général. KG & Benz au commande, suis chaque barber sur Insta.
+              Notre équipe est composée de barbiers aux styles et spécialités variés. Chaque membre
+              apporte sa touche, pour que tu trouves la personne qui te correspond le mieux.
             </p>
             <a
               href={shopInstagramUrl}
@@ -244,7 +268,7 @@ export function Team() {
         </div>
       </section>
 
-      {/* Squad : carrousel + rail (mobile / tablette) · grille large écran */}
+      {/* Équipe : carrousel + rail (mobile / tablette) · grille large écran */}
       <section className="section-diagonal-top relative bg-white pb-28 lg:pb-32">
         <SectionTopDiagonal tone="light" variant="slash" />
         <div className="layout-gutter">
@@ -359,7 +383,7 @@ export function Team() {
             className="text-center mb-20"
           >
             <h2 className="text-6xl lg:text-7xl font-black tracking-tighter uppercase text-white mb-6">
-              Notre vibe
+              Notre identité
             </h2>
             <p className="text-xl text-white/60">Ce qui nous définit au QG</p>
           </motion.div>
@@ -409,7 +433,7 @@ export function Team() {
         </div>
       </section>
 
-      {/* Join Team CTA */}
+      {/* Rejoindre l'équipe */}
       <section className="section-diagonal-top relative overflow-x-hidden bg-white pb-28 lg:pb-32">
         <SectionTopDiagonal tone="light" variant="slash" />
         <div className="absolute inset-0 opacity-5">
@@ -432,25 +456,27 @@ export function Team() {
           >
             <div className="space-y-4">
               <span className="inline-block px-6 py-2 bg-black text-white uppercase tracking-wider font-bold text-sm">
-                We're hiring
+                Recrutement
               </span>
               <h2 className="text-6xl font-black tracking-tighter uppercase">
                 Rejoins
                 <br />
-                la squad
+                notre équipe
               </h2>
             </div>
 
             <p className="text-xl text-black/70 leading-relaxed max-w-2xl mx-auto">
-              T'es un barber qui a la passion et le skill? Tu partages notre vision? Envoie-nous un message sur Instagram.
+              Si tu es un barbier avec de l'ambition et du talent, et que l'ambiance du salon te parle,
+              on veut te connaître. On cherche des personnes qui veulent se dépasser, évoluer sur le
+              plan personnel et professionnel, et qui prennent leur métier au sérieux.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8">
               <a
-                href="mailto:careers@qgbarbershop.com"
+                href={`mailto:${shopEmail}`}
                 className="px-12 py-6 bg-black text-white hover:bg-black/90 transition-all font-black uppercase tracking-wider"
               >
-                Envoie ton portfolio
+                Envoyer un message
               </a>
               <a
                 href={shopInstagramUrl}
@@ -459,7 +485,7 @@ export function Team() {
                 className="px-12 py-6 border-4 border-black text-black hover:bg-black hover:text-white transition-all font-black uppercase tracking-wider inline-flex items-center justify-center gap-2"
               >
                 <Instagram size={20} />
-                <span>DM @quartiergeneralbarbershop</span>
+                <span>Message @quartiergeneralbarbershop</span>
               </a>
             </div>
           </motion.div>

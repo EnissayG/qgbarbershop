@@ -40,7 +40,7 @@ export function Contact() {
           >
             <div className="inline-flex items-center gap-3 px-6 py-3 bg-white/10 text-white mb-8">
               <Zap size={20} className="text-yellow-400" />
-              <span className="uppercase tracking-widest font-bold text-sm">Walk-ins ok</span>
+              <span className="uppercase tracking-widest font-bold text-sm">Sans rendez-vous possible</span>
             </div>
 
             <h1 className="text-7xl lg:text-9xl font-black tracking-tighter leading-none mb-8 text-white uppercase">
@@ -49,7 +49,7 @@ export function Contact() {
               <span className="text-white/30">au QG</span>
             </h1>
             <p className="text-xl text-white/80 leading-relaxed max-w-2xl">
-              Réserve sur Squire ou écris en DM le barber de ton choix. Walk-ins selon place.
+              Réserve sur Squire ou écris sur Instagram au barbier de ton choix. Sans rendez-vous selon place.
             </p>
           </motion.div>
         </div>
@@ -147,9 +147,13 @@ export function Contact() {
                     <div>
                       <h3 className="mb-2 text-xs font-bold uppercase tracking-widest text-black/50">Heures</h3>
                       <div className="space-y-1 text-black/80">
-                        <p>Mer-Ven: 10h - 20h</p>
-                        <p>Sam: 9h - 18h</p>
-                        <p>Dim: 10h - 17h</p>
+                        <p>Lundi : 11h00 - 19h00</p>
+                        <p>Mardi : 11h00 - 19h00</p>
+                        <p>Mercredi : 11h00 - 19h00</p>
+                        <p>Jeudi : 10h00 - 20h00</p>
+                        <p>Vendredi : 9h00 - 21h00</p>
+                        <p>Samedi : 10h00 - 21h00</p>
+                        <p>Dimanche : 12h00 - 18h00</p>
                       </div>
                     </div>
                   </motion.div>
@@ -197,7 +201,7 @@ export function Contact() {
                   className="flex w-full items-center justify-center gap-3 border-4 border-black py-5 font-black uppercase tracking-wider text-black transition-all hover:bg-black hover:text-white"
                 >
                   <Instagram size={20} />
-                  <span>DM Instagram (barber au choix)</span>
+                  <span>Message Instagram (barbier au choix)</span>
                 </a>
                 <a
                   href={`tel:${shopPhoneTel}`}
@@ -252,7 +256,7 @@ export function Contact() {
           >
             <h3 className="text-4xl font-black uppercase tracking-tight lg:text-5xl">On se voit bientôt? 👊</h3>
             <p className="mt-6 text-xl text-black/60">
-              Passe au QG et découvre pourquoi on est le meilleur spot de Montréal.
+              Passe au QG et découvre pourquoi on est une référence à Montréal.
             </p>
           </motion.div>
         </div>

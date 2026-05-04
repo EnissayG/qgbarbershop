@@ -2,7 +2,7 @@ import { motion } from "motion/react";
 import { GraduationCap, Users, CheckCircle2, Calendar, MapPin, Scissors } from "lucide-react";
 import { ImageWithFallback } from "../components/figma/ImageWithFallback";
 import { SectionTopDiagonal } from "../components/SectionTopDiagonal";
-import { shopBookingUrl } from "../config/shopInfo";
+import { shopBookingUrl, shopEmail } from "../config/shopInfo";
 import { shopInstagramUrl, shopPhotos } from "../config/shopPhotos";
 
 export function Formations() {
@@ -23,7 +23,7 @@ export function Formations() {
           >
             <div className="inline-flex items-center gap-3 px-6 py-3 bg-white/10 text-white mb-8">
               <GraduationCap size={20} />
-              <span className="uppercase tracking-widest font-bold text-sm">QG Academy</span>
+              <span className="uppercase tracking-widest font-bold text-sm">QG Formations</span>
             </div>
 
             <h1 className="text-6xl lg:text-9xl font-black tracking-tighter leading-none mb-8 text-white uppercase">
@@ -32,7 +32,7 @@ export function Formations() {
               <span className="text-white/30">Le métier</span>
             </h1>
             <p className="text-xl lg:text-2xl text-white/80 leading-relaxed max-w-2xl">
-              On forme la prochaine génération de barbers d'élite. 
+              On forme la prochaine génération de barbiers d'élite. 
               Si t'as la passion, on t'apprend le reste
             </p>
           </motion.div>
@@ -51,12 +51,12 @@ export function Formations() {
             className="text-center mb-16"
           >
             <div className="inline-block px-6 py-2 bg-black text-white mb-6">
-              <span className="uppercase tracking-wider font-bold text-sm">Programme QG Academy</span>
+              <span className="uppercase tracking-wider font-bold text-sm">Programme QG Formations</span>
             </div>
             <h2 className="text-5xl lg:text-7xl font-black tracking-tighter uppercase mb-4">
               Formation
               <br />
-              <span className="text-black/30">Barber</span>
+              <span className="text-black/30">Barbier</span>
             </h2>
             <p className="text-xl text-black/60">
               Techniques de coupe, marketing et branding
@@ -93,7 +93,7 @@ export function Formations() {
                 <div>
                   <h3 className="text-3xl font-black uppercase mb-4">Programme Hybride</h3>
                   <p className="text-lg text-black/70 leading-relaxed mb-6">
-                    Des sessions animées par les barbers du QG, techniques réelles, en conditions de salon, avec
+                    Des sessions animées par les barbiers du QG, techniques réelles, en conditions de salon, avec
                     la même exigence qu&apos;au comptoir.
                   </p>
 
@@ -139,7 +139,7 @@ export function Formations() {
                   <ul className="space-y-3">
                     {[
                       "Techniques de coupe professionnelles",
-                      "Fades, tapers et designs",
+                      "Dégradés, coupes courtes et motifs",
                       "Taille et entretien de barbe",
                       "Marketing et branding personnel",
                       "Gestion de clientèle",
@@ -160,10 +160,10 @@ export function Formations() {
                     rel="noopener noreferrer"
                     className="flex-1 py-5 bg-black text-white hover:bg-black/90 transition-all text-center font-black uppercase tracking-wider"
                   >
-                    DM pour infos
+                    Message pour infos
                   </a>
                   <a
-                    href="mailto:academy@qgbarbershop.com"
+                    href={`mailto:${shopEmail}`}
                     className="flex-1 py-5 border-4 border-black text-black hover:bg-black hover:text-white transition-all text-center font-black uppercase tracking-wider"
                   >
                     Email nous
@@ -208,21 +208,21 @@ export function Formations() {
                 <span className="uppercase tracking-wider font-bold text-xs">À l'annonce</span>
               </div>
 
-              <h3 className="text-3xl font-black uppercase">Masterclass & Workshops</h3>
+              <h3 className="text-3xl font-black uppercase">Classes avancées et ateliers</h3>
               
               <p className="text-black/70 leading-relaxed">
-                On organise régulièrement des masterclass et workshops sur des techniques spécifiques. 
+                On organise régulièrement des classes avancées et des ateliers sur des techniques spécifiques. 
                 Suis-nous sur Instagram pour ne rien manquer.
               </p>
 
               <ul className="space-y-3 text-black/60">
                 <li className="flex items-start gap-3">
                   <CheckCircle2 size={20} className="flex-shrink-0 mt-0.5" />
-                  <span>Techniques avancées de fade</span>
+                  <span>Techniques avancées de dégradé</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle2 size={20} className="flex-shrink-0 mt-0.5" />
-                  <span>Designs créatifs et motifs</span>
+                  <span>Motifs et créations personnalisées</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle2 size={20} className="flex-shrink-0 mt-0.5" />
@@ -230,7 +230,7 @@ export function Formations() {
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle2 size={20} className="flex-shrink-0 mt-0.5" />
-                  <span>Content creation pour barbers</span>
+                  <span>Création de contenu pour barbiers</span>
                 </li>
               </ul>
 
@@ -325,19 +325,19 @@ export function Formations() {
               },
               {
                 q: "Je dois apporter mes outils?",
-                a: "On fournit tout pendant la formation. Tu recevras une liste pour ton kit personnel après.",
+                a: "Nous ne fournissons pas les outils de base. Tu peux apporter tes propres outils ou acheter un ensemble complet avec la formation.",
               },
               {
                 q: "Y'a des plans de paiement?",
-                a: "Oui, on offre des options flexibles. DM nous pour en discuter.",
+                a: "Oui, on offre des options flexibles. Écris-nous sur Instagram pour en discuter.",
               },
               {
                 q: "Qui anime les formations ?",
-                a: "L'équipe du QG : les mêmes barbers qu'au salon, pour un coaching concret et un suivi du début à la fin.",
+                a: "KG et Benz animent les formations, avec l'appui de l'équipe du QG selon les modules.",
               },
               {
                 q: "Comment je m'inscris?",
-                a: "Envoie-nous un DM sur Instagram ou un email. On te donnera tous les détails.",
+                a: "Écris-nous sur Instagram ou par courriel. On te donnera tous les détails.",
               },
             ].map((faq, index) => (
               <motion.div
@@ -378,13 +378,13 @@ export function Formations() {
             className="text-center space-y-8"
           >
             <h2 className="text-5xl lg:text-8xl font-black tracking-tighter uppercase text-white leading-tight">
-              Ready to
+              Prêt à
               <br />
-              learn?
+              apprendre?
             </h2>
             
             <p className="text-xl lg:text-2xl text-white/70 max-w-2xl mx-auto">
-              Les inscriptions sont ouvertes. DM nous pour réserver ta place
+              Les inscriptions sont ouvertes. Écris-nous pour réserver ta place.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8 flex-wrap">
@@ -394,7 +394,7 @@ export function Formations() {
                 rel="noopener noreferrer"
                 className="px-10 lg:px-12 py-5 lg:py-6 bg-white text-black hover:bg-white/90 transition-all font-black uppercase tracking-wider"
               >
-                DM Instagram
+                Message Instagram
               </a>
               <a
                 href={shopBookingUrl}
@@ -405,10 +405,10 @@ export function Formations() {
                 Réserver une coupe (Squire)
               </a>
               <a
-                href="mailto:academy@qgbarbershop.com"
+                href={`mailto:${shopEmail}`}
                 className="px-10 lg:px-12 py-5 lg:py-6 border-4 border-white text-white hover:bg-white hover:text-black transition-all font-black uppercase tracking-wider text-center"
               >
-                Email Academy
+                Envoyer un courriel
               </a>
             </div>
           </motion.div>

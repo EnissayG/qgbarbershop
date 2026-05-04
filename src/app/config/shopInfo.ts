@@ -16,6 +16,4 @@ export const shopMapEmbedUrl = `https://maps.google.com/maps?q=${encodeURICompon
 export const shopPhoneTel = "+15147138684";
 export const shopPhoneDisplay = "(514) 713-8684";
 
-/** Affiché en complément si besoin (enseigne) */
-export const shopPhoneAltTel = "+14384541412";
-export const shopPhoneAltDisplay = "(438) 454-1412";
+export const shopEmail = "barbierquartiergeneral@gmail.com";
