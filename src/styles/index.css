@@ -31,14 +31,14 @@ body {
   max-width: 100%;
   min-height: 100%;
   min-height: -webkit-fill-available;
-  background-color: #fff;
+  /* Même teinte que le hero : évite bande blanche sous la barre d’état / overscroll iOS */
+  background-color: #000;
 }
 
 #root {
-  min-height: 100%;
-  min-height: 100dvh;
-  min-height: -webkit-fill-available;
-  background-color: #fff;
+  /* Hauteur = contenu uniquement : un min-height 100dvh ici créait une zone vide en bas sur mobile */
+  min-height: 0;
+  background-color: #000;
 }
 
 .layout-gutter {

@@ -8,7 +8,7 @@ export const shopInstagramUrl = "https://www.instagram.com/quartiergeneralbarber
 
 export const shopPhotos = {
   logo: `${b}/qg-logo.png`,
-  /** Bannière branding (hors carousel, usage marketing / print) */
+  /** Grande image d'accueil (hors carrousel, usage marketing / print) */
   heroBanner: `${b}/hero-banner.png`,
   /** Carousel accueil, série actuelle du salon */
   carousel: [

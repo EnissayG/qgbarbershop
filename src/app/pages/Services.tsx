@@ -32,8 +32,8 @@ export function Services() {
       duration: "45 min",
       price: "40$",
       extras: [
-        { name: "Extra ciseaux", price: "5$" },
-        { name: "Extra lavage", price: "25$" },
+        { name: "Supplément ciseaux", price: "5$" },
+        { name: "Supplément lavage", price: "25$" },
       ],
     },
     {
@@ -48,7 +48,7 @@ export function Services() {
       slug: "barbe",
       icon: Scissors,
       name: "Barbe",
-      description: "Taille, contour, style. Ta barbe jamais été aussi clean.",
+      description: "Taille, contour, style. Ta barbe n'a jamais été aussi impeccable.",
       duration: "30 min",
       price: "20$",
     },
@@ -56,7 +56,7 @@ export function Services() {
       slug: "shampooing",
       icon: Sparkles,
       name: "Shampooing",
-      description: "Lavage premium avec produits de qualité.",
+      description: "Lavage soigné avec produits de qualité.",
       duration: "15 min",
       price: "30$",
     },
@@ -124,10 +124,10 @@ export function Services() {
               Nos services
             </h2>
             <p className="text-xl text-black/60">
-              Des cuts de qualité, des prix honnêtes
+              Des coupes de qualité, des prix honnêtes
             </p>
             <p className="mt-3 text-sm font-bold uppercase tracking-wider text-black/40 md:hidden">
-              Liste compacte : tape pour ouvrir les détails
+              Liste compacte : appuie pour ouvrir les détails
             </p>
           </motion.div>
 
@@ -258,7 +258,7 @@ export function Services() {
             className="mt-16 text-center"
           >
             <p className="text-lg text-black/60 mb-6">
-              Tous nos services incluent une consultation personnalisée et des produits premium
+              Tous nos services incluent une consultation personnalisée et des produits haut de gamme
             </p>
             <a
               href={shopBookingUrl}
@@ -266,7 +266,7 @@ export function Services() {
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center px-10 py-5 bg-black text-white hover:bg-black/90 transition-all font-black uppercase tracking-wider"
             >
-              Réserver sur Squire
+              Réserver en ligne (Squire)
             </a>
           </motion.div>
         </div>
@@ -349,7 +349,7 @@ export function Services() {
                   </h3>
                   
                   <p className="text-black/60 text-lg leading-relaxed">
-                    Réservation en ligne sur Squire, ou message Instagram au barbier de ton choix.
+                    Réservation en ligne (Squire), ou écris au barbier de ton choix sur Instagram.
                     Sans rendez-vous selon disponibilité.
                   </p>
 
@@ -360,7 +360,7 @@ export function Services() {
                       rel="noopener noreferrer"
                       className="block w-full py-5 bg-black text-white hover:bg-black/90 transition-all text-center font-black uppercase tracking-wider"
                     >
-                      Réserver sur Squire
+                      Réserver en ligne (Squire)
                     </a>
                     <a
                       href={shopInstagramUrl}
@@ -368,7 +368,7 @@ export function Services() {
                       rel="noopener noreferrer"
                       className="block w-full py-5 border-4 border-black text-black hover:bg-black hover:text-white transition-all text-center font-black uppercase tracking-wider"
                     >
-                      Message Instagram (barbier au choix)
+                      Écrire sur Instagram (barbier au choix)
                     </a>
                     <a
                       href={`tel:${shopPhoneTel}`}
@@ -415,7 +415,7 @@ export function Services() {
                 <p className="text-black/60 text-sm">Espace moderne, noir & blanc, service pro</p>
               </div>
               <div className="p-6 bg-black/5">
-                <p className="font-bold mb-2">Tag-nous sur Instagram</p>
+                <p className="font-bold mb-2">Identifie-nous sur Instagram</p>
                 <p className="text-black/60 text-sm">@quartiergeneralbarbershop</p>
               </div>
             </div>

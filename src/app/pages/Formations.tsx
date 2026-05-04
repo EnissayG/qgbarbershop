@@ -39,7 +39,7 @@ export function Formations() {
         </div>
       </section>
 
-      {/* Formation principale - Hybride 1000$ */}
+      {/* Formation principale — programme mixte 1000 $ */}
       <section className="section-diagonal-top relative bg-white pb-24 lg:pb-32">
         <SectionTopDiagonal tone="light" variant="slash" />
         <div className="layout-gutter">
@@ -59,7 +59,7 @@ export function Formations() {
               <span className="text-black/30">Barbier</span>
             </h2>
             <p className="text-xl text-black/60">
-              Techniques de coupe, marketing et branding
+              Techniques de coupe, marketing et image de marque
             </p>
           </motion.div>
 
@@ -91,7 +91,7 @@ export function Formations() {
               {/* Détails */}
               <div className="space-y-8">
                 <div>
-                  <h3 className="text-3xl font-black uppercase mb-4">Programme Hybride</h3>
+                  <h3 className="text-3xl font-black uppercase mb-4">Programme mixte</h3>
                   <p className="text-lg text-black/70 leading-relaxed mb-6">
                     Des sessions animées par les barbiers du QG, techniques réelles, en conditions de salon, avec
                     la même exigence qu&apos;au comptoir.
@@ -101,8 +101,8 @@ export function Formations() {
                     <div className="flex items-start gap-4 p-4 bg-black/5">
                       <Calendar size={24} className="flex-shrink-0 mt-1" />
                       <div>
-                        <p className="font-bold mb-1">Format hybride</p>
-                        <p className="text-black/60 text-sm">Cours en ligne et sessions pratiques en personne</p>
+                        <p className="font-bold mb-1">Format mixte</p>
+                        <p className="text-black/60 text-sm">Cours en ligne et pratique sur place</p>
                       </div>
                     </div>
 
@@ -141,7 +141,7 @@ export function Formations() {
                       "Techniques de coupe professionnelles",
                       "Dégradés, coupes courtes et motifs",
                       "Taille et entretien de barbe",
-                      "Marketing et branding personnel",
+                      "Marketing et image personnelle",
                       "Gestion de clientèle",
                       "Création de contenu pour réseaux sociaux",
                     ].map((item) => (
@@ -160,13 +160,13 @@ export function Formations() {
                     rel="noopener noreferrer"
                     className="flex-1 py-5 bg-black text-white hover:bg-black/90 transition-all text-center font-black uppercase tracking-wider"
                   >
-                    Message pour infos
+                    Écrire sur Instagram pour les infos
                   </a>
                   <a
                     href={`mailto:${shopEmail}`}
                     className="flex-1 py-5 border-4 border-black text-black hover:bg-black hover:text-white transition-all text-center font-black uppercase tracking-wider"
                   >
-                    Email nous
+                    Nous écrire par courriel
                   </a>
                 </div>
               </div>
@@ -208,10 +208,10 @@ export function Formations() {
                 <span className="uppercase tracking-wider font-bold text-xs">À l'annonce</span>
               </div>
 
-              <h3 className="text-3xl font-black uppercase">Classes avancées et ateliers</h3>
+              <h3 className="text-3xl font-black uppercase">Cours avancés et ateliers</h3>
               
               <p className="text-black/70 leading-relaxed">
-                On organise régulièrement des classes avancées et des ateliers sur des techniques spécifiques. 
+                On organise régulièrement des cours avancés et des ateliers sur des techniques spécifiques. 
                 Suis-nous sur Instagram pour ne rien manquer.
               </p>
 
@@ -258,7 +258,7 @@ export function Formations() {
                 <span className="uppercase tracking-wider font-bold text-xs">Flexibilité</span>
               </div>
 
-              <h3 className="text-3xl font-black uppercase">Horaires Personnalisés</h3>
+              <h3 className="text-3xl font-black uppercase">Horaires personnalisés</h3>
               
               <p className="text-black/70 leading-relaxed">
                 On comprend que tout le monde a des horaires différents. 
@@ -272,7 +272,7 @@ export function Formations() {
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle2 size={20} className="flex-shrink-0 mt-0.5" />
-                  <span>Weekends disponibles</span>
+                  <span>Fins de semaine possibles</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle2 size={20} className="flex-shrink-0 mt-0.5" />
@@ -280,7 +280,7 @@ export function Formations() {
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle2 size={20} className="flex-shrink-0 mt-0.5" />
-                  <span>Mentorat one-on-one disponible</span>
+                  <span>Mentorat individuel disponible</span>
                 </li>
               </ul>
 
@@ -312,7 +312,7 @@ export function Formations() {
             className="text-center mb-16"
           >
             <h2 className="text-4xl lg:text-5xl font-black tracking-tighter uppercase mb-4">
-              Questions?
+              Des questions ?
             </h2>
             <p className="text-black/60">On a les réponses</p>
           </motion.div>
@@ -329,7 +329,7 @@ export function Formations() {
               },
               {
                 q: "Y'a des plans de paiement?",
-                a: "Oui, on offre des options flexibles. Écris-nous sur Instagram pour en discuter.",
+                a: "Oui, on offre des modalités souples. Écris-nous sur Instagram pour en discuter.",
               },
               {
                 q: "Qui anime les formations ?",
@@ -394,7 +394,7 @@ export function Formations() {
                 rel="noopener noreferrer"
                 className="px-10 lg:px-12 py-5 lg:py-6 bg-white text-black hover:bg-white/90 transition-all font-black uppercase tracking-wider"
               >
-                Message Instagram
+                Écrire sur Instagram
               </a>
               <a
                 href={shopBookingUrl}
@@ -402,7 +402,7 @@ export function Formations() {
                 rel="noopener noreferrer"
                 className="px-10 lg:px-12 py-5 lg:py-6 border-4 border-white text-white hover:bg-white hover:text-black transition-all font-black uppercase tracking-wider text-center"
               >
-                Réserver une coupe (Squire)
+                Réserver une coupe en ligne (Squire)
               </a>
               <a
                 href={`mailto:${shopEmail}`}

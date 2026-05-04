@@ -47,7 +47,7 @@ export function Layout() {
   }, [mobileMenuOpen]);
 
   return (
-    <div className="flex min-h-screen w-full max-w-full flex-col bg-white">
+    <div className="flex w-full max-w-full flex-col bg-white">
       <Header mobileMenuOpen={mobileMenuOpen} setMobileMenuOpen={setMobileMenuOpen} />
 
       <AnimatePresence>
@@ -101,7 +101,7 @@ export function Layout() {
         )}
       </AnimatePresence>
 
-      <main className="min-w-0 flex-1 bg-white">
+      <main className="min-w-0 w-full bg-white">
         <Outlet />
       </main>
       <Footer />

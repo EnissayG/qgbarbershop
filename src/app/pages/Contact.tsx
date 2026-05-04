@@ -49,7 +49,7 @@ export function Contact() {
               <span className="text-white/30">au QG</span>
             </h1>
             <p className="text-xl text-white/80 leading-relaxed max-w-2xl">
-              Réserve sur Squire ou écris sur Instagram au barbier de ton choix. Sans rendez-vous selon place.
+              Réserve en ligne (Squire) ou écris au barbier de ton choix sur Instagram. Sans rendez-vous selon les places disponibles.
             </p>
           </motion.div>
         </div>
@@ -192,7 +192,7 @@ export function Contact() {
                   rel="noopener noreferrer"
                   className="flex w-full items-center justify-center gap-3 bg-black py-5 font-black uppercase tracking-wider text-white transition-all hover:bg-black/90"
                 >
-                  <span>Réserver sur Squire</span>
+                  <span>Réserver en ligne (Squire)</span>
                 </a>
                 <a
                   href={shopInstagramUrl}
@@ -201,7 +201,7 @@ export function Contact() {
                   className="flex w-full items-center justify-center gap-3 border-4 border-black py-5 font-black uppercase tracking-wider text-black transition-all hover:bg-black hover:text-white"
                 >
                   <Instagram size={20} />
-                  <span>Message Instagram (barbier au choix)</span>
+                  <span>Écrire sur Instagram (barbier au choix)</span>
                 </a>
                 <a
                   href={`tel:${shopPhoneTel}`}

@@ -393,7 +393,7 @@ export function Team() {
               {
                 icon: Star,
                 title: "Excellence",
-                desc: "Chaque coupe est un chef-d'œuvre. On se contente pas du 'correct'.",
+                desc: "Chaque coupe est un chef-d'œuvre. On ne se contente pas du passable.",
               },
               {
                 icon: Scissors,
@@ -403,7 +403,7 @@ export function Team() {
               {
                 icon: Instagram,
                 title: "Communauté",
-                desc: "Plus qu'un shop, c'est une famille. On grandit ensemble.",
+                desc: "Plus qu'un salon, c'est une famille. On grandit ensemble.",
               },
               {
                 icon: Award,
@@ -485,7 +485,7 @@ export function Team() {
                 className="px-12 py-6 border-4 border-black text-black hover:bg-black hover:text-white transition-all font-black uppercase tracking-wider inline-flex items-center justify-center gap-2"
               >
                 <Instagram size={20} />
-                <span>Message @quartiergeneralbarbershop</span>
+                <span>Instagram @quartiergeneralbarbershop</span>
               </a>
             </div>
           </motion.div>

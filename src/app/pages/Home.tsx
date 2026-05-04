@@ -224,7 +224,7 @@ export function Home() {
             <h2 className="text-5xl lg:text-7xl font-black tracking-tighter uppercase">
               On est des
               <br />
-              <span className="text-white/20">Artistes</span>
+              <span className="text-white/20">Artisans</span>
             </h2>
           </motion.div>
 
@@ -232,8 +232,8 @@ export function Home() {
             {[
               {
                 icon: Scissors,
-                title: "Coupes & fades",
-                desc: "Des fades nets, des contours précis, du classique au plus audacieux, toujours un résultat propre.",
+                title: "Coupes et dégradés",
+                desc: "Des dégradés nets, des contours précis, du classique au plus audacieux, toujours un résultat propre.",
               },
               {
                 icon: Users,
@@ -292,7 +292,7 @@ export function Home() {
         </div>
       </section>
 
-      {/* Gallery Section - Instagram Style */}
+      {/* Galerie type fil Instagram */}
       <section className="section-diagonal-top relative bg-white pb-24 lg:pb-32">
         <SectionTopDiagonal tone="light" variant="slash" />
         <div className="layout-gutter">
@@ -307,7 +307,7 @@ export function Home() {
               Le résultat
             </h2>
             <p className="text-xl text-black/60 mb-6">
-              Check nos derniers glow-ups sur Insta
+              Nos dernières coupes et finitions sur Instagram
             </p>
             <a 
               href={shopInstagramUrl} 
@@ -359,11 +359,11 @@ export function Home() {
             <h2 className="text-5xl lg:text-8xl font-black tracking-tighter uppercase leading-tight text-white">
               Prêt pour ton
               <br />
-              changement de style?
+              changement de style ?
             </h2>
             
             <p className="text-xl lg:text-2xl text-white/60 max-w-2xl mx-auto">
-              Passe au QG, on va te faire briller
+              Passe au QG pour repartir avec une coupe réussie
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8">
@@ -373,7 +373,7 @@ export function Home() {
                 rel="noopener noreferrer"
                 className="group inline-flex items-center justify-center gap-3 px-10 lg:px-12 py-5 lg:py-6 bg-white text-black hover:bg-white/90 transition-all font-black uppercase tracking-wider text-base lg:text-lg"
               >
-                <span>Réserver sur Squire</span>
+                <span>Réserver en ligne (Squire)</span>
                 <ArrowRight size={24} className="group-hover:translate-x-1 transition-transform" />
               </a>
               <a

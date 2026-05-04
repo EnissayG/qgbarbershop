@@ -19,7 +19,7 @@ export function Footer() {
           <div className="col-span-2 lg:col-span-1">
             <img
               src={shopPhotos.logo}
-              alt="QG Logo"
+              alt="Logo du QG"
               className="mb-2 h-11 w-auto sm:mb-3 sm:h-14 lg:mb-4 lg:h-16"
             />
             <p className="text-xs leading-snug text-white/60 sm:text-sm lg:leading-normal">
