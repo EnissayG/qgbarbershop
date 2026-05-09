@@ -1,11 +1,11 @@
 import { motion } from "motion/react";
+import { Link } from "react-router";
 import { MapPin, Phone, Clock, Instagram, Zap, ExternalLink } from "lucide-react";
 import { ImageWithFallback } from "../components/figma/ImageWithFallback";
 import { SectionTopDiagonal } from "../components/SectionTopDiagonal";
 import {
   shopAddressLine1,
   shopAddressLine2,
-  shopBookingUrl,
   shopGoogleUrl,
   shopMapEmbedUrl,
   shopPhoneDisplay,
@@ -186,14 +186,12 @@ export function Contact() {
               </div>
 
               <div className="space-y-4 pt-8">
-                <a
-                  href={shopBookingUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <Link
+                  to="/reserver"
                   className="flex w-full items-center justify-center gap-3 bg-black py-5 font-black uppercase tracking-wider text-white transition-all hover:bg-black/90"
                 >
                   <span>Réserver en ligne (Squire)</span>
-                </a>
+                </Link>
                 <a
                   href={shopInstagramUrl}
                   target="_blank"

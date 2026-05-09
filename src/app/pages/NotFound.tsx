@@ -4,6 +4,7 @@ import { ArrowLeft, Home, Scissors } from "lucide-react";
 
 const quickLinks = [
   { to: "/services", label: "Services & prix" },
+  { to: "/reserver", label: "Réserver" },
   { to: "/equipe", label: "Équipe" },
   { to: "/formations", label: "Formations" },
   { to: "/contact", label: "Contact" },

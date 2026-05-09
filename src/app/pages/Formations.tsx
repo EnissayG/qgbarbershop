@@ -1,8 +1,9 @@
 import { motion } from "motion/react";
+import { Link } from "react-router";
 import { GraduationCap, Users, CheckCircle2, Calendar, MapPin, Scissors } from "lucide-react";
 import { ImageWithFallback } from "../components/figma/ImageWithFallback";
 import { SectionTopDiagonal } from "../components/SectionTopDiagonal";
-import { shopBookingUrl, shopEmail } from "../config/shopInfo";
+import { shopEmail } from "../config/shopInfo";
 import { shopInstagramUrl, shopPhotos } from "../config/shopPhotos";
 
 export function Formations() {
@@ -396,14 +397,12 @@ export function Formations() {
               >
                 Écrire sur Instagram
               </a>
-              <a
-                href={shopBookingUrl}
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                to="/reserver"
                 className="px-10 lg:px-12 py-5 lg:py-6 border-4 border-white text-white hover:bg-white hover:text-black transition-all font-black uppercase tracking-wider text-center"
               >
                 Réserver une coupe en ligne (Squire)
-              </a>
+              </Link>
               <a
                 href={`mailto:${shopEmail}`}
                 className="px-10 lg:px-12 py-5 lg:py-6 border-4 border-white text-white hover:bg-white hover:text-black transition-all font-black uppercase tracking-wider text-center"

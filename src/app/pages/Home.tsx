@@ -1,17 +1,19 @@
 import { Link } from "react-router";
 import { Scissors, Users, GraduationCap, ArrowRight, Instagram } from "lucide-react";
 import { motion } from "motion/react";
+import { usePageSeo } from "../hooks/usePageSeo";
 import { ImageWithFallback } from "../components/figma/ImageWithFallback";
 import { SectionTopDiagonal } from "../components/SectionTopDiagonal";
-import {
-  shopBookingUrl,
-  shopGoogleUrl,
-  shopPhoneDisplay,
-  shopPhoneTel,
-} from "../config/shopInfo";
+import { shopGoogleUrl, shopPhoneDisplay, shopPhoneTel } from "../config/shopInfo";
 import { shopInstagramUrl, shopPhotos } from "../config/shopPhotos";
 
+const SEO_HOME_TITLE = "Quartier Général Barbershop | Barbier et salon Montréal Est";
+const SEO_HOME_DESCRIPTION =
+  "Barbershop à Montréal Est : coupes précises, cheveux afro et texturés, tresses et locs. Équipe pro, réservation en ligne. Quartier Général Barbershop, Sherbrooke Est.";
+
 export function Home() {
+  usePageSeo({ title: SEO_HOME_TITLE, description: SEO_HOME_DESCRIPTION });
+
   return (
     <div className="pt-0">
       {/* Hero — Orienté conversion, photo de fond, responsive */}
@@ -63,15 +65,13 @@ export function Home() {
 
               {/* CTA mobile — caché sur desktop */}
               <div className="w-full space-y-3 lg:hidden">
-                <a
-                  href={shopBookingUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <Link
+                  to="/reserver"
                   className="group inline-flex w-full items-center justify-center gap-3 bg-white px-8 py-5 font-black uppercase tracking-wider text-black transition-all hover:bg-white/95 active:scale-[0.99] sm:text-lg"
                 >
                   <span>Réserver maintenant</span>
                   <ArrowRight size={20} className="transition-transform group-hover:translate-x-1" />
-                </a>
+                </Link>
                 <a
                   href={`tel:${shopPhoneTel}`}
                   className="inline-flex w-full items-center justify-center border-2 border-white/35 px-8 py-4 font-bold uppercase tracking-wider text-white/80 transition-all hover:border-white hover:text-white"
@@ -107,15 +107,13 @@ export function Home() {
               </p>
 
               <div className="space-y-3">
-                <a
-                  href={shopBookingUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <Link
+                  to="/reserver"
                   className="group inline-flex w-full items-center justify-center gap-3 bg-white px-6 py-5 font-black uppercase tracking-wider text-black transition-all hover:bg-white/93"
                 >
                   <span>Réserver maintenant</span>
                   <ArrowRight size={20} className="transition-transform group-hover:translate-x-1" />
-                </a>
+                </Link>
                 <a
                   href={`tel:${shopPhoneTel}`}
                   className="inline-flex w-full items-center justify-center border-2 border-white px-6 py-4 text-sm font-bold uppercase tracking-wider text-white transition-all hover:bg-white hover:text-black"
@@ -341,6 +339,52 @@ export function Home() {
         </div>
       </section>
 
+      {/* Contenu SEO — visible, structuré */}
+      <section
+        className="section-diagonal-top relative border-t border-black/10 bg-neutral-100 pb-16 lg:pb-20"
+        aria-labelledby="seo-accueil-heading"
+      >
+        <SectionTopDiagonal tone="light" variant="slash" />
+        <div className="layout-gutter-narrow mx-auto max-w-3xl">
+          <h2
+            id="seo-accueil-heading"
+            className="mb-6 text-2xl font-black uppercase tracking-tight text-black sm:text-3xl"
+          >
+            Salon de barbier à Montréal — Quartier Général
+          </h2>
+          <div className="space-y-5 text-base leading-relaxed text-black/75 sm:text-lg">
+            <p>
+              Bienvenue chez Quartier Général Barbershop, reconnu comme le meilleur salon de coiffure à
+              Montréal pour ceux qui recherchent une coupe précise, moderne et adaptée à leur style.
+            </p>
+            <p>
+              Situé dans l&apos;est de Montréal, notre barbershop est considéré comme un salon premium,
+              offrant une expérience professionnelle et un service de haute qualité dans un environnement
+              soigné.
+            </p>
+            <p>
+              Notre équipe est spécialisée dans la coupe de cheveux afro, lisses et bouclés, avec une
+              maîtrise des techniques modernes comme les dégradés, les finitions nettes et les coupes
+              personnalisées.
+            </p>
+            <p>
+              En plus des services de barbier, nous avons également des coiffeuses expérimentées qui
+              proposent des services comme les tresses ainsi que l&apos;entretien et le retwist de locs,
+              adaptés à votre style et à vos besoins.
+            </p>
+            <p>
+              Que vous cherchiez une coupe de cheveux, une taille de barbe ou un service spécialisé,
+              Quartier Général Barbershop à Montréal vous garantit un résultat précis, constant et à la
+              hauteur des standards d&apos;un barbershop premium.
+            </p>
+            <p>
+              Faites confiance à une équipe reconnue dans l&apos;est de Montréal pour son
+              professionnalisme, sa constance et la qualité de ses services.
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* CTA Section */}
       <section className="section-diagonal-top relative overflow-x-hidden bg-black pb-[max(6.5rem,calc(env(safe-area-inset-bottom,0px)+4rem))] lg:pb-32">
         <SectionTopDiagonal tone="dark" variant="slashAlt" />
@@ -367,15 +411,13 @@ export function Home() {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8">
-              <a
-                href={shopBookingUrl}
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                to="/reserver"
                 className="group inline-flex items-center justify-center gap-3 px-10 lg:px-12 py-5 lg:py-6 bg-white text-black hover:bg-white/90 transition-all font-black uppercase tracking-wider text-base lg:text-lg"
               >
                 <span>Réserver en ligne (Squire)</span>
                 <ArrowRight size={24} className="group-hover:translate-x-1 transition-transform" />
-              </a>
+              </Link>
               <a
                 href={`tel:${shopPhoneTel}`}
                 className="inline-flex items-center justify-center px-10 lg:px-12 py-5 lg:py-6 border-4 border-white text-white hover:bg-white hover:text-black transition-all font-black uppercase tracking-wider text-base lg:text-lg"

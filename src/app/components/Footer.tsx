@@ -54,6 +54,14 @@ export function Footer() {
               </li>
               <li>
                 <Link
+                  to="/reserver"
+                  className="text-xs text-white/60 transition-colors hover:text-white sm:text-sm"
+                >
+                  Réserver
+                </Link>
+              </li>
+              <li>
+                <Link
                   to="/equipe"
                   className="text-xs text-white/60 transition-colors hover:text-white sm:text-sm"
                 >

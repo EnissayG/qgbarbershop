@@ -1,13 +1,10 @@
 import { useState } from "react";
+import { usePageSeo } from "../hooks/usePageSeo";
 import { motion } from "motion/react";
 import { Scissors, Sparkles, Clock, ChevronDown } from "lucide-react";
 import { Link } from "react-router";
 import { SectionTopDiagonal } from "../components/SectionTopDiagonal";
-import {
-  shopBookingUrl,
-  shopPhoneDisplay,
-  shopPhoneTel,
-} from "../config/shopInfo";
+import { shopPhoneDisplay, shopPhoneTel } from "../config/shopInfo";
 import { shopInstagramUrl } from "../config/shopPhotos";
 
 type ServiceItem = {
@@ -20,7 +17,13 @@ type ServiceItem = {
   extras?: { name: string; price: string }[];
 };
 
+const SEO_SERVICES_TITLE =
+  "Prix barbier Montréal | Tarifs transparents | Quartier Général Barbershop";
+const SEO_SERVICES_DESCRIPTION =
+  "Barbier à Montréal avec prix clairs : coupe enfant dès 35$, coupe standard 40$, options ciseaux et lavage, tresses et locs. Quartier Général Barbershop, Sherbrooke Est.";
+
 export function Services() {
+  usePageSeo({ title: SEO_SERVICES_TITLE, description: SEO_SERVICES_DESCRIPTION });
   const [openSlug, setOpenSlug] = useState<string | null>(null);
 
   const services: ServiceItem[] = [
@@ -32,8 +35,8 @@ export function Services() {
       duration: "45 min",
       price: "40$",
       extras: [
-        { name: "Supplément ciseaux", price: "5$" },
-        { name: "Supplément lavage", price: "25$" },
+        { name: "Supplément ciseaux", price: "10$" },
+        { name: "Supplément lavage", price: "20$" },
       ],
     },
     {
@@ -66,14 +69,14 @@ export function Services() {
       name: "Coupe enfant",
       description: "Pour les jeunes qui veulent être soignés comme les grands.",
       duration: "30 min",
-      price: "30$",
+      price: "35$",
     },
     {
       slug: "tresses",
       icon: Sparkles,
       name: "Tresses",
       description:
-        "Tresses, nattes et styles protecteurs avec notre spécialiste. Durée et tarif selon le style.",
+        "Tresses, nattes et styles protecteurs avec notre spécialiste. Fourchettes indicatives : tresses 60$ à 100$, retwist de locs 80$ à 120$ selon longueur et densité.",
       duration: "Variable",
       price: "Sur devis",
     },
@@ -260,14 +263,12 @@ export function Services() {
             <p className="text-lg text-black/60 mb-6">
               Tous nos services incluent une consultation personnalisée et des produits haut de gamme
             </p>
-            <a
-              href={shopBookingUrl}
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              to="/reserver"
               className="inline-flex items-center justify-center px-10 py-5 bg-black text-white hover:bg-black/90 transition-all font-black uppercase tracking-wider"
             >
               Réserver en ligne (Squire)
-            </a>
+            </Link>
           </motion.div>
         </div>
       </section>
@@ -354,14 +355,12 @@ export function Services() {
                   </p>
 
                   <div className="space-y-3 pt-4">
-                    <a
-                      href={shopBookingUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                    <Link
+                      to="/reserver"
                       className="block w-full py-5 bg-black text-white hover:bg-black/90 transition-all text-center font-black uppercase tracking-wider"
                     >
                       Réserver en ligne (Squire)
-                    </a>
+                    </Link>
                     <a
                       href={shopInstagramUrl}
                       target="_blank"
@@ -423,6 +422,50 @@ export function Services() {
         </div>
       </section>
 
+      {/* Contenu SEO — visible, structuré (pas de texte masqué) */}
+      <section
+        className="section-diagonal-top relative border-t border-black/10 bg-neutral-100 pb-20 lg:pb-24"
+        aria-labelledby="seo-tarifs-heading"
+      >
+        <SectionTopDiagonal tone="light" variant="slash" />
+        <div className="layout-gutter-narrow mx-auto max-w-3xl">
+          <h2
+            id="seo-tarifs-heading"
+            className="mb-6 text-2xl font-black uppercase tracking-tight text-black sm:text-3xl"
+          >
+            Barbier à Montréal : tarifs clairs et accessibles
+          </h2>
+          <div className="space-y-5 text-base leading-relaxed text-black/75 sm:text-lg">
+            <p>
+              Vous cherchez un barbier à Montréal avec des prix clairs et accessibles? Chez Quartier
+              Général Barbershop, nous offrons des coupes modernes adaptées à tous les styles, à partir
+              de 35$ pour une coupe enfant et 40$ pour une coupe de cheveux standard.
+            </p>
+            <p>
+              Nos services incluent la coupe de cheveux et barbe à 40$, la coupe aux ciseaux à 50$ ainsi
+              que la coupe avec lavage à 60$.
+            </p>
+            <p>
+              Pour les services spécialisés, nous proposons les tresses entre 60$ et 100$, ainsi que le
+              retwist de locs entre 80$ et 120$, selon la longueur et la densité des cheveux.
+            </p>
+            <p>
+              Nos prix sont transparents afin que vous sachiez exactement combien coûte votre service,
+              sans surprise.
+            </p>
+            <p>
+              Situé à Montréal, notre salon est spécialisé dans les cheveux afro, bouclés et texturés,
+              avec une équipe de barbiers professionnels qui vous garantit un résultat précis et adapté à
+              votre style.
+            </p>
+            <p>
+              Que ce soit pour une coupe rapide, un entretien de barbe ou un service de locs, nous
+              offrons un excellent rapport qualité-prix pour un barbier à Montréal.
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* Slogan Section */}
       <section className="section-diagonal-top relative overflow-x-hidden bg-black pb-[max(6.5rem,calc(env(safe-area-inset-bottom,0px)+4rem))] lg:pb-32">
         <SectionTopDiagonal tone="dark" variant="slashAlt" />
@@ -434,16 +477,16 @@ export function Services() {
             transition={{ duration: 0.8 }}
           >
             <h2 className="text-5xl lg:text-7xl font-black tracking-tighter text-white mb-8 italic">
-              "Viens juste faire ta tiass"
+              &quot;Viens juste faire ta tiass&quot;
             </h2>
             <p className="text-xl text-white/60 mb-8">
               Au QG, on te transforme
             </p>
             <Link
-              to="/contact"
+              to="/reserver"
               className="inline-flex items-center justify-center px-12 py-6 bg-white text-black hover:bg-white/90 transition-all font-black uppercase tracking-wider"
             >
-              Réserve maintenant
+              Réserver maintenant
             </Link>
           </motion.div>
         </div>
