@@ -1,7 +1,10 @@
 {
   "permissions": {
     "allow": [
-      "Bash(npm run *)"
+      "Bash(npm run *)",
+      "WebFetch(domain:widget.getsquire.com)",
+      "WebFetch(domain:getsquire.com)",
+      "WebSearch"
     ]
   }
 }

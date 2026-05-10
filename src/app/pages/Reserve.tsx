@@ -1,18 +1,8 @@
-import { useEffect, useState } from "react";
 import { motion } from "motion/react";
 import { ExternalLink } from "lucide-react";
 import { SectionTopDiagonal } from "../components/SectionTopDiagonal";
-import { shopBookingUrl } from "../config/shopInfo";
+import { shopBookingUrl, shopSquireWidgetEmbedUrl } from "../config/shopInfo";
 import { usePageSeo } from "../hooks/usePageSeo";
-
-function isLikelyLocalHostname(hostname: string) {
-  return (
-    hostname === "localhost" ||
-    hostname === "127.0.0.1" ||
-    hostname.endsWith(".local") ||
-    hostname.startsWith("192.168.")
-  );
-}
 
 const SEO_RESERVE_TITLE = "Réserver | Quartier Général Barbershop Montréal";
 const SEO_RESERVE_DESCRIPTION =
@@ -20,11 +10,6 @@ const SEO_RESERVE_DESCRIPTION =
 
 export function Reserve() {
   usePageSeo({ title: SEO_RESERVE_TITLE, description: SEO_RESERVE_DESCRIPTION });
-  const [isLocalDev, setIsLocalDev] = useState(false);
-
-  useEffect(() => {
-    setIsLocalDev(isLikelyLocalHostname(window.location.hostname));
-  }, []);
 
   return (
     <div className="overflow-x-hidden">
@@ -49,9 +34,8 @@ export function Reserve() {
               <span className="text-white/35">au QG</span>
             </h1>
             <p className="max-w-xl text-xl leading-relaxed text-white/80">
-              Choisis ton barbier, ton service et ton créneau — le flux Squire est affiché dans le cadre
-              ci-dessous. Sur le site en production (Netlify), il se charge en général correctement ; en
-              local, Squire bloque souvent l&apos;iframe pour des raisons de sécurité.
+              Choisis ton barbier, ton service et ton créneau. Réservation sécurisée, disponibilités en
+              temps réel.
             </p>
           </motion.div>
         </div>
@@ -67,17 +51,6 @@ export function Reserve() {
             transition={{ duration: 0.6 }}
             className="mx-auto max-w-5xl"
           >
-            {isLocalDev && (
-              <div
-                className="mb-6 border-2 border-black bg-amber-100 px-4 py-3 text-sm font-bold text-black/90"
-                role="status"
-              >
-                Mode local : le cadre Squire est souvent vide ici (en-têtes{' '}
-                <span className="whitespace-nowrap">X-Frame-Options / CSP</span>). Teste après déploiement
-                sur Netlify, ou utilise « Continuer sur Squire » ci-dessous.
-              </div>
-            )}
-
             <div className="mb-4 flex flex-col gap-3 border-b-2 border-black pb-4 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
               <p className="text-xs font-black uppercase tracking-[0.2em] text-black/50">
                 Réservation sécurisée · Squire
@@ -104,18 +77,17 @@ export function Reserve() {
             <div className="overflow-hidden border-4 border-black bg-neutral-100 shadow-[10px_10px_0_0_rgba(0,0,0,1)]">
               <iframe
                 title="Réservation en ligne — Quartier Général Barbershop (Squire)"
-                src={shopBookingUrl}
-                className="block min-h-[70vh] w-full bg-white lg:min-h-[78vh]"
-                loading="lazy"
+                src={shopSquireWidgetEmbedUrl}
+                className="block min-h-[80vh] w-full bg-white lg:min-h-[85vh]"
+                loading="eager"
                 referrerPolicy="no-referrer-when-downgrade"
-                allow="fullscreen"
+                allow="payment; fullscreen"
               />
             </div>
 
             <p className="mt-4 text-center text-sm text-black/50">
-              Cadre vide ? En local, c&apos;est normal. En production, si ça persiste, utilise «
-              Continuer sur Squire (cet onglet) » — même résultat que le cadre, sans quitter l&apos;expérience
-              de réservation.
+              Le cadre ne s&apos;affiche pas (bloqueur, réseau) ? Utilise « Continuer sur Squire » — même
+              parcours de réservation sur la page officielle.
             </p>
           </motion.div>
         </div>

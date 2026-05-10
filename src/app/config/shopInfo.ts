@@ -6,6 +6,9 @@ export const shopBookingUrl =
 /** Brand ID Squire (référence support / intégrations futures). */
 export const shopSquireBrandId = "d8e21510-540e-4dc9-923f-cc4e8b7b7496";
 
+/** Widget embarquable (iframe) — la page booking getsquire.com a X-Frame-Options: SAMEORIGIN. */
+export const shopSquireWidgetEmbedUrl = `https://widget.getsquire.com/v2/?brand=${shopSquireBrandId}`;
+
 export const shopGoogleUrl = "https://share.google/iw59bpzgtJpANcE1q";
 
 export const shopAddressLine1 = "7072 rue Sherbrooke Est";
