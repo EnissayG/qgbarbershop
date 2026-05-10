@@ -44,8 +44,14 @@ Routes principales : `/`, `/services`, `/reserver`, `/equipe`, `/formations`, `/
 
 ## Réservation (Squire)
 
-1. **`index.html`** : snippet recommandé par Squire dans le `<head>` (`widget.js?brand=…`, `id="squire-widget"`). Le bootstrap lit aussi les attributs **`brand`** et **`shop`** sur la balise (indispensables ; le seul `?brand=` ne remplit pas `getAttribute("brand")`). `x-squire-show-btn="false"` désactive le bouton flottant.
-2. **`/reserver`** : attend **`SquireWidget`**, appelle **`open()`**, puis **reparente** l’`iframe.squire_widget` dans `.reserve-squire-host` (voir `index.css`) pour un affichage intégré au layout.
+Il n’existe pas de page publique de doc technique détaillée pour `widget.js` ; le support Squire envoie le snippet **script dans le `<head>`** avec `?brand=BRAND_ID`. Comportement observé sur le loader public (`widget.getsquire.com/widget.js` → `v2/frameLoader.js`) :
+
+- La config est lue sur **`document.currentScript`** : attributs HTML **`brand`** (UUID) et **`shop`** (slug boutique) sont **nécessaires** — le seul `?brand=` dans l’URL ne remplace pas `getAttribute("brand")`.
+- `frameLoader.js` définit **`window.SquireWidget.open({ brand, shop })`** et crée une **`iframe.squire_widget`** sur le `body`.
+- **SPA (React)** : un second injecteur de script (head statique + effet React) peut créer des courses ; ici le script est chargé **uniquement** depuis **`Reserve.tsx`** au montage de `/reserver`.
+- Affichage dans le cadre du site : après **`open()`**, l’iframe est **reparentée** dans `.reserve-squire-host` (`index.css`), avec overrides CSS pour remplir la zone (le widget d’origine est pensé comme panneau latéral / bouton flottant).
+
+Si le cadre reste vide alors que `widget.js` et `frameLoader.js` sont en 200 : vérifier la console (erreurs JS), que **`shopSquireShopRoute`** correspond bien au slug Squire du salon, et l’absence de blocage réseau vers `widget.getsquire.com` / `getsquire.com`.
 
 ---
 

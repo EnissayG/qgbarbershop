@@ -5,10 +5,18 @@ import { shopSquireBrandId, shopSquireShopRoute } from "../config/shopInfo";
 import { usePageSeo } from "../hooks/usePageSeo";
 
 /**
- * Widget Squire : script dans index.html (recommandation Squire).
- * Le runtime lit `getAttribute("brand")` / `shop` sur la balise — le seul `?brand=` dans l’URL ne suffit pas.
- * `x-squire-show-btn="false"` : pas de bouton flottant ; on ouvre le panneau via `SquireWidget.open()` et on
- * reparente l’iframe dans `.reserve-squire-host` pour l’affichage intégré au layout.
+ * Intégration Squire (widget.getsquire.com)
+ *
+ * Points documentés par analyse du loader public :
+ * - `widget.js` lit `document.currentScript` : attributs **brand** et **shop** sur la balise `<script>` sont
+ *   nécessaires (le seul `?brand=` dans l’URL ne remplit pas `getAttribute("brand")`).
+ * - `frameLoader.js` expose `window.SquireWidget.open(config)` ; la config attend `{ brand, shop }` (UUID + slug boutique).
+ * - Le snippet HTML « une ligne dans le head » fonctionne sur site multipages ; en **SPA React**, charger le script
+ *   au montage de `/reserver` évite les courses avec un second injecteur et garantit un seul `currentScript`.
+ * - Le widget crée une `iframe.squire_widget` sur `body` puis l’anime ; on la reparente dans `.reserve-squire-host`
+ *   après ouverture pour l’affichage « intégré ».
+ *
+ * Réf. support client : coller le script dans `<head>` avec BRAND_ID — équivalent ici avec attributs complets.
  */
 const SCRIPT_ID = "squire-widget";
 const WIDGET_SRC = `https://widget.getsquire.com/widget.js?brand=${encodeURIComponent(shopSquireBrandId)}`;
@@ -29,38 +37,47 @@ declare global {
   }
 }
 
-function ensureSquireScriptInHead(): void {
-  let el = document.getElementById(SCRIPT_ID) as HTMLScriptElement | null;
-  if (
-    el &&
-    el.getAttribute("brand") === shopSquireBrandId &&
-    el.getAttribute("shop") === shopSquireShopRoute
-  ) {
-    return;
-  }
-  if (el) el.remove();
+const SQUIRE_OPEN_CONFIG = {
+  brand: shopSquireBrandId,
+  shop: shopSquireShopRoute,
+} as const;
 
-  const script = document.createElement("script");
-  script.type = "text/javascript";
-  script.id = SCRIPT_ID;
-  script.setAttribute("data-name", "squire-widget");
-  script.src = WIDGET_SRC;
-  script.setAttribute("brand", shopSquireBrandId);
-  script.setAttribute("shop", shopSquireShopRoute);
-  script.setAttribute("x-squire-show-btn", "false");
-  document.head.appendChild(script);
+function injectSquireLoaderOnce(): Promise<void> {
+  const existing = document.getElementById(SCRIPT_ID) as HTMLScriptElement | null;
+  if (
+    existing?.dataset.qgInjected === "1" &&
+    existing.getAttribute("brand") === shopSquireBrandId &&
+    existing.getAttribute("shop") === shopSquireShopRoute
+  ) {
+    return Promise.resolve();
+  }
+  if (existing) existing.remove();
+
+  return new Promise((resolve, reject) => {
+    const script = document.createElement("script");
+    script.type = "text/javascript";
+    script.id = SCRIPT_ID;
+    script.setAttribute("data-name", "squire-widget");
+    script.src = WIDGET_SRC;
+    script.setAttribute("brand", shopSquireBrandId);
+    script.setAttribute("shop", shopSquireShopRoute);
+    script.dataset.qgInjected = "1";
+    script.addEventListener("load", () => resolve(), { once: true });
+    script.addEventListener("error", () => reject(new Error("widget.js failed")), { once: true });
+    document.head.appendChild(script);
+  });
 }
 
 function waitForSquireWidgetApi(timeoutMs: number): Promise<void> {
   return new Promise((resolve, reject) => {
     const start = Date.now();
     const tick = () => {
-      if (typeof window.SquireWidget !== "undefined" && window.SquireWidget?.open) {
+      if (typeof window.SquireWidget !== "undefined" && typeof window.SquireWidget?.open === "function") {
         resolve();
         return;
       }
       if (Date.now() - start > timeoutMs) {
-        reject(new Error("SquireWidget timeout"));
+        reject(new Error("SquireWidget API timeout"));
         return;
       }
       requestAnimationFrame(tick);
@@ -74,10 +91,16 @@ export function Reserve() {
   const hostRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    ensureSquireScriptInHead();
-
     let cancelled = false;
     let observer: MutationObserver | null = null;
+    let reparentInterval: ReturnType<typeof setInterval> | null = null;
+
+    const clearReparentInterval = () => {
+      if (reparentInterval) {
+        clearInterval(reparentInterval);
+        reparentInterval = null;
+      }
+    };
 
     const tryMoveIframe = () => {
       const host = hostRef.current;
@@ -89,24 +112,59 @@ export function Reserve() {
       }
     };
 
+    const scheduleReparentBursts = () => {
+      clearReparentInterval();
+      tryMoveIframe();
+      [100, 400, 900, 1600, 2800, 4500].forEach((ms) => {
+        setTimeout(() => {
+          if (!cancelled) tryMoveIframe();
+        }, ms);
+      });
+      reparentInterval = setInterval(() => {
+        if (!cancelled) tryMoveIframe();
+      }, 350);
+      setTimeout(() => clearReparentInterval(), 12000);
+    };
+
+    const onWidgetOpened = () => {
+      if (cancelled) return;
+      setTimeout(tryMoveIframe, 0);
+      setTimeout(tryMoveIframe, 120);
+      scheduleReparentBursts();
+    };
+
+    const tryOpen = () => {
+      if (cancelled || !window.SquireWidget?.open) return;
+      try {
+        window.SquireWidget.open({
+          brand: SQUIRE_OPEN_CONFIG.brand,
+          shop: SQUIRE_OPEN_CONFIG.shop,
+        });
+      } catch {
+        /* Squire peut refuser si déjà ouvert — les timeouts suivants réessaient si besoin */
+      }
+    };
+
     const run = async () => {
       try {
-        await waitForSquireWidgetApi(30000);
-        if (cancelled) return;
-        await new Promise((r) => setTimeout(r, 150));
+        await injectSquireLoaderOnce();
+        await waitForSquireWidgetApi(45000);
         if (cancelled) return;
 
-        const cfg = window._squireWidgetConfig?.setups?.default;
-        if (cfg && window.SquireWidget) {
-          window.SquireWidget.open(cfg);
-        }
+        window.addEventListener("squire_widget_opened", onWidgetOpened);
 
         observer = new MutationObserver(() => tryMoveIframe());
         observer.observe(document.body, { childList: true, subtree: true });
-        requestAnimationFrame(tryMoveIframe);
-        [50, 200, 600, 1200].forEach((ms) => setTimeout(tryMoveIframe, ms));
+
+        /* Appels explicites brand + shop (le loader lit aussi _squireWidgetConfig depuis la balise script). */
+        tryOpen();
+        setTimeout(tryOpen, 300);
+        setTimeout(tryOpen, 1200);
+        setTimeout(tryOpen, 3500);
+
+        scheduleReparentBursts();
       } catch {
-        /* Échec silencieux : la zone réservée reste visible. */
+        /* silence — cadre vide si réseau / blocage */
       }
     };
 
@@ -114,7 +172,9 @@ export function Reserve() {
 
     return () => {
       cancelled = true;
+      window.removeEventListener("squire_widget_opened", onWidgetOpened);
       observer?.disconnect();
+      clearReparentInterval();
       window.SquireWidget?.close();
     };
   }, []);
@@ -142,7 +202,8 @@ export function Reserve() {
               <span className="text-white/35">au QG</span>
             </h1>
             <p className="max-w-xl text-xl leading-relaxed text-white/80">
-              Le planning officiel du salon est affiché dans le cadre ci-dessous, sans quitter le site.
+              Le planning officiel s’affiche dans le cadre ci-dessous. Un bouton Squire peut aussi apparaître en bas à
+              droite après chargement.
             </p>
           </motion.div>
         </div>
@@ -151,20 +212,15 @@ export function Reserve() {
       <section className="section-diagonal-top relative bg-white pb-[max(6rem,calc(env(safe-area-inset-bottom,0px)+3rem))] lg:pb-24">
         <SectionTopDiagonal tone="light" variant="slash" />
         <div className="layout-gutter min-w-0">
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="mx-auto max-w-5xl"
-          >
+          {/* Pas d’opacity:0 initial ici : évite tout effet de masquage sur l’iframe enfant */}
+          <div className="mx-auto max-w-5xl">
             <p className="mb-4 text-xs font-black uppercase tracking-[0.2em] text-black/45">
               Planning en ligne — Quartier Général
             </p>
             <div className="overflow-hidden border-4 border-black shadow-[10px_10px_0_0_rgba(0,0,0,1)]">
               <div ref={hostRef} className="reserve-squire-host" aria-label="Réservation Squire" />
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
     </div>
