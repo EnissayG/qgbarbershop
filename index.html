@@ -37,6 +37,22 @@
       content="Barbier moderne à Montréal près du métro Radisson. Coupes, barbe, réservation en ligne."
     />
     <meta name="twitter:image" content="https://qgbarbershop.netlify.app/assets/og-preview.png" />
+
+    <!-- Squire widget (doc officielle) — garder le Brand ID aligné avec src/app/config/shopInfo.ts -->
+    <script type="text/javascript">
+      !(function (e) {
+        var i = e.createElement("script"),
+          sa = "setAttribute";
+        i.src =
+          "https://widget.getsquire.com/widget.js?brand=d8e21510-540e-4dc9-923f-cc4e8b7b7496";
+        i[sa]("id", "squire-widget");
+        i[sa]("data-name", "squire-widget");
+        i[sa]("brand", "d8e21510-540e-4dc9-923f-cc4e8b7b7496");
+        i[sa]("shop", "quartier-general-barbershop-montreal");
+        i[sa]("x-squire-show-btn", "false");
+        e.head.appendChild(i);
+      })(document);
+    </script>
   </head>
 
   <body>

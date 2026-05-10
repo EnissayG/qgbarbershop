@@ -44,9 +44,8 @@ Routes principales : `/`, `/services`, `/reserver`, `/equipe`, `/formations`, `/
 
 ## Réservation (Squire)
 
-La page **`/reserver`** charge le script officiel **`https://widget.getsquire.com/widget.js`** (redirection vers `/v2/widget.js`). Le bootstrap public lit la config sur la balise `<script>` via **`getAttribute("brand")`**, **`getAttribute("shop")`**, etc. : le seul paramètre `?brand=` dans l’URL **ne suffit pas** — il faut aussi les attributs HTML `brand` et `shop` (voir `shopInfo.ts`).
-
-Ensuite **`frameLoader.js`** expose `window.SquireWidget` : on attend cette API puis on appelle **`SquireWidget.open()`** pour ouvrir le panneau. Le bouton flottant reste disponible si le script `bookButton.js` est chargé (comportement par défaut lorsque `x-squire-show-btn` n’est pas à `false`).
+1. **`index.html`** : snippet recommandé par Squire dans le `<head>` (`widget.js?brand=…`, `id="squire-widget"`). Le bootstrap lit aussi les attributs **`brand`** et **`shop`** sur la balise (indispensables ; le seul `?brand=` ne remplit pas `getAttribute("brand")`). `x-squire-show-btn="false"` désactive le bouton flottant.
+2. **`/reserver`** : attend **`SquireWidget`**, appelle **`open()`**, puis **reparente** l’`iframe.squire_widget` dans `.reserve-squire-host` (voir `index.css`) pour un affichage intégré au layout.
 
 ---
 

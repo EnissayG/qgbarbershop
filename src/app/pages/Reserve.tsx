@@ -1,17 +1,14 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { motion } from "motion/react";
-import { ExternalLink } from "lucide-react";
 import { SectionTopDiagonal } from "../components/SectionTopDiagonal";
-import { shopBookingUrl, shopSquireBrandId, shopSquireShopRoute } from "../config/shopInfo";
+import { shopSquireBrandId, shopSquireShopRoute } from "../config/shopInfo";
 import { usePageSeo } from "../hooks/usePageSeo";
 
 /**
- * Intégration alignée sur le loader officiel `widget.getsquire.com/widget.js` :
- * - `document.currentScript` lit les attributs `brand`, `shop`, `barber`, `x-squire-inline-enabled`, `x-squire-show-btn`.
- * - Le paramètre `?brand=` dans l’URL ne remplace pas l’attribut `brand` (getAttribute resterait vide).
- * - `frameLoader.js` charge ensuite `SquireWidget` : il faut attendre avant d’appeler `open()`.
- *
- * @see https://widget.getsquire.com/widget.js (bootstrap public)
+ * Widget Squire : script dans index.html (recommandation Squire).
+ * Le runtime lit `getAttribute("brand")` / `shop` sur la balise — le seul `?brand=` dans l’URL ne suffit pas.
+ * `x-squire-show-btn="false"` : pas de bouton flottant ; on ouvre le panneau via `SquireWidget.open()` et on
+ * reparente l’iframe dans `.reserve-squire-host` pour l’affichage intégré au layout.
  */
 const SCRIPT_ID = "squire-widget";
 const WIDGET_SRC = `https://widget.getsquire.com/widget.js?brand=${encodeURIComponent(shopSquireBrandId)}`;
@@ -32,46 +29,26 @@ declare global {
   }
 }
 
-function scriptTagIsValid(el: HTMLElement | null): el is HTMLScriptElement {
-  if (!el || el.id !== SCRIPT_ID) return false;
-  return (
-    el.getAttribute("brand") === shopSquireBrandId && el.getAttribute("shop") === shopSquireShopRoute
-  );
-}
-
-/** Injecte ou réutilise le script avec les attributs requis ; attend le chargement de `widget.js`. */
-function ensureOfficialSquireScript(): Promise<void> {
-  if (scriptTagIsValid(document.getElementById(SCRIPT_ID))) {
-    return Promise.resolve();
+function ensureSquireScriptInHead(): void {
+  let el = document.getElementById(SCRIPT_ID) as HTMLScriptElement | null;
+  if (
+    el &&
+    el.getAttribute("brand") === shopSquireBrandId &&
+    el.getAttribute("shop") === shopSquireShopRoute
+  ) {
+    return;
   }
+  if (el) el.remove();
 
-  const old = document.getElementById(SCRIPT_ID);
-  if (old) old.remove();
-
-  return new Promise((resolve, reject) => {
-    const script = document.createElement("script");
-    script.type = "text/javascript";
-    script.id = SCRIPT_ID;
-    script.setAttribute("data-name", "squire-widget");
-    script.src = WIDGET_SRC;
-    script.setAttribute("brand", shopSquireBrandId);
-    script.setAttribute("shop", shopSquireShopRoute);
-    script.setAttribute("x-squire-inline-enabled", "true");
-    script.addEventListener(
-      "load",
-      () => {
-        script.dataset.qgLoaded = "1";
-        resolve();
-      },
-      { once: true }
-    );
-    script.addEventListener(
-      "error",
-      () => reject(new Error("Échec du chargement du script Squire")),
-      { once: true }
-    );
-    document.head.appendChild(script);
-  });
+  const script = document.createElement("script");
+  script.type = "text/javascript";
+  script.id = SCRIPT_ID;
+  script.setAttribute("data-name", "squire-widget");
+  script.src = WIDGET_SRC;
+  script.setAttribute("brand", shopSquireBrandId);
+  script.setAttribute("shop", shopSquireShopRoute);
+  script.setAttribute("x-squire-show-btn", "false");
+  document.head.appendChild(script);
 }
 
 function waitForSquireWidgetApi(timeoutMs: number): Promise<void> {
@@ -83,7 +60,7 @@ function waitForSquireWidgetApi(timeoutMs: number): Promise<void> {
         return;
       }
       if (Date.now() - start > timeoutMs) {
-        reject(new Error("SquireWidget indisponible (timeout)"));
+        reject(new Error("SquireWidget timeout"));
         return;
       }
       requestAnimationFrame(tick);
@@ -94,21 +71,42 @@ function waitForSquireWidgetApi(timeoutMs: number): Promise<void> {
 
 export function Reserve() {
   usePageSeo({ title: SEO_RESERVE_TITLE, description: SEO_RESERVE_DESCRIPTION });
+  const hostRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    ensureSquireScriptInHead();
+
     let cancelled = false;
+    let observer: MutationObserver | null = null;
+
+    const tryMoveIframe = () => {
+      const host = hostRef.current;
+      if (!host || cancelled) return;
+      const iframe = document.querySelector<HTMLIFrameElement>("iframe.squire_widget");
+      if (!iframe) return;
+      if (iframe.parentElement !== host) {
+        host.appendChild(iframe);
+      }
+    };
 
     const run = async () => {
       try {
-        await ensureOfficialSquireScript();
-        await waitForSquireWidgetApi(25000);
+        await waitForSquireWidgetApi(30000);
         if (cancelled) return;
+        await new Promise((r) => setTimeout(r, 150));
+        if (cancelled) return;
+
         const cfg = window._squireWidgetConfig?.setups?.default;
         if (cfg && window.SquireWidget) {
           window.SquireWidget.open(cfg);
         }
+
+        observer = new MutationObserver(() => tryMoveIframe());
+        observer.observe(document.body, { childList: true, subtree: true });
+        requestAnimationFrame(tryMoveIframe);
+        [50, 200, 600, 1200].forEach((ms) => setTimeout(tryMoveIframe, ms));
       } catch {
-        /* Les liens vers shopBookingUrl restent utilisables (mode inline Squire + navigation directe). */
+        /* Échec silencieux : la zone réservée reste visible. */
       }
     };
 
@@ -116,6 +114,7 @@ export function Reserve() {
 
     return () => {
       cancelled = true;
+      observer?.disconnect();
       window.SquireWidget?.close();
     };
   }, []);
@@ -135,7 +134,7 @@ export function Reserve() {
             className="max-w-3xl"
           >
             <span className="mb-6 block text-sm font-bold uppercase tracking-widest text-white/60">
-              Squire · en ligne
+              Réservation · Squire
             </span>
             <h1 className="mb-6 text-6xl font-black uppercase leading-none tracking-tighter text-white lg:text-8xl">
               Réserver
@@ -143,8 +142,7 @@ export function Reserve() {
               <span className="text-white/35">au QG</span>
             </h1>
             <p className="max-w-xl text-xl leading-relaxed text-white/80">
-              Le panneau de réservation officiel s’ouvre sur cette page. Tu peux aussi réserver via le lien
-              ci-dessous ou le bouton flottant Squire (bas à droite).
+              Le planning officiel du salon est affiché dans le cadre ci-dessous, sans quitter le site.
             </p>
           </motion.div>
         </div>
@@ -158,33 +156,14 @@ export function Reserve() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="mx-auto max-w-2xl text-center"
+            className="mx-auto max-w-5xl"
           >
-            <p className="mb-6 text-sm font-bold uppercase tracking-widest text-black/45">
-              Réservation sécurisée
+            <p className="mb-4 text-xs font-black uppercase tracking-[0.2em] text-black/45">
+              Planning en ligne — Quartier Général
             </p>
-            <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center sm:gap-6">
-              <a
-                href={shopBookingUrl}
-                className="inline-flex min-h-[3rem] items-center justify-center border-4 border-black bg-black px-8 py-3 text-xs font-black uppercase tracking-wider text-white transition hover:bg-white hover:text-black"
-              >
-                Ouvrir la réservation (Squire)
-              </a>
-              <a
-                href={shopBookingUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-black/60 underline-offset-4 hover:text-black hover:underline"
-              >
-                Nouvel onglet
-                <ExternalLink className="h-3.5 w-3.5" aria-hidden />
-              </a>
+            <div className="overflow-hidden border-4 border-black shadow-[10px_10px_0_0_rgba(0,0,0,1)]">
+              <div ref={hostRef} className="reserve-squire-host" aria-label="Réservation Squire" />
             </div>
-            <p className="mt-8 text-sm text-black/50">
-              Rien ne s’ouvre ? Vérifie qu’aucun bloqueur de contenu ne bloque{" "}
-              <span className="whitespace-nowrap">widget.getsquire.com</span>, ou passe par le lien direct
-              ci-dessus.
-            </p>
           </motion.div>
         </div>
       </section>
