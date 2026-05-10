@@ -45,7 +45,7 @@ export function Home() {
                 transition={{ duration: 0.6, delay: 0.15 }}
                 src={shopPhotos.logo}
                 alt="Quartier Général Barbershop"
-                className="mb-6 h-16 w-auto sm:h-20 lg:h-24"
+                className="mb-6 h-20 w-auto sm:h-24 lg:h-28"
               />
 
               <span className="mb-5 inline-block bg-white px-3 py-1 text-xs font-black uppercase tracking-[0.2em] text-black">

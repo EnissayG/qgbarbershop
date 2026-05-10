@@ -20,7 +20,7 @@ export function Footer() {
             <img
               src={shopPhotos.logo}
               alt="Logo du QG"
-              className="mb-2 h-11 w-auto sm:mb-3 sm:h-14 lg:mb-4 lg:h-16"
+              className="mb-2 h-[3.25rem] w-auto sm:mb-3 sm:h-16 lg:mb-4 lg:h-[4.75rem]"
             />
             <p className="text-xs leading-snug text-white/60 sm:text-sm lg:leading-normal">
               Barbier moderne à Montréal, style épuré, service professionnel, résultats nets.

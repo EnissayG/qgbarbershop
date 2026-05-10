@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, Outlet, useLocation } from "react-router";
 import { AnimatePresence, motion } from "motion/react";
 import { MAIN_NAV_ITEMS } from "../config/navigation";
+import { shopPhotos } from "../config/shopPhotos";
 import { Header } from "./Header";
 import { Footer } from "./Footer";
 
@@ -70,6 +71,18 @@ export function Layout() {
               onClick={(e) => e.stopPropagation()}
               aria-label="Navigation mobile"
             >
+              <Link
+                to="/"
+                onClick={() => setMobileMenuOpen(false)}
+                className="mb-6 flex justify-center"
+                aria-label="Accueil Quartier Général"
+              >
+                <img
+                  src={shopPhotos.logo}
+                  alt=""
+                  className="h-16 w-auto drop-shadow-[0_2px_14px_rgba(0,0,0,0.8)]"
+                />
+              </Link>
               {MAIN_NAV_ITEMS.map((item, i) => (
                 <motion.div
                   key={item.path}
