@@ -264,3 +264,26 @@ body {
 .team-carousel-track::-webkit-scrollbar {
   display: none;
 }
+
+/* Page Réserver : l’iframe Squire est reparentée ici par JS (le script l’attache sinon au body). */
+.reserve-squire-host {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  min-height: min(78vh, 860px);
+  background-color: #f5f5f5;
+}
+
+.reserve-squire-host iframe.squire_widget {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 100% !important;
+  max-width: 100% !important;
+  transform: none !important;
+  transition: none !important;
+  box-shadow: none !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+}

@@ -1,13 +1,15 @@
 /** Coordonnées et liens officiels, Quartier Général Barbershop */
 
-export const shopBookingUrl =
-  "https://getsquire.com/booking/book/quartier-general-barbershop-montreal";
+/** Slug boutique dans l’URL Squire (`/booking/book/…`). */
+export const shopSquireShopRoute = "quartier-general-barbershop-montreal";
+
+export const shopBookingUrl = `https://getsquire.com/booking/book/${shopSquireShopRoute}`;
 
 /** Brand ID Squire (référence support / intégrations futures). */
 export const shopSquireBrandId = "d8e21510-540e-4dc9-923f-cc4e8b7b7496";
 
-/** Widget embarquable (iframe) — la page booking getsquire.com a X-Frame-Options: SAMEORIGIN. */
-export const shopSquireWidgetEmbedUrl = `https://widget.getsquire.com/v2/?brand=${shopSquireBrandId}`;
+/** Script widget officiel (charge frameLoader.js, etc.). Ne pas pointer vers `/v2/` seul : la page HTML est obsolète. */
+export const shopSquireWidgetScriptUrl = "https://widget.getsquire.com/widget.js";
 
 export const shopGoogleUrl = "https://share.google/iw59bpzgtJpANcE1q";
 

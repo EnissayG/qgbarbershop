@@ -1,15 +1,133 @@
+import { useEffect, useRef, useState } from "react";
 import { motion } from "motion/react";
 import { ExternalLink } from "lucide-react";
 import { SectionTopDiagonal } from "../components/SectionTopDiagonal";
-import { shopBookingUrl, shopSquireWidgetEmbedUrl } from "../config/shopInfo";
+import {
+  shopBookingUrl,
+  shopSquireBrandId,
+  shopSquireShopRoute,
+  shopSquireWidgetScriptUrl,
+} from "../config/shopInfo";
 import { usePageSeo } from "../hooks/usePageSeo";
+
+const SQUIRE_SCRIPT_ID = "qg-squire-widget-script";
+const EMBED_FALLBACK_MS = 12000;
 
 const SEO_RESERVE_TITLE = "Réserver | Quartier Général Barbershop Montréal";
 const SEO_RESERVE_DESCRIPTION =
   "Réserve ta coupe au QG : choix du barbier, service et créneau en ligne via Squire. Barbier Montréal Est, Sherbrooke.";
 
+declare global {
+  interface Window {
+    SquireWidget?: {
+      open: (config: { brand?: string; shop?: string; barber?: string }) => void;
+      close: () => void;
+    };
+    _squireWidgetConfig?: {
+      setups: { default: { brand?: string; shop?: string; barber?: string } };
+    };
+  }
+}
+
+function loadSquireScript(): Promise<void> {
+  const existing = document.getElementById(SQUIRE_SCRIPT_ID) as HTMLScriptElement | null;
+  if (existing) {
+    return existing.dataset.loaded === "1"
+      ? Promise.resolve()
+      : new Promise((resolve) => {
+          existing.addEventListener("load", () => resolve(), { once: true });
+        });
+  }
+  return new Promise((resolve, reject) => {
+    const s = document.createElement("script");
+    s.id = SQUIRE_SCRIPT_ID;
+    s.src = shopSquireWidgetScriptUrl;
+    s.async = true;
+    s.setAttribute("brand", shopSquireBrandId);
+    s.setAttribute("shop", shopSquireShopRoute);
+    s.setAttribute("x-squire-inline-enabled", "true");
+    s.setAttribute("x-squire-show-btn", "false");
+    s.addEventListener("load", () => {
+      s.dataset.loaded = "1";
+      resolve();
+    });
+    s.addEventListener("error", () => reject(new Error("Squire script failed to load")));
+    document.body.appendChild(s);
+  });
+}
+
 export function Reserve() {
   usePageSeo({ title: SEO_RESERVE_TITLE, description: SEO_RESERVE_DESCRIPTION });
+  const hostRef = useRef<HTMLDivElement>(null);
+  const readyRef = useRef(false);
+  const fallbackTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [embedState, setEmbedState] = useState<"loading" | "ready" | "fallback">("loading");
+
+  useEffect(() => {
+    let cancelled = false;
+    let observer: MutationObserver | null = null;
+
+    const clearFallbackTimer = () => {
+      if (fallbackTimerRef.current) {
+        clearTimeout(fallbackTimerRef.current);
+        fallbackTimerRef.current = null;
+      }
+    };
+
+    const tryMoveIframeIntoHost = () => {
+      const host = hostRef.current;
+      if (!host || cancelled) return;
+      const iframe = document.querySelector<HTMLIFrameElement>("iframe.squire_widget");
+      if (!iframe) return;
+      if (iframe.parentElement !== host) {
+        host.appendChild(iframe);
+      }
+      readyRef.current = true;
+      setEmbedState("ready");
+      clearFallbackTimer();
+    };
+
+    const openAndObserve = () => {
+      if (cancelled) return;
+      const cfg = window._squireWidgetConfig?.setups?.default;
+      if (cfg && window.SquireWidget) {
+        window.SquireWidget.open(cfg);
+      }
+      observer = new MutationObserver(() => {
+        tryMoveIframeIntoHost();
+      });
+      observer.observe(document.body, { childList: true, subtree: false });
+      requestAnimationFrame(() => tryMoveIframeIntoHost());
+      setTimeout(() => tryMoveIframeIntoHost(), 50);
+      setTimeout(() => tryMoveIframeIntoHost(), 200);
+      setTimeout(() => tryMoveIframeIntoHost(), 600);
+    };
+
+    fallbackTimerRef.current = setTimeout(() => {
+      if (!cancelled && !readyRef.current) {
+        setEmbedState("fallback");
+      }
+    }, EMBED_FALLBACK_MS);
+
+    loadSquireScript()
+      .then(() => {
+        if (!cancelled) openAndObserve();
+      })
+      .catch(() => {
+        if (!cancelled) {
+          clearFallbackTimer();
+          setEmbedState("fallback");
+        }
+      });
+
+    return () => {
+      cancelled = true;
+      observer?.disconnect();
+      clearFallbackTimer();
+      readyRef.current = false;
+      window.SquireWidget?.close();
+    };
+  }, []);
 
   return (
     <div className="overflow-x-hidden">
@@ -34,8 +152,8 @@ export function Reserve() {
               <span className="text-white/35">au QG</span>
             </h1>
             <p className="max-w-xl text-xl leading-relaxed text-white/80">
-              Choisis ton barbier, ton service et ton créneau. Réservation sécurisée, disponibilités en
-              temps réel.
+              Choisis ton barbier, ton service et ton créneau — le flux Squire est intégré dans le cadre
+              ci-dessous sur cette page.
             </p>
           </motion.div>
         </div>
@@ -74,20 +192,36 @@ export function Reserve() {
               </div>
             </div>
 
-            <div className="overflow-hidden border-4 border-black bg-neutral-100 shadow-[10px_10px_0_0_rgba(0,0,0,1)]">
-              <iframe
-                title="Réservation en ligne — Quartier Général Barbershop (Squire)"
-                src={shopSquireWidgetEmbedUrl}
-                className="block min-h-[80vh] w-full bg-white lg:min-h-[85vh]"
-                loading="eager"
-                referrerPolicy="no-referrer-when-downgrade"
-                allow="payment; fullscreen"
-              />
+            <div className="relative overflow-hidden border-4 border-black shadow-[10px_10px_0_0_rgba(0,0,0,1)]">
+              <div ref={hostRef} className="reserve-squire-host" aria-live="polite">
+                {embedState === "loading" && (
+                  <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 bg-neutral-100 px-6 text-center">
+                    <p className="text-sm font-bold text-black">Chargement de la réservation…</p>
+                    <p className="max-w-sm text-xs text-black/50">
+                      Le widget Squire s’affiche ici dans quelques secondes.
+                    </p>
+                  </div>
+                )}
+                {embedState === "fallback" && (
+                  <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-4 bg-neutral-100 px-6 text-center">
+                    <p className="max-w-md text-sm font-bold text-black">
+                      Le widget n’a pas pu se charger dans la page (réseau ou bloqueur). Tu peux continuer
+                      sur Squire directement.
+                    </p>
+                    <a
+                      href={shopBookingUrl}
+                      className="inline-flex min-h-[3rem] items-center justify-center border-4 border-black bg-black px-8 py-2 text-xs font-black uppercase tracking-wider text-white transition hover:bg-white hover:text-black"
+                    >
+                      Ouvrir la réservation
+                    </a>
+                  </div>
+                )}
+              </div>
             </div>
 
             <p className="mt-4 text-center text-sm text-black/50">
-              Le cadre ne s&apos;affiche pas (bloqueur, réseau) ? Utilise « Continuer sur Squire » — même
-              parcours de réservation sur la page officielle.
+              Intégration via le script officiel Squire : le cadre ci-dessus reprend leur interface de
+              réservation.
             </p>
           </motion.div>
         </div>
