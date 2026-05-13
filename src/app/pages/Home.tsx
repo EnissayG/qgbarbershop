@@ -1,9 +1,11 @@
-import { Link } from "react-router";
+import { Link, useLocation } from "react-router";
 import { Scissors, Users, GraduationCap, ArrowRight, Instagram } from "lucide-react";
 import { motion } from "motion/react";
+import { useEffect } from "react";
 import { usePageSeo } from "../hooks/usePageSeo";
 import { ImageWithFallback } from "../components/figma/ImageWithFallback";
 import { SectionTopDiagonal } from "../components/SectionTopDiagonal";
+import { SquireBookingEmbed } from "../components/SquireBookingEmbed";
 import { shopGoogleUrl, shopPhoneDisplay, shopPhoneTel } from "../config/shopInfo";
 import { shopInstagramUrl, shopPhotos } from "../config/shopPhotos";
 
@@ -12,11 +14,22 @@ const SEO_HOME_DESCRIPTION =
   "Barbershop à Montréal Est : coupes précises, cheveux afro et texturés, tresses et locs. Équipe pro, réservation en ligne. Quartier Général Barbershop, Sherbrooke Est.";
 
 export function Home() {
+  const location = useLocation();
   usePageSeo({ title: SEO_HOME_TITLE, description: SEO_HOME_DESCRIPTION });
+
+  useEffect(() => {
+    if (location.hash !== "#reserver") return;
+    const el = document.getElementById("reserver");
+    if (!el) return;
+    const t = window.setTimeout(() => {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 80);
+    return () => window.clearTimeout(t);
+  }, [location.hash, location.pathname]);
 
   return (
     <div className="pt-0">
-      {/* Hero — Orienté conversion, photo de fond, responsive */}
+      {/* Hero : photo de fond, conversion, responsive */}
       <section className="hero-fullscreen-section relative isolate flex w-full items-center overflow-hidden bg-black">
         {/* Photo de fond + voiles */}
         <div className="absolute inset-0 z-0 overflow-hidden">
@@ -35,7 +48,7 @@ export function Home() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="grid items-center gap-10 lg:grid-cols-[1fr_380px] xl:grid-cols-[1fr_420px]"
+            className="grid items-center gap-10 lg:grid-cols-1"
           >
             {/* Colonne gauche : identité + CTA mobile */}
             <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
@@ -49,7 +62,7 @@ export function Home() {
               />
 
               <span className="mb-5 inline-block bg-white px-3 py-1 text-xs font-black uppercase tracking-[0.2em] text-black">
-                Montréal — Sherbrooke Est
+                Montréal, Sherbrooke Est
               </span>
 
               <h1 className="mb-6 font-black uppercase leading-[0.88] tracking-tight text-white text-[clamp(2.75rem,9vw,5.75rem)]">
@@ -59,22 +72,14 @@ export function Home() {
               </h1>
 
               <p className="mb-8 max-w-md text-base leading-relaxed text-white/75 sm:text-lg">
-                Coupes précises, service soigné, ambiance professionnelle. Réserve en ligne et
-                choisis ton barbier.
+                Coupes précises, service soigné, ambiance professionnelle. Choisis ton barbier et ton
+                créneau dans le planning plus bas sur cette page.
               </p>
 
-              {/* CTA mobile — caché sur desktop */}
-              <div className="w-full space-y-3 lg:hidden">
-                <Link
-                  to="/reserver"
-                  className="group inline-flex w-full items-center justify-center gap-3 bg-white px-8 py-5 font-black uppercase tracking-wider text-black transition-all hover:bg-white/95 active:scale-[0.99] sm:text-lg"
-                >
-                  <span>Réserver maintenant</span>
-                  <ArrowRight size={20} className="transition-transform group-hover:translate-x-1" />
-                </Link>
+              <div className="mt-2 w-full max-w-md space-y-3 lg:mt-2">
                 <a
                   href={`tel:${shopPhoneTel}`}
-                  className="inline-flex w-full items-center justify-center border-2 border-white/35 px-8 py-4 font-bold uppercase tracking-wider text-white/80 transition-all hover:border-white hover:text-white"
+                  className="inline-flex w-full items-center justify-center border-2 border-white/35 px-8 py-4 font-bold uppercase tracking-wider text-white/80 transition-all hover:border-white hover:text-white lg:max-w-sm"
                 >
                   {shopPhoneDisplay}
                 </a>
@@ -94,37 +99,40 @@ export function Home() {
               </div>
             </div>
 
-            {/* Colonne droite : carte réservation — desktop uniquement */}
-            <div className="hidden lg:flex lg:flex-col border-4 border-white bg-black/85 p-8 shadow-[12px_12px_0_0_rgba(255,255,255,0.12)] xl:p-10">
-              <p className="mb-2 text-xs font-black uppercase tracking-[0.2em] text-white/50">
-                Réservation prioritaire
-              </p>
-              <h2 className="mb-3 text-3xl font-black uppercase tracking-tight text-white xl:text-4xl">
-                Réserver maintenant
-              </h2>
-              <p className="mb-7 text-sm leading-relaxed text-white/60">
-                Disponibilités en temps réel. Choisis ton barbier, ton service, ton créneau.
-              </p>
+          </motion.div>
+        </div>
+      </section>
 
-              <div className="space-y-3">
-                <Link
-                  to="/reserver"
-                  className="group inline-flex w-full items-center justify-center gap-3 bg-white px-6 py-5 font-black uppercase tracking-wider text-black transition-all hover:bg-white/93"
-                >
-                  <span>Réserver maintenant</span>
-                  <ArrowRight size={20} className="transition-transform group-hover:translate-x-1" />
-                </Link>
-                <a
-                  href={`tel:${shopPhoneTel}`}
-                  className="inline-flex w-full items-center justify-center border-2 border-white px-6 py-4 text-sm font-bold uppercase tracking-wider text-white transition-all hover:bg-white hover:text-black"
-                >
-                  Appeler : {shopPhoneDisplay}
-                </a>
-              </div>
-
-              <p className="mt-5 text-xs font-bold uppercase tracking-wider text-white/40">
-                Squire · Réservation sécurisée · Sans frais
-              </p>
+      {/* Réservation Squire sur l’accueil (trafic Google, conversion) */}
+      <section
+        id="reserver"
+        className="section-diagonal-top scroll-mt-[5.75rem] relative bg-white pb-[max(5rem,calc(env(safe-area-inset-bottom,0px)+2.5rem))] sm:scroll-mt-24 lg:scroll-mt-28 lg:pb-24"
+        aria-labelledby="home-booking-heading"
+      >
+        <SectionTopDiagonal tone="light" variant="slash" />
+        <div className="layout-gutter min-w-0">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-40px" }}
+            transition={{ duration: 0.65 }}
+            className="mx-auto max-w-5xl"
+          >
+            <p className="mb-3 text-xs font-black uppercase tracking-[0.2em] text-black/45">
+              Réservation en ligne
+            </p>
+            <h2
+              id="home-booking-heading"
+              className="mb-4 text-4xl font-black uppercase leading-tight tracking-tighter text-black sm:text-5xl lg:text-6xl"
+            >
+              Réserve ton créneau
+            </h2>
+            <p className="mb-8 max-w-2xl text-base leading-relaxed text-black/65 sm:text-lg">
+              Planning en temps réel : choisis ton barbier, ton service et ton horaire. Tu peux aussi ouvrir la page
+              dédiée depuis le menu (Planning).
+            </p>
+            <div className="overflow-hidden border-4 border-black shadow-[10px_10px_0_0_rgba(0,0,0,1)]">
+              <SquireBookingEmbed variant="home" />
             </div>
           </motion.div>
         </div>
@@ -339,7 +347,7 @@ export function Home() {
         </div>
       </section>
 
-      {/* Contenu SEO — visible, structuré */}
+      {/* Contenu SEO visible et structuré */}
       <section
         className="section-diagonal-top relative border-t border-black/10 bg-neutral-100 pb-16 lg:pb-20"
         aria-labelledby="seo-accueil-heading"
@@ -350,7 +358,7 @@ export function Home() {
             id="seo-accueil-heading"
             className="mb-6 text-2xl font-black uppercase tracking-tight text-black sm:text-3xl"
           >
-            Salon de barbier à Montréal — Quartier Général
+            Salon de barbier à Montréal : Quartier Général
           </h2>
           <div className="space-y-5 text-base leading-relaxed text-black/75 sm:text-lg">
             <p>
@@ -411,13 +419,6 @@ export function Home() {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8">
-              <Link
-                to="/reserver"
-                className="group inline-flex items-center justify-center gap-3 px-10 lg:px-12 py-5 lg:py-6 bg-white text-black hover:bg-white/90 transition-all font-black uppercase tracking-wider text-base lg:text-lg"
-              >
-                <span>Réserver en ligne (Squire)</span>
-                <ArrowRight size={24} className="group-hover:translate-x-1 transition-transform" />
-              </Link>
               <a
                 href={`tel:${shopPhoneTel}`}
                 className="inline-flex items-center justify-center px-10 lg:px-12 py-5 lg:py-6 border-4 border-white text-white hover:bg-white hover:text-black transition-all font-black uppercase tracking-wider text-base lg:text-lg"

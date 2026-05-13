@@ -121,7 +121,7 @@ export function Team() {
 
   const team: SquadMember[] = [
     {
-      name: "KG",
+      name: "Khalid",
       nickname: "KG",
       role: "Copropriétaire, formateur et barbier",
       specialty: "Dégradés, design et barbe",

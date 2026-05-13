@@ -13,7 +13,12 @@ type HeaderProps = {
 export function Header({ mobileMenuOpen, setMobileMenuOpen }: HeaderProps) {
   const location = useLocation();
 
-  const isActive = (path: string) => location.pathname === path;
+  const isActive = (path: string) => {
+    if (path === "/#reserver") {
+      return location.pathname === "/" && location.hash === "#reserver";
+    }
+    return location.pathname === path;
+  };
 
   const textShadow = "[text-shadow:0_1px_10px_rgba(0,0,0,0.85),0_0_1px_rgba(0,0,0,0.9)]";
 

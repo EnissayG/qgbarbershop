@@ -1,5 +1,4 @@
 import { motion } from "motion/react";
-import { Link } from "react-router";
 import { MapPin, Phone, Clock, Instagram, Zap, ExternalLink } from "lucide-react";
 import { ImageWithFallback } from "../components/figma/ImageWithFallback";
 import { SectionTopDiagonal } from "../components/SectionTopDiagonal";
@@ -49,7 +48,8 @@ export function Contact() {
               <span className="text-white/30">au QG</span>
             </h1>
             <p className="text-xl text-white/80 leading-relaxed max-w-2xl">
-              Réserve en ligne (Squire) ou écris au barbier de ton choix sur Instagram. Sans rendez-vous selon les places disponibles.
+              Planning sur la page d&apos;accueil du site ou message au barbier de ton choix sur Instagram. Sans
+              rendez-vous selon les places disponibles.
             </p>
           </motion.div>
         </div>
@@ -186,12 +186,6 @@ export function Contact() {
               </div>
 
               <div className="space-y-4 pt-8">
-                <Link
-                  to="/reserver"
-                  className="flex w-full items-center justify-center gap-3 bg-black py-5 font-black uppercase tracking-wider text-white transition-all hover:bg-black/90"
-                >
-                  <span>Réserver en ligne (Squire)</span>
-                </Link>
                 <a
                   href={shopInstagramUrl}
                   target="_blank"

@@ -2,7 +2,6 @@ import { useState } from "react";
 import { usePageSeo } from "../hooks/usePageSeo";
 import { motion } from "motion/react";
 import { Scissors, Sparkles, Clock, ChevronDown } from "lucide-react";
-import { Link } from "react-router";
 import { SectionTopDiagonal } from "../components/SectionTopDiagonal";
 import { shopPhoneDisplay, shopPhoneTel } from "../config/shopInfo";
 import { shopInstagramUrl } from "../config/shopPhotos";
@@ -260,15 +259,9 @@ export function Services() {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="mt-16 text-center"
           >
-            <p className="text-lg text-black/60 mb-6">
+            <p className="text-lg text-black/60">
               Tous nos services incluent une consultation personnalisée et des produits haut de gamme
             </p>
-            <Link
-              to="/reserver"
-              className="inline-flex items-center justify-center px-10 py-5 bg-black text-white hover:bg-black/90 transition-all font-black uppercase tracking-wider"
-            >
-              Réserver en ligne (Squire)
-            </Link>
           </motion.div>
         </div>
       </section>
@@ -350,17 +343,11 @@ export function Services() {
                   </h3>
                   
                   <p className="text-black/60 text-lg leading-relaxed">
-                    Réservation en ligne (Squire), ou écris au barbier de ton choix sur Instagram.
+                    Planning sur l&apos;accueil du site ou message au barbier de ton choix sur Instagram.
                     Sans rendez-vous selon disponibilité.
                   </p>
 
                   <div className="space-y-3 pt-4">
-                    <Link
-                      to="/reserver"
-                      className="block w-full py-5 bg-black text-white hover:bg-black/90 transition-all text-center font-black uppercase tracking-wider"
-                    >
-                      Réserver en ligne (Squire)
-                    </Link>
                     <a
                       href={shopInstagramUrl}
                       target="_blank"
@@ -422,7 +409,7 @@ export function Services() {
         </div>
       </section>
 
-      {/* Contenu SEO — visible, structuré (pas de texte masqué) */}
+      {/* Contenu SEO visible, structuré (pas de texte masqué) */}
       <section
         className="section-diagonal-top relative border-t border-black/10 bg-neutral-100 pb-20 lg:pb-24"
         aria-labelledby="seo-tarifs-heading"
@@ -482,12 +469,6 @@ export function Services() {
             <p className="text-xl text-white/60 mb-8">
               Au QG, on te transforme
             </p>
-            <Link
-              to="/reserver"
-              className="inline-flex items-center justify-center px-12 py-6 bg-white text-black hover:bg-white/90 transition-all font-black uppercase tracking-wider"
-            >
-              Réserver maintenant
-            </Link>
           </motion.div>
         </div>
       </section>

@@ -288,3 +288,20 @@ body {
   border: 0 !important;
   border-radius: 0 !important;
 }
+
+/* Accueil : bloc réservation un peu moins haut sur mobile pour garder le reste du contenu visible */
+.home-squire-embed-host.reserve-squire-host {
+  min-height: min(52vh, 520px);
+}
+
+@media (min-width: 640px) {
+  .home-squire-embed-host.reserve-squire-host {
+    min-height: min(58vh, 640px);
+  }
+}
+
+@media (min-width: 1024px) {
+  .home-squire-embed-host.reserve-squire-host {
+    min-height: min(68vh, 800px);
+  }
+}

@@ -1,5 +1,4 @@
 import { motion } from "motion/react";
-import { Link } from "react-router";
 import { GraduationCap, Users, CheckCircle2, Calendar, MapPin, Scissors } from "lucide-react";
 import { ImageWithFallback } from "../components/figma/ImageWithFallback";
 import { SectionTopDiagonal } from "../components/SectionTopDiagonal";
@@ -40,7 +39,7 @@ export function Formations() {
         </div>
       </section>
 
-      {/* Formation principale — programme mixte 1000 $ */}
+      {/* Formation principale : programme mixte 1000 $ */}
       <section className="section-diagonal-top relative bg-white pb-24 lg:pb-32">
         <SectionTopDiagonal tone="light" variant="slash" />
         <div className="layout-gutter">
@@ -397,12 +396,6 @@ export function Formations() {
               >
                 Écrire sur Instagram
               </a>
-              <Link
-                to="/reserver"
-                className="px-10 lg:px-12 py-5 lg:py-6 border-4 border-white text-white hover:bg-white hover:text-black transition-all font-black uppercase tracking-wider text-center"
-              >
-                Réserver une coupe en ligne (Squire)
-              </Link>
               <a
                 href={`mailto:${shopEmail}`}
                 className="px-10 lg:px-12 py-5 lg:py-6 border-4 border-white text-white hover:bg-white hover:text-black transition-all font-black uppercase tracking-wider text-center"

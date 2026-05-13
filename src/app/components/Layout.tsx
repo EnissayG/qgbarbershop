@@ -7,7 +7,7 @@ import { Header } from "./Header";
 import { Footer } from "./Footer";
 
 export function Layout() {
-  const { pathname } = useLocation();
+  const { pathname, hash } = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
@@ -100,7 +100,9 @@ export function Layout() {
                     to={item.path}
                     onClick={() => setMobileMenuOpen(false)}
                     className={`block rounded-2xl border border-white/10 px-6 py-4 text-center text-xl font-black uppercase tracking-wide transition-colors ${
-                      pathname === item.path
+                      (item.path === "/#reserver"
+                        ? pathname === "/" && hash === "#reserver"
+                        : pathname === item.path)
                         ? "bg-white/20 text-white"
                         : "bg-white/10 text-white/90 hover:bg-white/15 hover:text-white"
                     }`}

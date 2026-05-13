@@ -8,7 +8,7 @@ export const shopBookingUrl = `https://getsquire.com/booking/book/${shopSquireSh
 /** Brand ID Squire (référence support / intégrations futures). */
 export const shopSquireBrandId = "d8e21510-540e-4dc9-923f-cc4e8b7b7496";
 
-/** URL du loader Squire (param `brand` dans l’URL + attribut `brand` sur la balise — les deux sont attendus selon la doc / le runtime). */
+/** URL du loader Squire : param `brand` dans l’URL et attribut `brand` sur la balise (les deux sont attendus selon la doc / le runtime). */
 export const shopSquireWidgetScriptUrl = `https://widget.getsquire.com/widget.js?brand=${shopSquireBrandId}`;
 
 export const shopGoogleUrl = "https://share.google/iw59bpzgtJpANcE1q";

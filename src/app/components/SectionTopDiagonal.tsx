@@ -1,7 +1,7 @@
 /**
  * Bordure diagonale entre sections (cohérence site).
- * — Après un fond noir : tone "light" + variant "slash" (triangle blanc).
- * — Après un fond blanc : tone "dark" + variant "slashAlt" (triangle noir).
+ * Après un fond noir : tone "light" + variant "slash" (triangle blanc).
+ * Après un fond blanc : tone "dark" + variant "slashAlt" (triangle noir).
  * Utiliser avec la classe CSS .section-diagonal-top sur la section pour l’espace sous le pli.
  */
 type Tone = "light" | "dark";

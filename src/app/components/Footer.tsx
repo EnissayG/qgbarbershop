@@ -54,10 +54,10 @@ export function Footer() {
               </li>
               <li>
                 <Link
-                  to="/reserver"
+                  to="/#reserver"
                   className="text-xs text-white/60 transition-colors hover:text-white sm:text-sm"
                 >
-                  Réserver
+                  Planning
                 </Link>
               </li>
               <li>

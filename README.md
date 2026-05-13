@@ -1,8 +1,8 @@
-# Quartier Général Barbershop — site vitrine
+# Quartier Général Barbershop : site vitrine
 
 Site web public du **Quartier Général Barbershop** (Montréal, Sherbrooke Est). Présentation du salon, services, équipe, formations, contact et **réservation en ligne** via Squire.
 
-Maquette d’origine (référence design) : [Figma — Barbershop website design](https://www.figma.com/design/DLaefTnNkiOS0ZeL17lDxU/Barbershop-website-design).
+Maquette d’origine (référence design) : [Figma : Barbershop website design](https://www.figma.com/design/DLaefTnNkiOS0ZeL17lDxU/Barbershop-website-design).
 
 ---
 
@@ -46,7 +46,7 @@ Routes principales : `/`, `/services`, `/reserver`, `/equipe`, `/formations`, `/
 
 Il n’existe pas de page publique de doc technique détaillée pour `widget.js` ; le support Squire envoie le snippet **script dans le `<head>`** avec `?brand=BRAND_ID`. Comportement observé sur le loader public (`widget.getsquire.com/widget.js` → `v2/frameLoader.js`) :
 
-- La config est lue sur **`document.currentScript`** : attributs HTML **`brand`** (UUID) et **`shop`** (slug boutique) sont **nécessaires** — le seul `?brand=` dans l’URL ne remplace pas `getAttribute("brand")`.
+- La config est lue sur **`document.currentScript`** : attributs HTML **`brand`** (UUID) et **`shop`** (slug boutique) sont **nécessaires** ; le seul `?brand=` dans l’URL ne remplace pas `getAttribute("brand")`.
 - `frameLoader.js` définit **`window.SquireWidget.open({ brand, shop })`** et crée une **`iframe.squire_widget`** sur le `body`.
 - **SPA (React)** : un second injecteur de script (head statique + effet React) peut créer des courses ; ici le script est chargé **uniquement** depuis **`Reserve.tsx`** au montage de `/reserver`.
 - Affichage dans le cadre du site : après **`open()`**, l’iframe est **reparentée** dans `.reserve-squire-host` (`index.css`), avec overrides CSS pour remplir la zone (le widget d’origine est pensé comme panneau latéral / bouton flottant).
