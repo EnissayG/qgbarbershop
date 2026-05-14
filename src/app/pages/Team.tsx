@@ -25,6 +25,7 @@ function SquadCard({ member, airy }: { member: SquadMember; airy?: boolean }) {
       <div className={`relative overflow-hidden ${airy ? "mb-8" : "mb-5"}`}>
         <div className="relative aspect-[4/5] overflow-hidden bg-neutral-900">
           <ImageWithFallback
+            key={`${member.image}-${member.name}`}
             src={member.image}
             alt={member.name}
             className="h-full w-full object-cover object-top"
@@ -121,7 +122,7 @@ export function Team() {
 
   const team: SquadMember[] = [
     {
-      name: "Khalid",
+      name: "KG",
       nickname: "KG",
       role: "Copropriétaire, formateur et barbier",
       specialty: "Dégradés, design et barbe",
@@ -291,6 +292,7 @@ export function Team() {
                 }`}
               >
                 <ImageWithFallback
+                  key={m.instagramHref}
                   src={m.image}
                   alt=""
                   className="pointer-events-none h-12 w-12 rounded-full object-cover object-top ring-2 ring-black/10"
@@ -328,7 +330,7 @@ export function Team() {
             <div className="mx-auto max-w-md overflow-hidden px-11 sm:px-14">
               <AnimatePresence initial={false} mode="wait">
                 <motion.div
-                  key={team[activeIdx].name}
+                  key={`${team[activeIdx].name}-${team[activeIdx].instagramHref}`}
                   initial={{ opacity: 0, x: 28 }}
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -28 }}

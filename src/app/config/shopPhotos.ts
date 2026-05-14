@@ -30,8 +30,8 @@ export const shopPhotos = {
   /** Affiche / visuel formation officielle */
   formationFlyer: `${b}/formation-flyer.png`,
   squad: {
-    kg: `${b}/squad-kg.png`,
-    benz: `${b}/squad-benz.png`,
+    kg: `${b}/squad-kg.png?v=5`,
+    benz: `${b}/squad-benz.png?v=5`,
     lennox: `${b}/squad-lennox.png`,
     hauzoftanz: `${b}/squad-hauzoftanz.png`,
     shuyacutz: `${b}/squad-shuyacutz.png`,
