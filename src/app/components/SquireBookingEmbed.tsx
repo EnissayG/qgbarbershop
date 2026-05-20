@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
-import { shopSquireBrandId, shopSquireShopRoute } from "../config/shopInfo";
+import { ArrowRight } from "lucide-react";
+import { shopBookingUrl, shopSquireBrandId, shopSquireShopRoute } from "../config/shopInfo";
 
 const SCRIPT_ID = "squire-widget";
 const WIDGET_SRC = `https://widget.getsquire.com/widget.js?brand=${encodeURIComponent(shopSquireBrandId)}`;
@@ -198,5 +199,24 @@ export function SquireBookingEmbed({ variant = "page", className }: SquireBookin
       ? `reserve-squire-host home-squire-embed-host ${className ?? ""}`.trim()
       : `reserve-squire-host ${className ?? ""}`.trim();
 
-  return <div ref={hostRef} className={hostClass} aria-label="Réservation Squire" />;
+  return (
+    <div className="flex w-full flex-col">
+      <div ref={hostRef} className={hostClass} aria-label="Réservation Squire" />
+      <div className="border-t-2 border-black bg-neutral-50 px-4 py-3 sm:px-5 sm:py-4">
+        <a
+          href={shopBookingUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group flex w-full items-center justify-center gap-2 border-2 border-black bg-white px-4 py-3.5 text-center text-[0.65rem] font-black uppercase tracking-[0.14em] text-black transition-colors hover:bg-black hover:text-white sm:text-xs sm:tracking-wider"
+        >
+          <span>Le planning ne s&apos;affiche pas ? Réserver sur Squire</span>
+          <ArrowRight
+            size={16}
+            className="shrink-0 transition-transform group-hover:translate-x-0.5"
+            aria-hidden
+          />
+        </a>
+      </div>
+    </div>
+  );
 }
