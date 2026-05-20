@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { ExternalLink, RefreshCw } from "lucide-react";
+import { ArrowRight, RefreshCw } from "lucide-react";
 import {
   shopBookingUrl,
   shopPhoneDisplay,
@@ -395,9 +395,12 @@ export function SquireBookingEmbed({ variant = "page", className }: SquireBookin
   const showFallback = status === "error";
   const showLoading = status === "loading";
 
+  const bookingCtaClass =
+    "group inline-flex w-full max-w-md items-center justify-center gap-3 bg-black px-8 py-5 font-black uppercase tracking-wider text-white shadow-[6px_6px_0_0_rgba(0,0,0,0.15)] transition-all hover:bg-black/90 active:scale-[0.99]";
+
   return (
     <div ref={hostRef} className={`${hostClass} squire-embed-shell`} aria-label="Réservation en ligne">
-      {showLoading && !showFallback && (
+      {showLoading && (
         <div className="squire-embed-overlay" role="status" aria-live="polite">
           <p className="squire-embed-overlay-title">Chargement du planning</p>
           <p className="squire-embed-overlay-hint">Quelques secondes…</p>
@@ -408,24 +411,31 @@ export function SquireBookingEmbed({ variant = "page", className }: SquireBookin
         <div className="squire-embed-fallback" role="alert">
           <p className="squire-embed-fallback-title">Planning indisponible ici</p>
           <p className="squire-embed-fallback-text">
-            {errorCode ? errorMessageFromCode(errorCode) : errorMessageFromCode("unknown")} Tu peux quand même
-            réserver sur la page officielle Squire ou nous appeler.
+            {errorCode ? errorMessageFromCode(errorCode) : errorMessageFromCode("unknown")} Tu peux réserver
+            directement sur Squire ou nous appeler.
           </p>
           <div className="squire-embed-fallback-actions">
             <a
               href={shopBookingUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="squire-embed-fallback-primary"
+              className={bookingCtaClass}
             >
-              <ExternalLink size={18} aria-hidden />
-              <span>Ouvrir la réservation Getsquire</span>
+              <span>Réserver sur la page Squire</span>
+              <ArrowRight size={20} className="transition-transform group-hover:translate-x-1" aria-hidden />
             </a>
-            <button type="button" onClick={retry} className="squire-embed-fallback-secondary">
+            <button
+              type="button"
+              onClick={retry}
+              className="inline-flex w-full max-w-md items-center justify-center gap-2 border-4 border-black bg-white px-8 py-4 font-black uppercase tracking-wider text-black transition-all hover:bg-black hover:text-white"
+            >
               <RefreshCw size={18} aria-hidden />
               <span>Réessayer</span>
             </button>
-            <a href={`tel:${shopPhoneTel}`} className="squire-embed-fallback-link">
+            <a
+              href={`tel:${shopPhoneTel}`}
+              className="pt-1 text-sm font-bold uppercase tracking-wider text-black/50 underline decoration-black/25 underline-offset-4 hover:text-black"
+            >
               {shopPhoneDisplay}
             </a>
           </div>
