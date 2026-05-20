@@ -289,6 +289,128 @@ body {
   border-radius: 0 !important;
 }
 
+/* États chargement / repli si le widget Squire ne s’affiche pas */
+.squire-embed-shell {
+  position: relative;
+}
+
+.squire-embed-overlay,
+.squire-embed-fallback {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.squire-embed-overlay {
+  background-color: #f5f5f5;
+  color: #000;
+}
+
+.squire-embed-overlay-title {
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(0, 0, 0, 0.45);
+}
+
+.squire-embed-overlay-hint {
+  margin-top: 0.5rem;
+  font-size: 0.95rem;
+  color: rgba(0, 0, 0, 0.55);
+}
+
+.squire-embed-fallback {
+  background-color: #fff;
+  border: 0;
+}
+
+.squire-embed-fallback-title {
+  margin-bottom: 0.75rem;
+  font-size: 1.35rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  color: #000;
+}
+
+.squire-embed-fallback-text {
+  max-width: 22rem;
+  margin-bottom: 1.5rem;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: rgba(0, 0, 0, 0.65);
+}
+
+.squire-embed-fallback-actions {
+  display: flex;
+  width: 100%;
+  max-width: 20rem;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.squire-embed-fallback-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: #000;
+  padding: 0.9rem 1.25rem;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #fff;
+  transition: background-color 0.2s;
+}
+
+.squire-embed-fallback-primary:hover {
+  background-color: rgba(0, 0, 0, 0.88);
+}
+
+.squire-embed-fallback-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border: 2px solid #000;
+  background-color: #fff;
+  padding: 0.85rem 1.25rem;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #000;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.squire-embed-fallback-secondary:hover {
+  background-color: #000;
+  color: #fff;
+}
+
+.squire-embed-fallback-link {
+  padding-top: 0.35rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(0, 0, 0, 0.5);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.squire-embed-fallback-link:hover {
+  color: #000;
+}
+
 /* Accueil : bloc réservation un peu moins haut sur mobile pour garder le reste du contenu visible */
 .home-squire-embed-host.reserve-squire-host {
   min-height: min(52vh, 520px);
