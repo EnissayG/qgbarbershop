@@ -5,11 +5,11 @@ export const shopSquireShopRoute = "quartier-general-barbershop-montreal";
 
 export const shopBookingUrl = `https://getsquire.com/booking/book/${shopSquireShopRoute}`;
 
-/** Brand ID Squire (référence support / intégrations futures). */
-export const shopSquireBrandId = "d8e21510-540e-4dc9-923f-cc4e8b7b7496";
+/** URL iframe embarquée (même page que le lien direct, paramètres widget Squire). */
+export const shopSquireEmbedUrl = `${shopBookingUrl}?platform=widget&viewMode=singleShop`;
 
-/** URL du loader Squire : param `brand` dans l’URL et attribut `brand` sur la balise (les deux sont attendus selon la doc / le runtime). */
-export const shopSquireWidgetScriptUrl = `https://widget.getsquire.com/widget.js?brand=${shopSquireBrandId}`;
+/** Brand ID Squire (référence interne). */
+export const shopSquireBrandId = "d8e21510-540e-4dc9-923f-cc4e8b7b7496";
 
 export const shopGoogleUrl = "https://share.google/iw59bpzgtJpANcE1q";
 

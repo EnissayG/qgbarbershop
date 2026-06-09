@@ -1,82 +1,7 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useId, useState } from "react";
+import { useLocation } from "react-router";
 import { ArrowRight } from "lucide-react";
-import { shopBookingUrl, shopSquireBrandId, shopSquireShopRoute } from "../config/shopInfo";
-
-const SCRIPT_ID = "squire-widget";
-const WIDGET_SRC = `https://widget.getsquire.com/widget.js?brand=${encodeURIComponent(shopSquireBrandId)}`;
-
-const SQUIRE_OPEN_CONFIG = {
-  brand: shopSquireBrandId,
-  shop: shopSquireShopRoute,
-} as const;
-
-declare global {
-  interface Window {
-    SquireWidget?: {
-      open: (config: { brand?: string | null; shop?: string | null; barber?: string | null }) => void;
-      close: () => void;
-    };
-    _squireWidgetConfig?: {
-      setups: { default: { brand?: string | null; shop?: string | null; barber?: string | null } };
-    };
-  }
-}
-
-/** Le bouton vit dans un shadow DOM : seul le JS peut le masquer sans casser le plugin. */
-function hideSquireFloatingButton(): boolean {
-  const root = document.getElementById("squire_booking_widget_root");
-  const button = root?.shadowRoot?.getElementById("squire-book-button");
-  if (!button) return false;
-  button.style.setProperty("display", "none", "important");
-  button.style.setProperty("visibility", "hidden", "important");
-  button.style.setProperty("pointer-events", "none", "important");
-  return true;
-}
-
-function injectSquireLoaderOnce(): Promise<void> {
-  const existing = document.getElementById(SCRIPT_ID) as HTMLScriptElement | null;
-  if (
-    existing?.dataset.qgInjected === "1" &&
-    existing.getAttribute("brand") === shopSquireBrandId &&
-    existing.getAttribute("shop") === shopSquireShopRoute &&
-    existing.getAttribute("x-squire-show-btn") !== "false"
-  ) {
-    return Promise.resolve();
-  }
-  if (existing) existing.remove();
-
-  return new Promise((resolve, reject) => {
-    const script = document.createElement("script");
-    script.type = "text/javascript";
-    script.id = SCRIPT_ID;
-    script.setAttribute("data-name", "squire-widget");
-    script.src = WIDGET_SRC;
-    script.setAttribute("brand", shopSquireBrandId);
-    script.setAttribute("shop", shopSquireShopRoute);
-    script.dataset.qgInjected = "1";
-    script.addEventListener("load", () => resolve(), { once: true });
-    script.addEventListener("error", () => reject(new Error("widget.js failed")), { once: true });
-    document.head.appendChild(script);
-  });
-}
-
-function waitForSquireWidgetApi(timeoutMs: number): Promise<void> {
-  return new Promise((resolve, reject) => {
-    const start = Date.now();
-    const tick = () => {
-      if (typeof window.SquireWidget !== "undefined" && typeof window.SquireWidget?.open === "function") {
-        resolve();
-        return;
-      }
-      if (Date.now() - start > timeoutMs) {
-        reject(new Error("SquireWidget API timeout"));
-        return;
-      }
-      requestAnimationFrame(tick);
-    };
-    tick();
-  });
-}
+import { shopBookingUrl, shopSquireEmbedUrl } from "../config/shopInfo";
 
 export type SquireBookingEmbedVariant = "page" | "home";
 
@@ -86,135 +11,58 @@ type SquireBookingEmbedProps = {
 };
 
 /**
- * Charge widget.js, ouvre Squire et reparente l’iframe dans le conteneur.
- * Pas de panneau d’erreur : en cas d’échec le cadre reste vide (comportement d’origine).
+ * Iframe directe Squire — nouvelle instance à chaque montage (navigation SPA fiable).
  */
 export function SquireBookingEmbed({ variant = "page", className }: SquireBookingEmbedProps) {
-  const hostRef = useRef<HTMLDivElement>(null);
+  const location = useLocation();
+  const reactId = useId();
+  const [embedToken, setEmbedToken] = useState(() => Date.now());
+  const [showContent, setShowContent] = useState(false);
+
+  const visitKey = `${location.pathname}|${location.key}|${location.hash}`;
 
   useEffect(() => {
-    let cancelled = false;
-    let observer: MutationObserver | null = null;
-    let reparentInterval: ReturnType<typeof setInterval> | null = null;
-    let blankWatch: ReturnType<typeof setTimeout> | null = null;
+    setEmbedToken(Date.now());
+    setShowContent(false);
+  }, [visitKey]);
 
-    const clearReparentInterval = () => {
-      if (reparentInterval) {
-        clearInterval(reparentInterval);
-        reparentInterval = null;
-      }
-    };
-
-    const tryMoveIframe = () => {
-      hideSquireFloatingButton();
-      const host = hostRef.current;
-      if (!host || cancelled) return;
-      const iframe = document.querySelector<HTMLIFrameElement>("iframe.squire_widget");
-      if (!iframe) return;
-      if (iframe.parentElement !== host) {
-        host.appendChild(iframe);
-      }
-    };
-
-    const scheduleReparentBursts = () => {
-      clearReparentInterval();
-      tryMoveIframe();
-      [100, 400, 900, 1600, 2800, 4500].forEach((ms) => {
-        setTimeout(() => {
-          if (!cancelled) tryMoveIframe();
-        }, ms);
-      });
-      reparentInterval = setInterval(() => {
-        if (!cancelled) tryMoveIframe();
-      }, 350);
-      setTimeout(() => clearReparentInterval(), 12000);
-    };
-
-    const onWidgetOpened = () => {
-      if (cancelled) return;
-      setTimeout(tryMoveIframe, 0);
-      setTimeout(tryMoveIframe, 120);
-      scheduleReparentBursts();
-    };
-
-    const tryOpen = () => {
-      if (cancelled || !window.SquireWidget?.open) return;
-      try {
-        window.SquireWidget.open({
-          brand: SQUIRE_OPEN_CONFIG.brand,
-          shop: SQUIRE_OPEN_CONFIG.shop,
-        });
-      } catch {
-        /* Squire peut refuser si déjà ouvert */
-      }
-    };
-
-    const scheduleBlankWatchdog = () => {
-      if (blankWatch) clearTimeout(blankWatch);
-      blankWatch = setTimeout(() => {
-        if (cancelled) return;
-        const host = hostRef.current;
-        if (host?.querySelector("iframe.squire_widget")) return;
-        tryOpen();
-        setTimeout(tryOpen, 400);
-        setTimeout(tryOpen, 1400);
-        scheduleReparentBursts();
-      }, 4500);
-    };
-
-    const run = async () => {
-      try {
-        await injectSquireLoaderOnce();
-        await waitForSquireWidgetApi(45000);
-        if (cancelled) return;
-
-        window.addEventListener("squire_widget_opened", onWidgetOpened);
-
-        observer = new MutationObserver(() => tryMoveIframe());
-        observer.observe(document.body, { childList: true, subtree: true });
-
-        tryOpen();
-        setTimeout(tryOpen, 300);
-        setTimeout(tryOpen, 1200);
-        setTimeout(tryOpen, 3500);
-
-        scheduleReparentBursts();
-        scheduleBlankWatchdog();
-      } catch {
-        /* réseau / blocage */
-      }
-    };
-
-    const onPageShow = (e: PageTransitionEvent) => {
-      if (!e.persisted || cancelled) return;
-      tryOpen();
-      setTimeout(tryOpen, 300);
-      scheduleReparentBursts();
-      scheduleBlankWatchdog();
-    };
-
-    void run();
-    window.addEventListener("pageshow", onPageShow);
-
+  useEffect(() => {
     return () => {
-      cancelled = true;
-      window.removeEventListener("pageshow", onPageShow);
-      window.removeEventListener("squire_widget_opened", onWidgetOpened);
-      observer?.disconnect();
-      clearReparentInterval();
-      if (blankWatch) clearTimeout(blankWatch);
-      window.SquireWidget?.close();
+      setShowContent(false);
     };
   }, []);
+
+  const embedSrc = `${shopSquireEmbedUrl}&_qg=${embedToken}`;
 
   const hostClass =
     variant === "home"
       ? `reserve-squire-host home-squire-embed-host ${className ?? ""}`.trim()
       : `reserve-squire-host ${className ?? ""}`.trim();
 
+  const handleIframeLoad = () => {
+    window.setTimeout(() => setShowContent(true), 1200);
+  };
+
   return (
     <div className="flex w-full flex-col">
-      <div ref={hostRef} className={hostClass} aria-label="Réservation Squire" />
+      <div className={`relative ${hostClass}`} aria-label="Réservation en ligne">
+        {!showContent && (
+          <div
+            className="absolute inset-0 z-10 flex items-center justify-center bg-neutral-100 text-xs font-bold uppercase tracking-[0.2em] text-black/40"
+            aria-live="polite"
+          >
+            Chargement de la réservation…
+          </div>
+        )}
+        <iframe
+          key={`${reactId}-${embedToken}`}
+          src={embedSrc}
+          title="Réservation Quartier Général"
+          className="squire-booking-iframe"
+          allow="geolocation; payment"
+          onLoad={handleIframeLoad}
+        />
+      </div>
       <div className="border-t-2 border-black bg-neutral-50 px-4 py-3 sm:px-5 sm:py-4">
         <a
           href={shopBookingUrl}

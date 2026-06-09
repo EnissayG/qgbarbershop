@@ -5,16 +5,17 @@ import { MAIN_NAV_ITEMS } from "../config/navigation";
 import { shopPhotos } from "../config/shopPhotos";
 import { Header } from "./Header";
 import { Footer } from "./Footer";
-import { ReserveNowButton } from "./ReserveNowButton";
+import { purgeLegacySquire } from "../lib/purgeLegacySquire";
 
 export function Layout() {
   const { pathname, hash } = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
+    purgeLegacySquire();
     window.scrollTo(0, 0);
     setMobileMenuOpen(false);
-  }, [pathname]);
+  }, [pathname, hash]);
 
   useEffect(() => {
     if (!mobileMenuOpen) return;
@@ -121,7 +122,6 @@ export function Layout() {
         <Outlet />
       </main>
       <Footer />
-      <ReserveNowButton />
     </div>
   );
 }

@@ -44,14 +44,13 @@ Routes principales : `/`, `/services`, `/reserver`, `/equipe`, `/formations`, `/
 
 ## Réservation (Squire)
 
-Il n’existe pas de page publique de doc technique détaillée pour `widget.js` ; le support Squire envoie le snippet **script dans le `<head>`** avec `?brand=BRAND_ID`. Comportement observé sur le loader public (`widget.getsquire.com/widget.js` → `v2/frameLoader.js`) :
+Squire ne documente pas publiquement `widget.js` (bouton flottant + panneau latéral). Pour ce site React (SPA), on embarque la **page de réservation officielle** en iframe directe :
 
-- La config est lue sur **`document.currentScript`** : attributs HTML **`brand`** (UUID) et **`shop`** (slug boutique) sont **nécessaires** ; le seul `?brand=` dans l’URL ne remplace pas `getAttribute("brand")`.
-- `frameLoader.js` définit **`window.SquireWidget.open({ brand, shop })`** et crée une **`iframe.squire_widget`** sur le `body`.
-- **SPA (React)** : un second injecteur de script (head statique + effet React) peut créer des courses ; ici le script est chargé **uniquement** depuis **`Reserve.tsx`** au montage de `/reserver`.
-- Affichage dans le cadre du site : après **`open()`**, l’iframe est **reparentée** dans `.reserve-squire-host` (`index.css`), avec overrides CSS pour remplir la zone (le widget d’origine est pensé comme panneau latéral / bouton flottant).
+- URL : `shopSquireEmbedUrl` dans `shopInfo.ts` (`/booking/book/{slug}?platform=widget&viewMode=singleShop`).
+- **Pas de `widget.js`** : plus de bouton flottant Squire, plus de scripts lourds (`frameLoader`, `bookButton`, `dataPreloader`).
+- Chaque visite de l’accueil ou de `/reserver` monte une **iframe dédiée** (pas de déplacement DOM) : fiable en SPA quand on revient depuis Formations, Équipe, etc.
 
-Si le cadre reste vide alors que `widget.js` et `frameLoader.js` sont en 200 : vérifier la console (erreurs JS), que **`shopSquireShopRoute`** correspond bien au slug Squire du salon, et l’absence de blocage réseau vers `widget.getsquire.com` / `getsquire.com`.
+Lien de secours : `shopBookingUrl` (nouvel onglet).
 
 ---
 

@@ -265,7 +265,16 @@ body {
   display: none;
 }
 
-/* Page Réserver : l’iframe Squire est reparentée ici par JS (le script l’attache sinon au body). */
+/* Restes widget.js (bouton flottant) — filet de sécurité si cache navigateur. */
+#squire_booking_widget_root,
+#squire-book-button {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  opacity: 0 !important;
+}
+
+/* Réservation : iframe directe vers getsquire.com/booking (sans widget.js). */
 .reserve-squire-host {
   position: relative;
   z-index: 2;
@@ -275,18 +284,15 @@ body {
   background-color: #f5f5f5;
 }
 
-.reserve-squire-host iframe.squire_widget {
-  position: absolute !important;
-  inset: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
-  min-height: 100% !important;
-  max-width: 100% !important;
-  transform: none !important;
-  transition: none !important;
-  box-shadow: none !important;
-  border: 0 !important;
-  border-radius: 0 !important;
+.reserve-squire-host .squire-booking-iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  max-width: 100%;
+  border: 0;
+  border-radius: 0;
 }
 
 /* Accueil : bloc réservation un peu moins haut sur mobile */

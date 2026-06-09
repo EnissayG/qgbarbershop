@@ -77,13 +77,6 @@ export function Home() {
               </p>
 
               <div className="mt-2 w-full max-w-md space-y-3 lg:mt-2">
-                <Link
-                  to="/#reserver"
-                  className="inline-flex w-full items-center justify-center gap-2 border-2 border-white bg-white px-8 py-4 font-black uppercase tracking-wider text-black transition-all hover:bg-black hover:text-white lg:max-w-sm"
-                >
-                  <span>Réserver maintenant</span>
-                  <ArrowRight size={18} aria-hidden />
-                </Link>
                 <a
                   href={`tel:${shopPhoneTel}`}
                   className="inline-flex w-full items-center justify-center border-2 border-white/35 px-8 py-4 font-bold uppercase tracking-wider text-white/80 transition-all hover:border-white hover:text-white lg:max-w-sm"
@@ -118,13 +111,7 @@ export function Home() {
       >
         <SectionTopDiagonal tone="light" variant="slash" />
         <div className="layout-gutter min-w-0">
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-40px" }}
-            transition={{ duration: 0.65 }}
-            className="mx-auto max-w-5xl"
-          >
+          <div className="mx-auto max-w-5xl">
             <p className="mb-3 text-xs font-black uppercase tracking-[0.2em] text-black/45">
               Réservation en ligne
             </p>
@@ -141,7 +128,7 @@ export function Home() {
             <div className="overflow-hidden border-4 border-black shadow-[10px_10px_0_0_rgba(0,0,0,1)]">
               <SquireBookingEmbed variant="home" />
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
 
