@@ -5,6 +5,7 @@ import { MAIN_NAV_ITEMS } from "../config/navigation";
 import { shopPhotos } from "../config/shopPhotos";
 import { Header } from "./Header";
 import { Footer } from "./Footer";
+import { ReserveNowButton } from "./ReserveNowButton";
 
 export function Layout() {
   const { pathname, hash } = useLocation();
@@ -120,6 +121,7 @@ export function Layout() {
         <Outlet />
       </main>
       <Footer />
+      <ReserveNowButton />
     </div>
   );
 }

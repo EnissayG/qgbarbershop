@@ -343,7 +343,7 @@ export function Services() {
                   </h3>
                   
                   <p className="text-black/60 text-lg leading-relaxed">
-                    Planning sur l&apos;accueil du site ou message au barbier de ton choix sur Instagram.
+                    Réservation sur l&apos;accueil du site ou message au barbier de ton choix sur Instagram.
                     Sans rendez-vous selon disponibilité.
                   </p>
 

@@ -48,7 +48,7 @@ export function Contact() {
               <span className="text-white/30">au QG</span>
             </h1>
             <p className="text-xl text-white/80 leading-relaxed max-w-2xl">
-              Planning sur la page d&apos;accueil du site ou message au barbier de ton choix sur Instagram. Sans
+              Réservation sur la page d&apos;accueil du site ou message au barbier de ton choix sur Instagram. Sans
               rendez-vous selon les places disponibles.
             </p>
           </motion.div>

@@ -33,7 +33,7 @@ export function Reserve() {
               <span className="text-white/35">au QG</span>
             </h1>
             <p className="max-w-xl text-xl leading-relaxed text-white/80">
-              Le planning officiel s&apos;affiche dans le cadre ci-dessous.
+              La réservation officielle s&apos;affiche dans le cadre ci-dessous.
             </p>
           </motion.div>
         </div>
@@ -44,7 +44,7 @@ export function Reserve() {
         <div className="layout-gutter min-w-0">
           <div className="mx-auto max-w-5xl">
             <p className="mb-4 text-xs font-black uppercase tracking-[0.2em] text-black/45">
-              Planning en ligne, Quartier Général
+              Réservation en ligne, Quartier Général
             </p>
             <div className="overflow-hidden border-4 border-black shadow-[10px_10px_0_0_rgba(0,0,0,1)]">
               <SquireBookingEmbed variant="page" />

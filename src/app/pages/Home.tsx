@@ -73,10 +73,17 @@ export function Home() {
 
               <p className="mb-8 max-w-md text-base leading-relaxed text-white/75 sm:text-lg">
                 Coupes précises, service soigné, ambiance professionnelle. Choisis ton barbier et ton
-                créneau dans le planning plus bas sur cette page.
+                créneau via la réservation en ligne plus bas sur cette page.
               </p>
 
               <div className="mt-2 w-full max-w-md space-y-3 lg:mt-2">
+                <Link
+                  to="/#reserver"
+                  className="inline-flex w-full items-center justify-center gap-2 border-2 border-white bg-white px-8 py-4 font-black uppercase tracking-wider text-black transition-all hover:bg-black hover:text-white lg:max-w-sm"
+                >
+                  <span>Réserver maintenant</span>
+                  <ArrowRight size={18} aria-hidden />
+                </Link>
                 <a
                   href={`tel:${shopPhoneTel}`}
                   className="inline-flex w-full items-center justify-center border-2 border-white/35 px-8 py-4 font-bold uppercase tracking-wider text-white/80 transition-all hover:border-white hover:text-white lg:max-w-sm"
@@ -128,8 +135,8 @@ export function Home() {
               Réserve ton créneau
             </h2>
             <p className="mb-8 max-w-2xl text-base leading-relaxed text-black/65 sm:text-lg">
-              Planning en temps réel : choisis ton barbier, ton service et ton horaire. Tu peux aussi ouvrir la page
-              dédiée depuis le menu (Planning).
+              Réservation en temps réel : choisis ton barbier, ton service et ton horaire. Tu peux aussi ouvrir la page
+              dédiée depuis le menu (Réservation).
             </p>
             <div className="overflow-hidden border-4 border-black shadow-[10px_10px_0_0_rgba(0,0,0,1)]">
               <SquireBookingEmbed variant="home" />

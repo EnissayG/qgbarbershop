@@ -22,12 +22,24 @@ declare global {
   }
 }
 
+/** Le bouton vit dans un shadow DOM : seul le JS peut le masquer sans casser le plugin. */
+function hideSquireFloatingButton(): boolean {
+  const root = document.getElementById("squire_booking_widget_root");
+  const button = root?.shadowRoot?.getElementById("squire-book-button");
+  if (!button) return false;
+  button.style.setProperty("display", "none", "important");
+  button.style.setProperty("visibility", "hidden", "important");
+  button.style.setProperty("pointer-events", "none", "important");
+  return true;
+}
+
 function injectSquireLoaderOnce(): Promise<void> {
   const existing = document.getElementById(SCRIPT_ID) as HTMLScriptElement | null;
   if (
     existing?.dataset.qgInjected === "1" &&
     existing.getAttribute("brand") === shopSquireBrandId &&
-    existing.getAttribute("shop") === shopSquireShopRoute
+    existing.getAttribute("shop") === shopSquireShopRoute &&
+    existing.getAttribute("x-squire-show-btn") !== "false"
   ) {
     return Promise.resolve();
   }
@@ -94,6 +106,7 @@ export function SquireBookingEmbed({ variant = "page", className }: SquireBookin
     };
 
     const tryMoveIframe = () => {
+      hideSquireFloatingButton();
       const host = hostRef.current;
       if (!host || cancelled) return;
       const iframe = document.querySelector<HTMLIFrameElement>("iframe.squire_widget");
@@ -209,7 +222,7 @@ export function SquireBookingEmbed({ variant = "page", className }: SquireBookin
           rel="noopener noreferrer"
           className="group flex w-full items-center justify-center gap-2 border-2 border-black bg-white px-4 py-3.5 text-center text-[0.65rem] font-black uppercase tracking-[0.14em] text-black transition-colors hover:bg-black hover:text-white sm:text-xs sm:tracking-wider"
         >
-          <span>Le planning ne s&apos;affiche pas ? Réserver sur Squire</span>
+          <span>La réservation ne s&apos;affiche pas ? Réserver sur Squire</span>
           <ArrowRight
             size={16}
             className="shrink-0 transition-transform group-hover:translate-x-0.5"
