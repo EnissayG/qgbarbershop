@@ -6,6 +6,7 @@ import { shopPhotos } from "../config/shopPhotos";
 import { Header } from "./Header";
 import { Footer } from "./Footer";
 import { purgeLegacySquire } from "../lib/purgeLegacySquire";
+import { SeoJsonLd } from "./SeoJsonLd";
 
 export function Layout() {
   const { pathname, hash } = useLocation();
@@ -51,6 +52,7 @@ export function Layout() {
 
   return (
     <div className="flex w-full max-w-full flex-col bg-white">
+      <SeoJsonLd />
       <Header mobileMenuOpen={mobileMenuOpen} setMobileMenuOpen={setMobileMenuOpen} />
 
       <AnimatePresence>

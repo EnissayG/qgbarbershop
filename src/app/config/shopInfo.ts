@@ -1,5 +1,9 @@
 /** Coordonnées et liens officiels, Quartier Général Barbershop */
 
+/** Domaine public du site (SEO, canonical, sitemap, partages). */
+export const shopSiteUrl = "https://barbierquartiergeneral.ca";
+export const shopSiteName = "Quartier Général Barbershop";
+
 /** Slug boutique dans l’URL Squire (`/booking/book/…`). */
 export const shopSquireShopRoute = "quartier-general-barbershop-montreal";
 
